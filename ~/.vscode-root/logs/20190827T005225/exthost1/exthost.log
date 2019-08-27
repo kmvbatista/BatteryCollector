@@ -1,0 +1,40 @@
+[2019-08-27 00:52:33.697] [exthost] [info] extension host started
+[2019-08-27 00:52:33.720] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:52:33.720] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/debug-auto-launch/dist/extension
+[2019-08-27 00:52:33.726] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:52:33.726] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/emmet/dist/extension
+[2019-08-27 00:52:33.814] [exthost] [info] ExtensionService#_doActivateExtension vscode.git {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:52:33.814] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/git/dist/main
+[2019-08-27 00:52:33.989] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:52:33.989] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/merge-conflict/dist/extension
+[2019-08-27 00:52:33.999] [exthost] [info] ExtensionService#_doActivateExtension vscode-icons-team.vscode-icons {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:52:33.999] [exthost] [info] ExtensionService#loadCommonJSModule /home/kmvbatista/.vscode/extensions/vscode-icons-team.vscode-icons-9.3.0/dist/src/vscode-icons.bundle.js
+[2019-08-27 00:52:34.275] [exthost] [info] eager extensions activated
+[2019-08-27 00:52:40.803] [exthost] [info] ExtensionService#_doActivateExtension vscode.configuration-editing {"startup":false,"activationEvent":"onLanguage:jsonc"}
+[2019-08-27 00:52:40.803] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/configuration-editing/dist/extension
+[2019-08-27 00:52:40.866] [exthost] [info] ExtensionService#_doActivateExtension vscode.json-language-features {"startup":false,"activationEvent":"onLanguage:jsonc"}
+[2019-08-27 00:52:40.866] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/json-language-features/client/dist/jsonMain
+[2019-08-27 00:52:41.013] [exthost] [info] ExtensionService#_doActivateExtension vscode.typescript-language-features {"startup":false,"activationEvent":"onLanguage:jsonc"}
+[2019-08-27 00:52:41.013] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/typescript-language-features/dist/extension
+[2019-08-27 00:53:01.553] [exthost] [info] extension host started
+[2019-08-27 00:53:01.587] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:53:01.587] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/debug-auto-launch/dist/extension
+[2019-08-27 00:53:01.594] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:53:01.594] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/emmet/dist/extension
+[2019-08-27 00:53:01.699] [exthost] [info] ExtensionService#_doActivateExtension vscode.git {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:53:01.699] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/git/dist/main
+[2019-08-27 00:53:01.885] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:53:01.885] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/merge-conflict/dist/extension
+[2019-08-27 00:53:01.894] [exthost] [info] ExtensionService#_doActivateExtension vscode-icons-team.vscode-icons {"startup":true,"activationEvent":"*"}
+[2019-08-27 00:53:01.894] [exthost] [info] ExtensionService#loadCommonJSModule /home/kmvbatista/.vscode/extensions/vscode-icons-team.vscode-icons-9.3.0/dist/src/vscode-icons.bundle.js
+[2019-08-27 00:53:02.094] [exthost] [info] ExtensionService#_doActivateExtension vscode.npm {"startup":true,"activationEvent":"workspaceContains:package.json"}
+[2019-08-27 00:53:02.094] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/npm/dist/main
+[2019-08-27 00:53:03.476] [exthost] [info] eager extensions activated
+[2019-08-27 00:53:34.872] [exthost] [info] ExtensionService#_doActivateExtension vscode.typescript-language-features {"startup":false,"activationEvent":"onLanguage:javascript"}
+[2019-08-27 00:53:34.872] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/typescript-language-features/dist/extension
+[2019-08-27 00:56:42.744] [exthost] [info] ExtensionService#_doActivateExtension vscode.extension-editing {"startup":false,"activationEvent":"onLanguage:typescript"}
+[2019-08-27 00:56:42.744] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/extension-editing/dist/extension
+[2019-08-27 01:02:51.063] [exthost] [info] ExtensionService#_doActivateExtension vscode.configuration-editing {"startup":false,"activationEvent":"onLanguage:json"}
+[2019-08-27 01:02:51.063] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/configuration-editing/dist/extension
+[2019-08-27 01:02:51.089] [exthost] [info] ExtensionService#_doActivateExtension vscode.json-language-features {"startup":false,"activationEvent":"onLanguage:json"}
+[2019-08-27 01:02:51.089] [exthost] [info] ExtensionService#loadCommonJSModule /snap/code/13/usr/share/code/resources/app/extensions/json-language-features/client/dist/jsonMain
