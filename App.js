@@ -1,11 +1,14 @@
 
 import React from 'react';
 import Routes from './src/routes'
+import Login from './src/Pages/Login'
+import { StatusBar } from 'react-native'
 
-export default function App() {
+const App = () => (
+    <>
+        <StatusBar barStyle='light-content' backgroundColor="rgba(21, 219, 10, 1)"></StatusBar>
+        <Routes></Routes>
+    </>
+);
 
-    return ( 
-    
-    <Routes></Routes>
-    );
-}
+export default App;

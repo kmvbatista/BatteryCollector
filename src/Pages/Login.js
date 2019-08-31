@@ -1,29 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
-import AsyncStorage from 'AsyncStorage'
+import AsyncStorage from '@react-native-community/async-storage'
 
-import api from '../Api'
 
-import Icon from 'react-native-vector-icons/Octicons';
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.png';
 
 const {width : WIDTH} = Dimensions.get('window');
 export default function Login( { navigation } ) {
     
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
 
-      useEffect(() => {
+  useEffect(() => {
        AsyncStorage.getItem('user').then(user => {
         if(user) {
-            navigation.navigate('Main', {user});
+            
         }
     });
-}, []);
+    
+  }, []);
 
     async function handleLogin() {
         
-        await AsyncStorage.setItem('user', user);
+        //await AsyncStorage.setItem('user', user);
+        navigation.navigate('Main', {user});
     }
 
   return (
@@ -33,7 +33,7 @@ export default function Login( { navigation } ) {
             behavior='padding'>
                 <View style={styles.logoContainer}>
                     <Image source={logo} style={styles.logo}/>
-                    <Text style={styles.logoText}>Battery Collector tr</Text>
+                    <Text style={styles.logoText}>Battery Collector</Text>
                 </View>
 
                 <View>
@@ -47,7 +47,6 @@ export default function Login( { navigation } ) {
                     value= {user}
                     onChangeText= {setUser}
                     />
-                    <Icon name={'person'} size={28} color='rgba(0, 0, 0 , 1)' style={styles.personIcon}></Icon>
                 </View>
 
                 <View>
@@ -60,9 +59,7 @@ export default function Login( { navigation } ) {
                         value= {password}
                         onChangeText= {setPassword}
                     />
-                    <Icon name={'key'} size={28} color='rgba(0, 0, 0 , 1)' style={styles.keyIcon}></Icon>
                     <TouchableOpacity>
-                    <Icon name={'eye'} size={28} color='rgba(0, 0, 0 , 1)' style={styles.eyeIcon}></Icon>
                     </TouchableOpacity>
                 </View>
                 
@@ -94,7 +91,7 @@ const styles = StyleSheet.create({
   },
   logoText : {
     color: 'white',
-    fontSize: 20,
+    fontSize: 27,
     fontWeight:'500',
     marginBottom: 150
   },
@@ -120,21 +117,6 @@ const styles = StyleSheet.create({
     paddingLeft:100,
     marginBottom:20
   }, 
-  personIcon : {
-    position: "absolute",
-    top: 10,
-    left:20 
-  },
-  keyIcon : {
-    position: "absolute",
-    bottom: 27,
-    left:20
-  },
-  eyeIcon : {
-    position: "absolute",
-    bottom: 27,
-    right:20
-  },
   button: {
     backgroundColor: 'rgba(0,0,0,0.95)',
     width: WIDTH-80,
