@@ -4,7 +4,8 @@ import Login from './Pages/Login'
 import Main from './Pages/Main'
 
 export default createAppContainer(
-    createSwitchNavigator({
+    createSwitchNavigator
+    ({
         Login,
         Main,
     })
