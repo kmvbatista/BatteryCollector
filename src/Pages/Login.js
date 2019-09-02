@@ -1,35 +1,52 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 import Api from '../Api'
-
 import logo from '../../images/logo.png';
 
+
+this.state={
+  loggedInUser: null,
+  errorMessage: null,
+  token: null
+}
+
 const {width : WIDTH} = Dimensions.get('window');
+
+
 export default function Login( { navigation } ) {
     
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
   signIn = async() => {
-    try {
-      const response = await Api.post('/api/token', {
-        email:"kennedy@gmail.com",
-        password:"12345678"
-      });
-      console.log(response);
-      const { user, token } = response.data;
-
-      await AsyncStorage.multiSet([
-        ['@BatteryCollector:token', token],
-        ['@BatteryCollector:user', JSON.stringify(user)]
-      ])
-    }
-    catch(response) {
-      console.log(response);
+    // const loggedIn= Json.Parse(await AsyncStorage.getItem('@BatteryCollector:user'));
+    //     const _token = await AsyncStorage.getItem('@BatteryCollector:token')
+    // if(loggedI && token){
+    //   this.setState({loggedInUser: loggedIn});
+    //   this.setState({token: _token})
+      navigation.navigate('Main');
     } 
+    // try {
+    //   const response = await Api.post('/api/token', {
+    //     email:user,
+    //     password:password
+    //   });
+    //   console.log(response);
+    //   const _user= response.data.user;
+
+    //   await AsyncStorage.multiSet([
+    //     ['@BatteryCollector:token', response.data.token.value.token],
+    //     ['@BatteryCollector:user', JSON.stringify(response.data.user)]
+    //   ]);
+    //   this.setState({loggedInUser: _user});
+    //   Alert.alert(`Bem vindo, ${_user.name}`);
+    //   navigation.navigate('Main', {_user});
+    // }
+    // catch(response) {
+    //   Alert.alert(response);
+    // } 
       
-  }
   return (
     <View  style={styles.backgroundContainer}>
     
@@ -55,13 +72,15 @@ export default function Login( { navigation } ) {
 
                 <View>
                     <TextInput
-                    style={styles.inputPassword}
+                        style={styles.inputPassword}
+                        autoCapitalize= 'none'
                         placeholder={'Password'}
                         secureTextEntry={true}
                         placeholderTextColor={'rgba(0,0,0, 0.7)'}
                         underlineColorAndroid ='transparent'
                         value= {password}
                         onChangeText= {setPassword}
+                        autoCorrect={false}
                     />
                     <TouchableOpacity>
                     </TouchableOpacity>
@@ -105,10 +124,11 @@ const styles = StyleSheet.create({
     borderRadius: 54,
     borderColor: 'black',
     backgroundColor: 'rgba(255,255,255,0.7)',
-    color: 'rgba(255,255,255,1)',
+    color: 'rgba(0,0,0,1)',
     fontSize: 16, 
-    paddingLeft:100,
-    marginBottom:7
+    marginBottom:7,
+    textAlign:"center",
+    justifyContent:"center"
   },
   inputPassword: {
     width: WIDTH-80,
@@ -118,9 +138,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.7)',
     color: 'rgba(0,0,0,1)',
     fontSize: 16, 
-    paddingLeft:100,
-    marginBottom:20
-  }, 
+    marginBottom:20,
+    textAlign:"center",
+    justifyContent:"center"
+    }, 
   button: {
     backgroundColor: 'rgba(0,0,0,0.95)',
     width: WIDTH-80,
