@@ -1,20 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { View, Text } from 'react-native'
-import MapView from 'react-native-maps'
+import  MapView from 'react-native-maps'
 import Geolocation from '@react-native-community/geolocation';
 import Directions from '../src/Destinations/index'
 import { getPixelSize } from '../utils'
+import markerImage from '../images/resizedIcon48.png'
+import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
+import {Picker} from 'react-native'
+
 
 
 export default class Map extends Component {
     state = {
         region: null,
-        destination: {
-            latitude: -26.913829,
-            longitude: -49.069169,
-            title: 'Prefeitura',
-            subtitle: 'Prefeitura Blumenau'
-        }
+        destination: null,
+        PickerValue: null,
+        directionsResult: null,
+        placeToGo: null
     };
 
     componentDidMount() {
@@ -46,17 +48,12 @@ export default class Map extends Component {
         Geolocation.getCurrentPosition(goSuccess, goFailure, options);
     }
 
-    handleLocationSelected = ({ latitude, longitude }) => {
-        this.setState({
-            destination: {
-                latitude,
-                longitude,
-                title: "Prefeitura"
-            }
-        })
-    }
+    
+    
 
     render() {
+        
+        
         const Prefeitura = 
         {
             latitude: -26.913829,
@@ -64,10 +61,43 @@ export default class Map extends Component {
             title: 'Prefeitura',
             subtitle: 'Prefeitura Blumenau'
         }
-          
+        const Neumarkt = 
+        {
+            latitude: -26.920532,
+            longitude: -49.069610,
+            title: "Neumarkt",
+            subtitle: "Neumarkt Shopping"
+        }
+        const Furb =
+        {
+            latitude: -26.891123,
+            longitude: -49.084850,
+            title: "Furb Campus 2",
+            subtitle: "Furb Campus 2"
+        }
+
+        handleLocationSelected = (itemIndex) => {
+            const places= [Prefeitura, Furb,  Neumarkt];
+            this.setState({destination: places[itemIndex]})
+        }
         const { region } = this.state;
         return (
+            
         <View style={{ flex:1 }}>
+            <PickerBox>
+                <Picker
+                    selectedValue= {this.state.PickerValue}
+                    onValueChange= {(itemValue, itemIndex)=> {
+                        this.setState({PickerValue: itemValue});
+                        handleLocationSelected(itemIndex);
+                    }}
+                >
+                    <Picker.Item label="Prefeitura de Blumenau" value="Prefeitura de Blumenau"></Picker.Item>
+                    <Picker.Item label="Furb Campus 2" value="Furb Campus 2"></Picker.Item>
+                    <Picker.Item label= "Neumarkt shopping" value="Neumarkt shopping" ></Picker.Item>
+
+                </Picker>
+            </PickerBox>
             <MapView
                 style={{ flex:1 }}
                 region={region}
@@ -77,29 +107,78 @@ export default class Map extends Component {
                 ref= {el => this.mapView= el}
             >
             <MapView.Marker
-                coordinate={{latitude: -26.913829,
-                longitude: -49.069169}}
-                title={"Prefeitura De Blumenau"}
-                description={"Descarte suas baterias aqui"}
-         />
-            { (
-                <Directions
-                    origin= {region}
-                    destination= {this.state.destination}
-                    onReady= {
-                        result =>{
-                            this.mapView.fitToCoordinates(result.coordinates, {
-                                edgePadding: {
-                                    right: getPixelSize(20),
-                                    left: getPixelSize(20),
-                                    top: getPixelSize(20),
-                                    bottom: getPixelSize(20)
-                                }
-                            });
+                        coordinate={{latitude: -26.913829,
+                            longitude: -49.069169
+                        }}
+                        title={"Prefeitura De Blumenau"}
+                        description={"Descarte suas baterias aqui"}
+                        image = {markerImage}
+                    >
+                    </MapView.Marker>
+                    
+                    <MapView.Marker
+                        coordinate={{latitude: -26.920532,
+                            longitude: -49.069610}}
+                        title={Neumarkt.title}
+                        description={"Descarte suas baterias aqui"}
+                        image = {markerImage}
+                    ></MapView.Marker>
+
+                    <MapView.Marker
+                        coordinate={{latitude: -26.891123,
+                            longitude: -49.084850}}
+                        title={Furb.title}
+                        description={"Descarte suas baterias aqui"}
+                        image = {markerImage}
+                    ></MapView.Marker>
+
+            
+            { !!this.state.destination &&(
+                <>
+                    <Directions
+                        origin= {region}
+                        destination= {this.state.destination}
+                        onReady= {
+                            result =>{
+
+                                this.setState({directionsResult: result})
+                                this.mapView.fitToCoordinates(result.coordinates, {
+                                    edgePadding: {
+                                        right: getPixelSize(50),
+                                        left: getPixelSize(50),
+                                        top: getPixelSize(20),
+                                        bottom: getPixelSize(20)
+                                    }
+                                });
+                            }
                         }
-                    }
-                >
-                </Directions>
+                    >
+                    </Directions>
+
+                    <>
+                        {
+                            !!this.state.directionsResult && (
+                        <MapView.Marker coordinate={region} >   
+                            <ContainerStyle>
+                                <LocationBox>
+                                    <LocationText>
+                                        {this.state.directionsResult.distance} km
+                                    </LocationText>
+                                </LocationBox>
+                                <LocationBox2>
+                                    <LocationText2>
+                                        Até {this.state.PickerValue}
+                                    </LocationText2>
+                                </LocationBox2>
+                            </ContainerStyle>
+                        </MapView.Marker>
+                            )
+                        }
+                    </>
+                    
+                    
+                    
+                </>
             )}
              </MapView> 
         </View>
