@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
-
+import Api from '../Api'
 
 import logo from '../../images/logo.png';
 
@@ -11,21 +11,25 @@ export default function Login( { navigation } ) {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-       AsyncStorage.getItem('user').then(user => {
-        if(user) {
-            
-        }
-    });
-    
-  }, []);
+  signIn = async() => {
+    try {
+      const response = await Api.post('/api/token', {
+        email:"kennedy@gmail.com",
+        password:"12345678"
+      });
+      console.log(response);
+      const { user, token } = response.data;
 
-    async function handleLogin() {
-        
-        //await AsyncStorage.setItem('user', user);
-        navigation.navigate('Main', {user});
+      await AsyncStorage.multiSet([
+        ['@BatteryCollector:token', token],
+        ['@BatteryCollector:user', JSON.stringify(user)]
+      ])
     }
-
+    catch(response) {
+      console.log(response);
+    } 
+      
+  }
   return (
     <View  style={styles.backgroundContainer}>
     
@@ -64,8 +68,8 @@ export default function Login( { navigation } ) {
                 </View>
                 
                 <View>
-                    <TouchableOpacity onPress={handleLogin} placeholderTextColor='white' style={styles.button}>
-                    <Text style={styles.buttonText}>Login</Text>
+                    <TouchableOpacity onPress={signIn} placeholderTextColor='white' style={styles.button}>
+                    <Text style={styles.buttonText}>sign</Text>
                     </TouchableOpacity>
                 </View>
         </KeyboardAvoidingView>

@@ -48,9 +48,6 @@ export default class Map extends Component {
         Geolocation.getCurrentPosition(goSuccess, goFailure, options);
     }
 
-    
-    
-
     render() {
         
         
