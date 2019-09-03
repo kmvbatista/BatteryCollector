@@ -1,12 +1,13 @@
-import React, { Component, Fragment } from 'react'
-import { View, Text } from 'react-native'
+import React, { Component } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
 import  MapView from 'react-native-maps'
 import Geolocation from '@react-native-community/geolocation';
-import Directions from '../src/Destinations/index'
+import Directions from '../src/Components/Destinations/index'
 import { getPixelSize } from '../utils'
 import markerImage from '../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
 import {Picker} from 'react-native'
+import Tabs from '../src/Tabs';
 
 
 
@@ -47,10 +48,7 @@ export default class Map extends Component {
         }
         Geolocation.getCurrentPosition(goSuccess, goFailure, options);
     }
-
     render() {
-        
-        
         const Prefeitura = 
         {
             latitude: -26.913829,
@@ -84,14 +82,15 @@ export default class Map extends Component {
             <PickerBox>
                 <Picker
                     selectedValue= {this.state.PickerValue}
+                    
                     onValueChange= {(itemValue, itemIndex)=> {
                         this.setState({PickerValue: itemValue});
                         handleLocationSelected(itemIndex);
                     }}
                 >
                     <Picker.Item label="Prefeitura de Blumenau" value="Prefeitura de Blumenau"></Picker.Item>
-                    <Picker.Item label="Furb Campus 2" value="Furb Campus 2"></Picker.Item>
-                    <Picker.Item label= "Neumarkt shopping" value="Neumarkt shopping" ></Picker.Item>
+                    <Picker.Item label="Furb Campus 2" value="Furb Campus 2" > </Picker.Item>
+                    <Picker.Item label= "Neumarkt shopping" value="Neumarkt shopping"></Picker.Item>
 
                 </Picker>
             </PickerBox>
@@ -177,9 +176,20 @@ export default class Map extends Component {
                     
                 </>
             )}
-             </MapView> 
+             </MapView>
+            <View style={styles.tabContainer}>
+                <Tabs style={styles.Tabs}></Tabs>
+            </View>
         </View>
         );
     }   
     
 }
+const styles = StyleSheet.create({
+    Tabs: {
+        backgroundColor: 'rgba(21, 219, 10, 1)'
+    },
+    tabContainer: {
+        backgroundColor: 'rgba(21, 219, 10, 1)',
+    }
+});

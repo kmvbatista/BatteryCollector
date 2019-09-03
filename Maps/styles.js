@@ -31,7 +31,9 @@ export const LocationBox2 = styled.View`
 `;
 
 export const PickerBox = styled.View`
-    width:80%;
+    width:100%;
     text-align: center;
     justify-content: center;
+    background-color: rgba(21, 219, 10, 1);
+    background: rgba(21, 219, 10, 1);
 `;

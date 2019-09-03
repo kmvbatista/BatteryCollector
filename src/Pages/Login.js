@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 import Api from '../Api'
 import logo from '../../images/logo.png';
