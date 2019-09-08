@@ -5,11 +5,25 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';
 import {Container, LineContainer, BarContainer, ContributionContainer, Title,
      Header, UserData, DataText, DataTitle} from './styles'
-import {View, StyleSheet, Dimensions, Text} from 'react-native'
+import {View, StyleSheet, Dimensions, BackHandler, Backbutt} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
+import { BackButton } from 'react-navigation'
 const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
 
-export default function Statistics() {
+
+export default function Statistics({navigation}) {
+    this._didFocusSubscription = navigation.addListener(  
+        'didFocus',
+        payload =>
+          BackHandler.addEventListener(
+            'hardwareBackPress',
+            handlebackPress
+          )
+    );
+
+    function handlebackPress(){
+        return navigation.navigate('Main');
+      }
     return (
         <Container style={{height: HEIGHT}}>  
             <Header>
@@ -21,7 +35,7 @@ export default function Statistics() {
             <ScrollView
                 horizontal= {true}
                 pagingEnabled= {true}
-                showsHorizontalScrollIndicator={true}
+                showsHorizontalScrollIndicator={false}
                 contentInset= {{top: 90, left: -100, bottom: 0, right: 0}}
             >
                 <LineContainer style={{width: WIDTH}}>
@@ -46,6 +60,7 @@ export default function Statistics() {
                 <DataTitle>Local mais frequente: </DataTitle>
                 <DataText>Furb</DataText>
             </UserData>
+            <BackButton></BackButton>
         </Container>
     );
 }

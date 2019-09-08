@@ -177,9 +177,6 @@ export default class Map extends Component {
                 </>
             )}
              </MapView>
-            <View style={styles.tabContainer}>
-                <Tabs style={styles.Tabs}></Tabs>
-            </View>
         </View>
         );
     }   

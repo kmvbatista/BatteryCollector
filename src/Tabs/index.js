@@ -3,15 +3,15 @@ import {Container, TabsContainer, TabItem, TabText} from './styles'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import {withNavigation} from 'react-navigation'
-const handlepress= ()=> {
-  alert('Voce clicou');
-}
-toMap = () => {
-  this.PaymentResponse.navigation.navigate('Map');
-} 
 
 class Tabs extends React.Component {
+
+  handleSair() {
+    return this.props.navigation.goBack(null)
+  }
+
   render() {
+
     return (
       <Container>
         <TabsContainer>
@@ -47,10 +47,17 @@ class Tabs extends React.Component {
             <Icon name="info" size={35} color="#fff" ></Icon>
             <TabText>Informações</TabText>
           </TabItem>
-          <TabItem>
-            <Icon name="keyboard-tab" size={35} color="#fff" ></Icon>
-            <TabText>Sair</TabText>
-          </TabItem>
+          <TouchableHighlight onPress={() => { 
+            this.handleSair();
+            }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
+
+              <TabItem>
+                <Icon name="keyboard-tab" size={35} color="#fff" ></Icon>
+                <TabText>Sair</TabText>
+              </TabItem>
+
+          </TouchableHighlight>
+
         </TabsContainer>
       </Container>
     );
