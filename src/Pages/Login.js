@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 import Api from '../Api'
 import logo from '../../images/logo.png';
@@ -20,32 +20,33 @@ export default function Login( { navigation } ) {
   const [password, setPassword] = useState('');
 
   signIn = async() => {
-    // const loggedIn= Json.Parse(await AsyncStorage.getItem('@BatteryCollector:user'));
-    //     const _token = await AsyncStorage.getItem('@BatteryCollector:token')
+    //const loggedIn= Json.Parse(await AsyncStorage.getItem('@BatteryCollector:user'));
+    //const _token = await AsyncStorage.getItem('@BatteryCollector:token')
     // if(loggedI && token){
     //   this.setState({loggedInUser: loggedIn});
     //   this.setState({token: _token})
       navigation.navigate('Main');
-    } 
+    
     // try {
-    //   const response = await Api.post('/api/token', {
-    //     email:user,
-    //     password:password
-    //   });
-    //   console.log(response);
-    //   const _user= response.data.user;
+    //  const response = await Api.post('/api/token', {
+    //    email:user,
+    //    password:password
+    //  });
+    //  console.log(response);
+    //  const _user= response.data.user;
 
-    //   await AsyncStorage.multiSet([
-    //     ['@BatteryCollector:token', response.data.token.value.token],
-    //     ['@BatteryCollector:user', JSON.stringify(response.data.user)]
-    //   ]);
-    //   this.setState({loggedInUser: _user});
-    //   Alert.alert(`Bem vindo, ${_user.name}`);
-    //   navigation.navigate('Main', {_user});
+    // //   await AsyncStorage.multiSet([
+    // //     ['@BatteryCollector:token', response.data.token.value.token],
+    // //     ['@BatteryCollector:user', JSON.stringify(response.data.user)]
+    // //   ]);
+    // //   this.setState({loggedInUser: _user});
+    // Alert.alert(`Bem vindo, ${_user.name}`);
+    // navigation.navigate('Main', {_user});
     // }
-    // catch(response) {
-    //   Alert.alert(response);
-    // } 
+    //  catch(response) {
+    //    Alert.alert(response);
+    //  } 
+  }
       
   return (
     <View  style={styles.backgroundContainer}>

@@ -39,7 +39,7 @@ export default class Map extends Component {
         const goFailure= () => {
             console.log('erro kennedy')
         }
-
+        -26.913455, -49.069124
         const options= 
         {
             timeout: 2000,

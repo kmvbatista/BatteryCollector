@@ -15,7 +15,7 @@ class Tabs extends React.Component {
     return (
       <Container>
         <TabsContainer>
-          <TouchableHighlight onPress={ () => { 
+          <TouchableHighlight onPress={ () => { r
             this.props.navigation.navigate('Map');
           }} 
           underlayColor= {"rgba(255, 255, 255, 0.6)"}>
@@ -34,10 +34,15 @@ class Tabs extends React.Component {
             </TabItem>
             </TouchableHighlight>
 
+            <TouchableHighlight onPress={() => { 
+            this.props.navigation.navigate('Statistics');
+          }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
           <TabItem>
             <Icon name="trending-up" size={35} color="#fff" ></Icon>
             <TabText>Estatísticas</TabText>
           </TabItem>
+          </TouchableHighlight>
+
           <TabItem>
             <Icon name="info" size={35} color="#fff" ></Icon>
             <TabText>Informações</TabText>
