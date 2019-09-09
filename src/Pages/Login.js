@@ -5,6 +5,11 @@ import Api from '../Api'
 import logo from '../../images/logo.png';
 
 
+if (__DEV__) {
+  require('react-devtools');
+}
+
+
 this.state={
   loggedInUser: null,
   errorMessage: null,
@@ -13,8 +18,8 @@ this.state={
 
 const {width : WIDTH} = Dimensions.get('window');
 
-
 export default function Login( { navigation } ) {
+
     
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');

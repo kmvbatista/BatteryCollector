@@ -37,3 +37,4 @@ export const PickerBox = styled.View`
     background-color: rgba(21, 219, 10, 1);
     background: rgba(21, 219, 10, 1);
 `;
+

@@ -3,12 +3,10 @@ import { View, Text, StyleSheet } from 'react-native'
 import  MapView from 'react-native-maps'
 import Geolocation from '@react-native-community/geolocation';
 import Directions from '../src/Components/Destinations/index'
-import { getPixelSize } from '../utils'
 import markerImage from '../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
-import {Picker} from 'react-native'
-import Tabs from '../src/Tabs';
-
+import Search from '../src/Components/Search'
+import { GetPlacesObject, getPixelSize, GetPlacesArray } from '../utils'
 
 
 export default class Map extends Component {
@@ -17,11 +15,11 @@ export default class Map extends Component {
         destination: null,
         PickerValue: null,
         directionsResult: null,
-        placeToGo: null
+        placeToGo: null,
+        places: GetPlacesObject(),
     };
 
     componentDidMount() {
-
         const goSuccess= (position) => {
             const longitude = position.coords.longitude;
             const latitude = position.coords.latitude;
@@ -35,9 +33,7 @@ export default class Map extends Component {
                  }
              });
         }
-
         const goFailure= () => {
-            console.log('erro kennedy')
         }
         -26.913455, -49.069124
         const options= 
@@ -49,37 +45,16 @@ export default class Map extends Component {
         Geolocation.getCurrentPosition(goSuccess, goFailure, options);
     }
     render() {
-        const Prefeitura = 
-        {
-            latitude: -26.913829,
-            longitude: -49.069169,
-            title: 'Prefeitura',
-            subtitle: 'Prefeitura Blumenau'
-        }
-        const Neumarkt = 
-        {
-            latitude: -26.920532,
-            longitude: -49.069610,
-            title: "Neumarkt",
-            subtitle: "Neumarkt Shopping"
-        }
-        const Furb =
-        {
-            latitude: -26.891123,
-            longitude: -49.084850,
-            title: "Furb Campus 2",
-            subtitle: "Furb Campus 2"
-        }
+        const places = this.state.places;
 
         handleLocationSelected = (itemIndex) => {
-            const places= [Prefeitura, Furb,  Neumarkt];
-            this.setState({destination: places[itemIndex]})
+            this.setState({destination: GetPlacesArray()[itemIndex]})
         }
         const { region } = this.state;
         return (
             
         <View style={{ flex:1 }}>
-            <PickerBox>
+            {/* <PickerBox>
                 <Picker
                     selectedValue= {this.state.PickerValue}
                     
@@ -93,20 +68,20 @@ export default class Map extends Component {
                     <Picker.Item label= "Neumarkt shopping" value="Neumarkt shopping"></Picker.Item>
 
                 </Picker>
-            </PickerBox>
+            </PickerBox> */}
             <MapView
                 style={{ flex:1 }}
                 region={region}
                 showsUserLocation
                 loadingEnabled
-                annotations={Prefeitura}
+                annotations={this.state.places.Prefeitura}
                 ref= {el => this.mapView= el}
             >
             <MapView.Marker
                         coordinate={{latitude: -26.913829,
                             longitude: -49.069169
                         }}
-                        title={"Prefeitura De Blumenau"}
+                        title={this.state.places.Prefeitura.title}
                         description={"Descarte suas baterias aqui"}
                         image = {markerImage}
                     >
@@ -115,7 +90,7 @@ export default class Map extends Component {
                     <MapView.Marker
                         coordinate={{latitude: -26.920532,
                             longitude: -49.069610}}
-                        title={Neumarkt.title}
+                        title={this.state.places.Neumarkt.title}
                         description={"Descarte suas baterias aqui"}
                         image = {markerImage}
                     ></MapView.Marker>
@@ -123,7 +98,7 @@ export default class Map extends Component {
                     <MapView.Marker
                         coordinate={{latitude: -26.891123,
                             longitude: -49.084850}}
-                        title={Furb.title}
+                        title={this.state.places.Furb.title}
                         description={"Descarte suas baterias aqui"}
                         image = {markerImage}
                     ></MapView.Marker>
@@ -171,12 +146,10 @@ export default class Map extends Component {
                             )
                         }
                     </>
-                    
-                    
-                    
                 </>
             )}
              </MapView>
+            <Search></Search>
         </View>
         );
     }   

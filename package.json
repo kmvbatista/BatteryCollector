@@ -5,7 +5,8 @@
   "scripts": {
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "react-devtool": "react-devtools"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.1",
@@ -22,6 +23,7 @@
     "react-native-keyboard-avoiding-view": "^1.0.0",
     "react-native-maps": "^0.25.0",
     "react-native-maps-directions": "^1.7.0",
+    "react-native-modal-dropdown": "^0.6.2",
     "react-native-reanimated": "^1.2.0",
     "react-native-responsive-linechart": "^2.1.0",
     "react-native-svg": "^9.8.4",
@@ -37,6 +39,7 @@
     "eslint": "6.2.2",
     "jest": "24.9.0",
     "metro-react-native-babel-preset": "0.54.1",
+    "react-devtools": "^3.6.3",
     "react-test-renderer": "16.8.6"
   },
   "jest": {

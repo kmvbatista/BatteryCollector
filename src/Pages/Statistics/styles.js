@@ -47,11 +47,9 @@ export const UserData = styled.View`
 
 export const DataText = styled.Text`
   font-size: 11px;
-  color: white;
 `;
 
 export const DataTitle = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: white;
 `;
