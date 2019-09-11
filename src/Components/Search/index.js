@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {View, TextInput, StyleSheet, Text } from 'react-native'
 import { FlatList, ActivityIndicator, TouchableHighlight, TouchableWithoutFeedback } from 'react-native'
 import { GetPlacesArray } from '../../../utils'
-import { Container, TextInputContainer, TextInputStyled, ListContainer } from './styles'
+import { Container, TextInputContainer, TextInputStyled, ListContainer, Item, ListItemContainer } from './styles'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 export default class Search extends Component{
@@ -57,7 +58,7 @@ export default class Search extends Component{
             <FlatList
             contentContainerStyle={{ alignItems: "center", justifyContent: "space-between" }}
               data={getResults()}
-              renderItem={({item}) => <Text> {item.key} </Text>}
+              renderItem={({item}) => <ListItemContainer><Item><Text>{item.key}</Text></Item></ListItemContainer>}
               ListEmptyComponent= {() => 
                <Text style={{color: '#000'}}>Nada encontrado</Text>
               
