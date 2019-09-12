@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput, Alert, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 import Api from '../Api'
 import logo from '../../images/logo.png';
-
+import AnimatedLoader from 'react-native-animated-loader'
 
 if (__DEV__) {
   require('react-devtools');
@@ -13,14 +13,14 @@ if (__DEV__) {
 this.state={
   loggedInUser: null,
   errorMessage: null,
-  token: null
+  token: null,
 }
 
 const {width : WIDTH} = Dimensions.get('window');
 
 export default function Login( { navigation } ) {
 
-    
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
@@ -52,10 +52,23 @@ export default function Login( { navigation } ) {
     //    Alert.alert(response);
     //  } 
   }
-      
+  const toggleLoader = () => {
+    this.setTimeout(() => {
+      setIsLoading(false);
+    }, 7000);
+  }
   return (
-    <View  style={styles.backgroundContainer}>
     
+    <View  style={styles.backgroundContainer}>
+
+      {isLoading &&(
+        <AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'  animationStyle={styles.lottie}
+          speed={1}  source={require("../Components/4.json")}></AnimatedLoader>)}
+      
+      {toggleLoader()}
+ 
+      { !isLoading &&(
+      <>  
         <KeyboardAvoidingView
             behavior='padding'>
                 <View style={styles.logoContainer}>
@@ -98,6 +111,7 @@ export default function Login( { navigation } ) {
                     </TouchableOpacity>
                 </View>
         </KeyboardAvoidingView>
+      </>)}
     </View>
   );
 }

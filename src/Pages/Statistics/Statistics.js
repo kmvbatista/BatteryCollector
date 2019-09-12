@@ -60,7 +60,6 @@ export default function Statistics({navigation}) {
                 <DataTitle>Local mais frequente: </DataTitle>
                 <DataText>Furb</DataText>
             </UserData>
-            <BackButton></BackButton>
         </Container>
     );
 }

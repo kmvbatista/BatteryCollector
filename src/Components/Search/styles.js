@@ -33,3 +33,23 @@ export const TextInputStyled = styled.TextInput`
   border-radius: 15px;
   padding: 0px 20px 0px 20px;
 `;
+
+
+export const ListItemContainer = styled.View`
+  background-color: red;
+  align-self: stretch;
+`;
+
+export const ItemText = styled.Text`
+  color: black;
+  font-weight: bold;
+`;
+
+export const Item = styled.TouchableOpacity`
+background-Color: #ddd;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  margin-bottom: 5px;
+  align-self: stretch
+`;

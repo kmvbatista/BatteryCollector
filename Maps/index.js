@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Picker } from 'react-native'
 import  MapView from 'react-native-maps'
 import Geolocation from '@react-native-community/geolocation';
 import Directions from '../src/Components/Destinations/index'
@@ -54,7 +54,7 @@ export default class Map extends Component {
         return (
             
         <View style={{ flex:1 }}>
-            {/* <PickerBox>
+            <PickerBox>
                 <Picker
                     selectedValue= {this.state.PickerValue}
                     
@@ -68,7 +68,7 @@ export default class Map extends Component {
                     <Picker.Item label= "Neumarkt shopping" value="Neumarkt shopping"></Picker.Item>
 
                 </Picker>
-            </PickerBox> */}
+            </PickerBox> 
             <MapView
                 style={{ flex:1 }}
                 region={region}

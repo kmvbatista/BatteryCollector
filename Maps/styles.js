@@ -21,7 +21,7 @@ export const LocationText = styled.Text`
     font-size: 10px;
 `;
 export const LocationText2 = styled.Text`
-    color: #222;
+    color: black;
     font-size: 10px;
 `;
 
