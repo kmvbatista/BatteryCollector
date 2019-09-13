@@ -55,7 +55,7 @@ export default function Login( { navigation } ) {
   const toggleLoader = () => {
     this.setTimeout(() => {
       setIsLoading(false);
-    }, 7000);
+    }, 2000);
   }
   return (
     
@@ -73,7 +73,7 @@ export default function Login( { navigation } ) {
             behavior='padding'>
                 <View style={styles.logoContainer}>
                     <Image source={logo} style={styles.logo}/>
-                    <Text style={styles.logoText}>Battery Collector</Text>
+                    <Text style={styles.logoText}>Turn IT Greener</Text>
                 </View>
 
                 <View>
@@ -107,7 +107,7 @@ export default function Login( { navigation } ) {
                 
                 <View>
                     <TouchableOpacity onPress={signIn} placeholderTextColor='white' style={styles.button}>
-                    <Text style={styles.buttonText}>sign</Text>
+                    <Text style={styles.buttonText}>Entrar</Text>
                     </TouchableOpacity>
                 </View>
         </KeyboardAvoidingView>

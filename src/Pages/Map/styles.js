@@ -11,8 +11,6 @@ background-Color: rgba(21, 219, 10, 1);
   width: 100%;
   bottom: 28px;
   border-radius: 15px;
-
-
 `;
 
 export const ButtonView = styled.View`

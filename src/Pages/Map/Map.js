@@ -1,6 +1,6 @@
 import React from 'react'
 import Map from '../../../Maps/index'
-import {BackHandler, View, Text, Dimensions} from 'react-native'
+import {BackHandler, View, Text, Dimensions, Alert} from 'react-native'
 import DiscardButton from './DiscardButton'
 import {  ButtonView, Container } from './styles'
 import ModalDropdown from '../../Components/Modals/MapModal/index';
@@ -17,6 +17,9 @@ export default function Main( { navigation } ) {
             handlebackPress
           )
     );
+    const handleDiscardButton = () => {
+      navigation.navigate('DiscardPage')
+    }
 
     function handlebackPress(){
         return navigation.navigate('Main');
@@ -26,7 +29,7 @@ export default function Main( { navigation } ) {
           <Map>
           </Map>
           <ButtonView>
-            <DiscardButton ></DiscardButton>
+            <DiscardButton onclick={handleDiscardButton}></DiscardButton>
           </ButtonView>
         </Container>
     );

@@ -5857,12 +5857,10 @@ react-native-maps@^0.25.0:
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.25.0.tgz#81bc51eb50e33811a9e1c345cc48869413ead67d"
   integrity sha512-PFJuW1pt+HnnnN0m0OGk29RSvICFVkK/DScX6cUk0SuCSN2DAHx0y6y57lZyYXcYqU4J4usNpfxgp/ccjASDiw==
 
-react-native-modal-dropdown@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/react-native-modal-dropdown/-/react-native-modal-dropdown-0.6.2.tgz#da6027b3546d2031fbce46242bffc95561e13599"
-  integrity sha512-1jzByA+ME+q0mZJ2rZrLsf6jVwJhNxNHdg7I50xYZ9oYJsmmKwF9r/ks95tZxxks4Zvd7/FnaveNtyd+uevXAw==
-  dependencies:
-    prop-types "^15.6.0"
+react-native-picker-modal-view@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/react-native-picker-modal-view/-/react-native-picker-modal-view-1.2.6.tgz#02fdf2bd446670e9b491789e7651fa3d14bd76d5"
+  integrity sha512-kHyuqigAuPZCoA1Pt0l0reVxBgOc+T2o6cD6qznq5I+F7Ltg+GhfcstzLH1RXQSfhCImEcSVmgX3+FeoPXapxQ==
 
 react-native-reanimated@^1.2.0:
   version "1.2.0"

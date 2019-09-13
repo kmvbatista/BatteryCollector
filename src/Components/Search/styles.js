@@ -36,8 +36,6 @@ export const TextInputStyled = styled.TextInput`
 
 
 export const ListItemContainer = styled.View`
-  background-color: red;
-  align-self: stretch;
 `;
 
 export const ItemText = styled.Text`
@@ -46,10 +44,7 @@ export const ItemText = styled.Text`
 `;
 
 export const Item = styled.TouchableOpacity`
-background-Color: #ddd;
   justify-content: center;
-  align-items: center;
   height: 32px;
   margin-bottom: 5px;
-  align-self: stretch
 `;
