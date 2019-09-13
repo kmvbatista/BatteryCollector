@@ -55,7 +55,7 @@ export default function Login( { navigation } ) {
   const toggleLoader = () => {
     this.setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 2500);
   }
   return (
     
