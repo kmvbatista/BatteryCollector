@@ -1,5 +1,6 @@
 import { Platform, PixelRatio } from 'react-native';
-import Calculate from './src/CalculatePermission/haversine'
+import Calculate from './src/CalculatePermission/haversine';
+import Geolocation from '@react-native-community/geolocation';
 
 export function getPixelSize(pixels) {
     return Platform.select({
@@ -40,3 +41,7 @@ export function GetPlacesArray() {
 export function CalculatePermission(lat, long) {
     return Calculate(lat, long);
 } 
+
+export function getRadioPermitted() {
+    return 9000;
+}

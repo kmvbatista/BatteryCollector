@@ -1,10 +1,12 @@
-const getDistanceFromLatLonInMeters = (lat2,lon2) => {
+import { getRadioPermitted, GetPlacesArray } from '../../utils'
+
+const getDistanceFromLatLonInMeters = (lat1, long1, curLat, curLong) => {
     var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(lat2-(-26.913924));  // deg2rad below
-    var dLon = deg2rad(lon2-(-49.069124)); 
+    var dLat = deg2rad(curLat-(lat1));  // deg2rad below
+    var dLon = deg2rad(curLong-(long1)); 
     var a = 
       Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(deg2rad(-26.913924)) * Math.cos(deg2rad(lat2)) * 
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(curLat)) * 
       Math.sin(dLon/2) * Math.sin(dLon/2)
       ; 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
@@ -17,9 +19,12 @@ const getDistanceFromLatLonInMeters = (lat2,lon2) => {
   }
 
   export default function CalculatePermission (lat, long) {
-    const distance = getDistanceFromLatLonInMeters(lat, long);
-    if(distance > 10) {
-      return false;
-    }
-    return true;
+    const radioPermitted = getRadioPermitted();
+    const places = GetPlacesArray();
+    return verifyPlaces(radioPermitted, places, lat, long);
+  }
+
+  let verifyPlaces = (radioPermitted, places, curLat, curLong) => {
+    let placesPermitted = places.filter((el) => getDistanceFromLatLonInMeters(el.latitude, el.longitude, curLat, curLong)<=radioPermitted);
+    return placesPermitted.length > 0;
   }

@@ -8,8 +8,12 @@ import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle,
 import Search from '../src/Components/Search'
 import { GetPlacesObject, getPixelSize, GetPlacesArray, CalculatePermission } from '../utils'
 import AnimatedLoader from 'react-native-animated-loader'
+import DiscardButton from '../src/Pages/Map/DiscardButton'
 
 export default class Map extends Component {
+    constructor(props) {
+        super(props);
+      }
     state = {
         region: null,
         destination: null,
@@ -18,10 +22,10 @@ export default class Map extends Component {
         placeToGo: null,
         places: GetPlacesObject(),
         isLoading: true,
-        permission: false
+        discardNow: false
     };
 
-    componentDidMount() {
+    updateCurrentPosition = () => { 
         const goSuccess= (position) => {
             const longitude = position.coords.longitude;
             const latitude = position.coords.latitude;
@@ -34,25 +38,37 @@ export default class Map extends Component {
                      longitudeDelta: 0.0134
                  }
             });
-            this.handlePermission(position.coords.longitude, position.coords.latitude);
+            if(this.state.discardNow) {
+                const permission = CalculatePermission(latitude, longitude)
+                this.props.handleNavigation(permission);
+            }
             
         }
         const goFailure= () => {
+            this.setState({permission: false});
+            console.log('Verifique seu GPS, por favor :(')
         }
-        -26.913455, -49.069124
+
         const options= 
         {
             timeout: 2000,
             enableHighAccuracy: false,
             maximumAge: 17000
         }
-        Geolocation.getCurrentPosition(goSuccess, goFailure, options);
-        this.toggleLoader();
+        return Geolocation.getCurrentPosition(goSuccess, goFailure, options);
     }
 
-    handlePermission(long, lat) {
-        const permission = CalculatePermission(lat, long)
-        this.setState({permission: permission});
+    componentDidMount() {
+        this.handlePermission();
+    }
+
+    handlePermission() {
+        this.updateCurrentPosition();
+    }
+
+    handleDiscardButton = ( ) => {
+        this.state.discardNow = true;
+        this.handlePermission();
     }
 
     toggleLoader() {
@@ -69,11 +85,12 @@ export default class Map extends Component {
         return (
             
         <View style={{ flex:1 }}>
-                {this.state.isLoading &&(
+                {!this.state.region &&(
           <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)' 
           speed={1}  source={require("../src/Components/bigLixeira.json")}></AnimatedLoader>
         )}
-        { !this.state.isLoading &&(
+
+        { this.state.region &&(
         <>
             <MapView
                 style={{ flex:1 }}
@@ -155,7 +172,9 @@ export default class Map extends Component {
             </MapView>
         </>)}
             <Search handleLocationSelected={handleLocationSelected}></Search>
+            <DiscardButton onclick={this.handleDiscardButton}></DiscardButton>
         </View>
+
         );
     }   
     

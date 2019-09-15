@@ -1,7 +1,6 @@
 import Map from '../../../Maps/index'
 import {BackHandler, View, Text, Dimensions, Alert} from 'react-native'
-import DiscardButton from './DiscardButton'
-import {  ButtonView, Container } from './styles'
+import { Container } from './styles'
 import React, {useState, useEffect} from 'react';
 
 
@@ -14,7 +13,7 @@ export default function Main( { navigation } ) {
             handlebackPress
           )
     );
-    const handleDiscardButton = (condition) => {
+    const handleNavigation = (condition) => {
       if(condition){
         navigation.navigate('DiscardPage');
       }
@@ -29,11 +28,9 @@ export default function Main( { navigation } ) {
     return (
       <Container>
   
-          <Map>
+          <Map handleNavigation= {handleNavigation}>
           </Map>
-          <ButtonView>
-            <DiscardButton onclick={handleDiscardButton}></DiscardButton>
-          </ButtonView>
+
       </Container>
     );
 }
