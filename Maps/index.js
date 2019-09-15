@@ -7,7 +7,7 @@ import markerImage from '../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
 import Search from '../src/Components/Search'
 import { GetPlacesObject, getPixelSize, GetPlacesArray } from '../utils'
-
+import AnimatedLoader from 'react-native-animated-loader'
 
 export default class Map extends Component {
     state = {
@@ -17,6 +17,7 @@ export default class Map extends Component {
         directionsResult: null,
         placeToGo: null,
         places: GetPlacesObject(),
+        isLoading: true
     };
 
     componentDidMount() {
@@ -31,7 +32,8 @@ export default class Map extends Component {
                      latitudeDelta: 0.0143,
                      longitudeDelta: 0.0134
                  }
-             });
+            });
+            this.toggleLoader();
         }
         const goFailure= () => {
         }
@@ -44,6 +46,11 @@ export default class Map extends Component {
         }
         Geolocation.getCurrentPosition(goSuccess, goFailure, options);
     }
+
+    toggleLoader() {
+        this.setState({isLoading: false});
+    }
+
     render() {
         const places = this.state.places;
 
@@ -54,21 +61,12 @@ export default class Map extends Component {
         return (
             
         <View style={{ flex:1 }}>
-            <PickerBox>
-                <Picker
-                    selectedValue= {this.state.PickerValue}
-                    
-                    onValueChange= {(itemValue, itemIndex)=> {
-                        this.setState({PickerValue: itemValue});
-                        handleLocationSelected(itemIndex);
-                    }}
-                >
-                    <Picker.Item label="Prefeitura de Blumenau" value="Prefeitura de Blumenau"></Picker.Item>
-                    <Picker.Item label="Furb Campus 2" value="Furb Campus 2" > </Picker.Item>
-                    <Picker.Item label= "Neumarkt shopping" value="Neumarkt shopping"></Picker.Item>
-
-                </Picker>
-            </PickerBox> 
+                {this.state.isLoading &&(
+          <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)' 
+          speed={1}  source={require("../src/Components/bigLixeira.json")}></AnimatedLoader>
+        )}
+        { !this.state.isLoading &&(
+        <>
             <MapView
                 style={{ flex:1 }}
                 region={region}
@@ -103,7 +101,6 @@ export default class Map extends Component {
                         image = {markerImage}
                     ></MapView.Marker>
 
-            
             { !!this.state.destination &&(
                 <>
                     <Directions
@@ -125,7 +122,6 @@ export default class Map extends Component {
                         }
                     >
                     </Directions>
-
                     <>
                         {
                             !!this.state.directionsResult && (
@@ -148,8 +144,9 @@ export default class Map extends Component {
                     </>
                 </>
             )}
-             </MapView>
-            <Search></Search>
+            </MapView>
+        </>)}
+            <Search handleLocationSelected={handleLocationSelected}></Search>
         </View>
         );
     }   

@@ -7,6 +7,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 export default class Search extends Component{
+  constructor(props){
+    super(props);
+  }
   state={
     SearchedPlace: null,
     placesInMemory: null,
@@ -30,8 +33,8 @@ export default class Search extends Component{
     const getResults = () => {
       var places= this.state.placesInMemory;
       if(places){
-        
-        var placesToShow = places.map(el => {return {key: `${el.title}`}});
+        i = 0
+        var placesToShow = places.map(el => {return {key: `${el.title}`, index: i++}});
         return placesToShow;
       }
     }
@@ -51,23 +54,21 @@ export default class Search extends Component{
         </TextInputContainer>
           
           <ListContainer >
-          {this.state.isLoading ?
-            <View style={{...StyleSheet.absoluteFill ,alignItems: "center", justifyContent: 'center'}}>
-              <ActivityIndicator size="large" color="#000"></ActivityIndicator>
-            </View> :null}
             <FlatList
             contentContainerStyle={{ alignItems: "center", justifyContent: "space-between" }}
               data={getResults()}
-              renderItem={({item}) => <ListItemContainer><Item><Text>{item.key}</Text></Item></ListItemContainer>}
+              renderItem={({item}) => 
+              <ListItemContainer>
+                <Item onPress={() => {this.props.handleLocationSelected(item.index)}}>
+                  <Text>{item.key}</Text>
+                </Item>
+              </ListItemContainer>}
               ListEmptyComponent= {() => 
                <Text style={{color: '#000'}}>Nada encontrado</Text>
-              
               }
              >
           </FlatList>
          </ListContainer>
-            
-        
       </Container>
     );
   }

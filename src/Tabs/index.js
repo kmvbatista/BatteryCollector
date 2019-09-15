@@ -11,7 +11,6 @@ class Tabs extends React.Component {
   }
 
   render() {
-
     return (
       <Container>
         <TabsContainer>

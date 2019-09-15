@@ -24,7 +24,8 @@ export const ListContainer = styled.View`
   margin-right: 20px;
   border-top-width: 0;
   border-bottom-width: 0;
-  border-radius: 5px;
+  border-radius: 10px;
+  margin-top: 10px;
 `;
 
 export const TextInputStyled = styled.TextInput`
