@@ -6,7 +6,7 @@ import Directions from '../src/Components/Destinations/index'
 import markerImage from '../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
 import Search from '../src/Components/Search'
-import { GetPlacesObject, getPixelSize, GetPlacesArray } from '../utils'
+import { GetPlacesObject, getPixelSize, GetPlacesArray, CalculatePermission } from '../utils'
 import AnimatedLoader from 'react-native-animated-loader'
 
 export default class Map extends Component {
@@ -17,7 +17,8 @@ export default class Map extends Component {
         directionsResult: null,
         placeToGo: null,
         places: GetPlacesObject(),
-        isLoading: true
+        isLoading: true,
+        permission: false
     };
 
     componentDidMount() {
@@ -33,7 +34,8 @@ export default class Map extends Component {
                      longitudeDelta: 0.0134
                  }
             });
-            this.toggleLoader();
+            this.handlePermission(position.coords.longitude, position.coords.latitude);
+            
         }
         const goFailure= () => {
         }
@@ -45,6 +47,12 @@ export default class Map extends Component {
             maximumAge: 17000
         }
         Geolocation.getCurrentPosition(goSuccess, goFailure, options);
+        this.toggleLoader();
+    }
+
+    handlePermission(long, lat) {
+        const permission = CalculatePermission(lat, long)
+        this.setState({permission: permission});
     }
 
     toggleLoader() {

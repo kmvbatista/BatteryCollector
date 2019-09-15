@@ -1,4 +1,5 @@
 import { Platform, PixelRatio } from 'react-native';
+import Calculate from './src/CalculatePermission/haversine'
 
 export function getPixelSize(pixels) {
     return Platform.select({
@@ -32,6 +33,10 @@ export function GetPlacesObject() {
     return  {Prefeitura, Furb, Neumarkt };
 }
 
-export function GetPlacesArray(){
+export function GetPlacesArray() {
     return [Prefeitura, Furb, Neumarkt];
 }
+
+export function CalculatePermission(lat, long) {
+    return Calculate(lat, long);
+} 

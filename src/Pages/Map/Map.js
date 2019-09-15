@@ -14,9 +14,13 @@ export default function Main( { navigation } ) {
             handlebackPress
           )
     );
-    const handleDiscardButton = () => {
-
-      navigation.navigate('DiscardPage')
+    const handleDiscardButton = (condition) => {
+      if(condition){
+        navigation.navigate('DiscardPage');
+      }
+      else {
+        Alert.alert("Você não está em uma localidade permitida");
+      }
     }
 
     function handlebackPress(){

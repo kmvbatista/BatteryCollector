@@ -5,7 +5,7 @@ import {withNavigation} from 'react-navigation'
 export default function Button(props) {
     
     return (
-            <ButtonStyled onPress={props.onclick}>
+            <ButtonStyled onPress={() => {props.onclick(this.state.permission)}}>
                 <ButtonText>
                     Descartar Agora
                 </ButtonText>
