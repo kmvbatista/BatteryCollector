@@ -17,7 +17,7 @@ export default function DiscardingPage(props) {
   return (
     <ContentsContainer>
         <PickerModal
-          onSelected={(selected) => setSelected(selected)}
+          onSelected={(selected) => props.setSelected(selected)}
           onClosed={()=> {}}
           onBackButtonPressed={()=> {}}
           items={list}
@@ -42,7 +42,7 @@ export default function DiscardingPage(props) {
           underlineColorAndroid ={'#ddd'}
           // value= {this.state.places.title}
           keyboardType= 'number-pad'
-          onChangeText={(value) => setQuantity(value)}
+          onChangeText={(value) => props.setQuantity(value)}
         />
         <ButtonStyled
           onPress={props.handleDiscardPress}

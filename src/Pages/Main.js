@@ -1,7 +1,7 @@
-import React from 'react'
-import { BackHandler } from 'react-native'
-import Container1 from '../styles'
-import Header from '../Components/Header/index'
+import React from 'react';
+import { BackHandler } from 'react-native';
+import Container1 from '../styles';
+import Header from '../Components/Header/index';
 import Tabs from '../Tabs/index';
 
 export default function Main( { navigation } ) {

@@ -47,7 +47,7 @@ export default function DiscardPage() {
   const toggleLoader = () => {
     setTimeout(() => {
       setCongrats(false);
-      Alert.alert("@Parabéns por contribuir com o bem do nosso planeta!\n As gerações futuras agradecem!");
+      setisDiscarding(false)
     }, 1500);
   }
 
@@ -68,7 +68,6 @@ export default function DiscardPage() {
         {!isDiscarding &&(
           <AfterDiscardPage></AfterDiscardPage>
         )}   
-     
     </Container>
   )}
 

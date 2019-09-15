@@ -5,6 +5,9 @@ export const Container = styled.View`
   width: 100%;
   height: 100%;
   background: rgba(21, 219, 10, 1);
+  display: flex;
+  flex-flow: column;
+  flex-direction: column;
 `;
 
 export const TextInputStyled = styled.TextInput`
@@ -37,3 +40,33 @@ export const TextStyled = styled.Text`
   color: #fff;
 `;
 
+export const UserDataContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`;
+
+export const AnimationContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  flex: 2;
+`;
+
+export const CongratsTextContainer = styled.View`
+  flex: 0.5;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const CongratsText = styled.Text`
+  font-family: cursive;
+  font-weight: bold;
+  font-size: 25px;
+  color: #fff;
+`;
+
+export const ButtonContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  flex: 0.5;
+`;

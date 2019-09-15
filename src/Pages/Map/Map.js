@@ -35,7 +35,7 @@ export default function Main( { navigation } ) {
       <Container>
         {isLoading &&(
           <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)' 
-          speed={1}  source={require("../../Components/lineDel.json")}></AnimatedLoader>
+          speed={1}  source={require("../../Components/bigLixeira.json")}></AnimatedLoader>
         // <LottieView  visible={true} style={{backgroundColor: 'rgba(21, 219, 10, 1)' }}
         // cacheStrategy={'strong'}
         // source={require("../../Components/city.json")} autoPlay={true} loop={true}></LottieView>

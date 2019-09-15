@@ -2,16 +2,26 @@ import LineChart from '../../Components/Charts/LineChart/index'
 import BarChart from '../../Components/Charts/BarChart/index'
 import ContributionChart from '../../Components/Charts/ContributionChart/index'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import React from 'react';
+import React, {useState} from 'react';
 import {Container, LineContainer, BarContainer, ContributionContainer, Title,
-     Header, UserData, DataText, DataTitle} from './styles'
+     Header} from './styles';
+import UserData from '../../Components/UserData/index'
 import {View, StyleSheet, Dimensions, BackHandler, Backbutt} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
-import { BackButton } from 'react-navigation'
 const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
+import AnimatedLoader from 'react-native-animated-loader'
+
+
 
 
 export default function Statistics({navigation}) {
+    const [isLoading, setisLoading] = useState(true);
+
+    const toggleLoader = () => {
+        setTimeout(() => {
+            setisLoading(false);
+        }, 1500);
+    }
     this._didFocusSubscription = navigation.addListener(  
         'didFocus',
         payload =>
@@ -25,7 +35,13 @@ export default function Statistics({navigation}) {
         return navigation.navigate('Main');
       }
     return (
-        <Container style={{height: HEIGHT}}>  
+        
+        <Container style={{height: HEIGHT}}> 
+        {isLoading &&(<AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'
+        speed={1} animationType={'fade'} source={require("../../Components/rocket.json")}></AnimatedLoader>)}
+        {isLoading && toggleLoader()}
+        {!isLoading && (
+            <>
             <Header>
                 <Title >
                     Gire para o lado
@@ -52,14 +68,9 @@ export default function Statistics({navigation}) {
                     </ContributionChart>
                 </ContributionContainer>
             </ScrollView>
-            <UserData>
-                <DataTitle>Mês de maior contribuição: </DataTitle>
-                <DataText> Outubro</DataText>
-                <DataTitle> Material mais descartado: </DataTitle>
-                <DataText>Pilhas</DataText>
-                <DataTitle>Local mais frequente: </DataTitle>
-                <DataText>Furb</DataText>
-            </UserData>
+            <UserData></UserData>
+        </>
+        )}
         </Container>
     );
 }

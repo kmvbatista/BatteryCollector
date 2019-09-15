@@ -39,17 +39,3 @@ export const ContributionContainer = styled.View`
   justify-content: flex-start;
   flex: 1;
 `;
-
-export const UserData = styled.View`
-  flex: 1;
-
-`;
-
-export const DataText = styled.Text`
-  font-size: 11px;
-`;
-
-export const DataTitle = styled.Text`
-  font-size: 16px;
-  font-weight: bold;
-`;

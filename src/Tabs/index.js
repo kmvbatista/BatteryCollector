@@ -55,7 +55,6 @@ class Tabs extends React.Component {
                 <Icon name="keyboard-tab" size={35} color="#fff" ></Icon>
                 <TabText>Sair</TabText>
               </TabItem>
-
           </TouchableHighlight>
 
         </TabsContainer>
