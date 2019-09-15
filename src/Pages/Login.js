@@ -5,9 +5,9 @@ import Api from '../Api'
 import logo from '../../images/logo.png';
 import AnimatedLoader from 'react-native-animated-loader'
 
-if (__DEV__) {
-  require('react-devtools');
-}
+// if (__DEV__) {
+//   require('react-devtools');
+// }
 
 
 this.state={
@@ -62,7 +62,7 @@ export default function Login( { navigation } ) {
     <View  style={styles.backgroundContainer}>
 
       {isLoading &&(
-        <AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'  animationStyle={styles.lottie}
+        <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)'  animationStyle={styles.lottie}
           speed={1}  source={require("../Components/4.json")}></AnimatedLoader>)}
       
       {toggleLoader()}
