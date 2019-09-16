@@ -1,21 +1,24 @@
 import LineChart from '../../Components/Charts/LineChart/index'
 import BarChart from '../../Components/Charts/BarChart/index'
-import ContributionChart from '../../Components/Charts/ContributionChart/index'
+import PieChart from '../../Components/Charts/PieChart/index'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React, {useState} from 'react';
 import {Container, LineContainer, BarContainer, ContributionContainer, Title,
-     Header} from './styles';
+     Header, StyledScrollView} from './styles';
 import UserData from '../../Components/UserData/index'
 import {View, StyleSheet, Dimensions, BackHandler, Backbutt} from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler';
 const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
 import AnimatedLoader from 'react-native-animated-loader'
 
-
+const getData = () => {
+    return ['30', '19', '20', '24', '0', '0', '0', '0', '0', '0', '0', '0']
+}
 
 
 export default function Statistics({navigation}) {
     const [isLoading, setisLoading] = useState(true);
+
+    const data= ['30', '19', '20', '24', '0', '0', '0', '0', '0', '0', '0', '0'];
 
     const toggleLoader = () => {
         setTimeout(() => {
@@ -36,7 +39,7 @@ export default function Statistics({navigation}) {
       }
     return (
         
-        <Container style={{height: HEIGHT}}> 
+        <Container>
         {isLoading &&(<AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'
         speed={1} animationType={'fade'} source={require("../../Components/rocket.json")}></AnimatedLoader>)}
         {isLoading && toggleLoader()}
@@ -48,26 +51,28 @@ export default function Statistics({navigation}) {
                 </Title>
                 <Icon name="keyboard-arrow-right" size={35} color="#fff" ></Icon>
             </Header>
-            <ScrollView
+
+            <StyledScrollView
+            contentContainerStyle
                 horizontal= {true}
                 pagingEnabled= {true}
                 showsHorizontalScrollIndicator={false}
-                contentInset= {{top: 90, left: -100, bottom: 0, right: 0}}
+                contentInset= {{top: 90, left: -100, bottom: 0, right: 0}
+            }
             >
                 <LineContainer style={{width: WIDTH}}>
-                    <LineChart ></LineChart>
+                    <LineChart data={data} ></LineChart>
                 </LineContainer>
                 <BarContainer style={{width: WIDTH}}> 
                     <BarChart>
                     </BarChart>
                 </BarContainer>
-
                 <ContributionContainer style={{width: WIDTH}}>
-                    <ContributionChart>
-
-                    </ContributionChart>
+                    <PieChart>
+                    </PieChart>
                 </ContributionContainer>
-            </ScrollView>
+            </StyledScrollView>
+            
             <UserData></UserData>
         </>
         )}

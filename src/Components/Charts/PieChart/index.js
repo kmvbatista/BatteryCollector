@@ -1,9 +1,9 @@
 import{ PieChart } from 'react-native-chart-kit'
 import React from 'react'
-import { Dimensions, StyleSheet, View } from 'react-native'
+import { Dimensions} from 'react-native'
 
 const screenWidth = Dimensions.get('window').width;
-export default function Contribution(){
+export default function PieChartGraph(){
   const data = [
     { name: 'Pilha', population: 40, color: 'rgba(131, 167, 234, 1)', legendFontColor: '#7F7F7F', legendFontSize: 15 },
     { name: 'Bateria', population: 30, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },

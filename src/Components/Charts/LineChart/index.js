@@ -4,25 +4,12 @@ import { Dimensions, StyleSheet, View } from 'react-native'
 
 const {width : WIDTH} = Dimensions.get('window');
 
-export default function Line() {
+export default function Line(props) {
   const data= { 
     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
     datasets: [
       {
-        data: [
-          13,
-          40,
-          1,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100
-        ],
+        data: props.data,
       },
     ],
   }
