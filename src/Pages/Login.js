@@ -8,14 +8,11 @@ import AnimatedLoader from 'react-native-animated-loader'
 // if (__DEV__) {
 //   require('react-devtools');
 // }
-
-
 this.state={
   loggedInUser: null,
   errorMessage: null,
   token: null,
 }
-
 const {width : WIDTH} = Dimensions.get('window');
 
 export default function Login( { navigation } ) {
@@ -57,6 +54,11 @@ export default function Login( { navigation } ) {
       setIsLoading(false);
     }, 2500);
   }
+
+  const handleSignUp = () => {
+    navigation.navigate('SignUp');
+  }
+
   return (
     
     <View  style={styles.backgroundContainer}>
@@ -109,6 +111,11 @@ export default function Login( { navigation } ) {
                     <TouchableOpacity onPress={signIn} placeholderTextColor='white' style={styles.button}>
                     <Text style={styles.buttonText}>Entrar</Text>
                     </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity onPress={handleSignUp} style={styles.button} placeholderTextColor='white'>
+                    <Text>Cadastrar</Text>
+                  </TouchableOpacity>
                 </View>
         </KeyboardAvoidingView>
       </>)}
