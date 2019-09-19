@@ -170,17 +170,17 @@ const styles = StyleSheet.create({
     justifyContent:"center"
     }, 
   button: {
-    backgroundColor: 'rgba(0,0,0,0.95)',
-    width: WIDTH-80,
-    height: 50,
-    borderRadius: 40,
-    fontSize: 30, 
-    paddingLeft:100,
-    paddingRight:100,
-    marginBottom:70,
-    justifyContent: 'center',
-    alignItems: "center",
-    alignSelf: "stretch"
+      backgroundColor: 'rgba(0,0,0,0.95)',
+      width: WIDTH-80,
+      height: 50,
+      borderRadius: 40,
+      fontSize: 30, 
+      paddingLeft:100,
+      paddingRight:100,
+      marginBottom:70,
+      justifyContent: 'center',
+      alignItems: "center",
+      alignSelf: "stretch"
   },
   buttonText: {
     color: 'white',
