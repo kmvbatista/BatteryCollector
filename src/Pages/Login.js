@@ -111,9 +111,7 @@ export default function Login( { navigation } ) {
                     <TouchableOpacity onPress={signIn} placeholderTextColor='white' style={styles.button}>
                     <Text style={styles.buttonText}>Entrar</Text>
                     </TouchableOpacity>
-                </View>
-                <View>
-                  <TouchableOpacity onPress={handleSignUp} style={styles.button} placeholderTextColor='white'>
+                    <TouchableOpacity onPress={handleSignUp} style={styles.button} placeholderTextColor='white'>
                     <Text>Cadastrar</Text>
                   </TouchableOpacity>
                 </View>
@@ -182,6 +180,18 @@ const styles = StyleSheet.create({
       alignItems: "center",
       alignSelf: "stretch"
   },
+  button2: {
+    backgroundColor: 'rgba(0,0,0,0.95)',
+    width: WIDTH-60,
+    height: 50,
+    borderRadius: 40,
+    fontSize: 30, 
+    paddingLeft:100,
+    paddingRight:100,
+    marginBottom:70,
+    justifyContent: 'center',
+    alignItems: "center",
+},
   buttonText: {
     color: 'white',
     fontSize: 20,
