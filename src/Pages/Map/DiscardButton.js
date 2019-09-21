@@ -6,7 +6,7 @@ export default function Button(props) {
     
     return (
         <ButtonView>
-            <ButtonStyled onPress={() => {props.onclick(this.state.permission)}}>
+            <ButtonStyled onPress={() => {props.onclick()}}>
                 <ButtonText>
                     Descartar Agora
                 </ButtonText>

@@ -6,7 +6,7 @@ import React, {useState} from 'react';
 import {Container, LineContainer, BarContainer, ContributionContainer, Title,
      Header, StyledScrollView} from './styles';
 import UserData from '../../Components/UserData/index'
-import {View, StyleSheet, Dimensions, BackHandler, Backbutt} from 'react-native'
+import {View, StyleSheet, Dimensions, BackHandler} from 'react-native'
 const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
 import AnimatedLoader from 'react-native-animated-loader'
 

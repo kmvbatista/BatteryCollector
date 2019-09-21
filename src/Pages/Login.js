@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, TextInput, Alert, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, 
+  Image, Dimensions, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 import Api from '../Api'
 import logo from '../../images/logo.png';
@@ -8,11 +9,11 @@ import AnimatedLoader from 'react-native-animated-loader'
 // if (__DEV__) {
 //   require('react-devtools');
 // }
-this.state={
-  loggedInUser: null,
-  errorMessage: null,
-  token: null,
-}
+// this.state={
+//   loggedInUser: null,
+//   errorMessage: null,
+//   token: null,
+// }
 const {width : WIDTH} = Dimensions.get('window');
 
 export default function Login( { navigation } ) {
@@ -21,14 +22,20 @@ export default function Login( { navigation } ) {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
-  signIn = async() => {
-    //const loggedIn= Json.Parse(await AsyncStorage.getItem('@BatteryCollector:user'));
-    //const _token = await AsyncStorage.getItem('@BatteryCollector:token')
-    // if(loggedI && token){
-    //   this.setState({loggedInUser: loggedIn});
-    //   this.setState({token: _token})
-      navigation.navigate('Main');
-    
+  const signIn = async () => {
+    const loggedIn= await AsyncStorage.getItem('@BatteryCollector:user');
+    if(loggedIn) {
+      loggedIn = JSON.parse(loggedIn);
+    }
+    const _token = await AsyncStorage.getItem('@BatteryCollector:token');
+    if(loggedIn) {
+      this.setState({loggedInUser: loggedIn});
+    }
+    if(_token) {
+    this.setState({token: _token})
+    }
+    navigation.navigate('Main');
+  
     // try {
     //  const response = await Api.post('/api/token', {
     //    email:user,
@@ -91,7 +98,7 @@ export default function Login( { navigation } ) {
                     />
                 </View>
 
-                <View>
+                <View style={{margin: 'auto'}}>
                     <TextInput
                         style={styles.inputPassword}
                         autoCapitalize= 'none'
@@ -111,8 +118,8 @@ export default function Login( { navigation } ) {
                     <TouchableOpacity onPress={signIn} placeholderTextColor='white' style={styles.button}>
                     <Text style={styles.buttonText}>Entrar</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={handleSignUp} style={styles.button} placeholderTextColor='white'>
-                    <Text>Cadastrar</Text>
+                    <TouchableOpacity onPress={handleSignUp} style={styles.button2} placeholderTextColor='#fff'>
+                    <Text style={styles.buttonText}>Cadastre-se</Text>
                   </TouchableOpacity>
                 </View>
         </KeyboardAvoidingView>
@@ -175,29 +182,24 @@ const styles = StyleSheet.create({
       fontSize: 30, 
       paddingLeft:100,
       paddingRight:100,
-      marginBottom:70,
+      marginBottom:20,
       justifyContent: 'center',
       alignItems: "center",
       alignSelf: "stretch"
   },
   button2: {
-    backgroundColor: 'rgba(0,0,0,0.95)',
+    backgroundColor: 'rgba(2,2,2,0.95)',
     width: WIDTH-60,
     height: 50,
-    borderRadius: 40,
+    borderRadius: 10,
     fontSize: 30, 
     paddingLeft:100,
     paddingRight:100,
-    marginBottom:70,
     justifyContent: 'center',
     alignItems: "center",
 },
   buttonText: {
     color: 'white',
-    fontSize: 20,
-    justifyContent: 'center',
-    alignItems: "center",
-    fontWeight: "bold"
   }
 
 });

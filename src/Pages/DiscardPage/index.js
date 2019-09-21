@@ -4,6 +4,7 @@ import AnimatedLoader from 'react-native-animated-loader'
 import React, { useState } from 'react';
 import DiscardingPage from './DiscardingPage'
 import AfterDiscardPage from './AfterDiscardPage'
+import api from '../../Api'
 
 const list = [
 	{Id: 1, Name: 'Bateria', Value: 'Test1 Value'},
@@ -36,8 +37,22 @@ export default function DiscardPage() {
     }
   }
 
-  const handleDiscardSuccess = () => {
-    setCongrats(true);
+  const getDiscardData = () => {
+    const discardData = {
+      selectedItem,
+      quantity,
+    }
+    return discardData;
+  }
+
+  const handleDiscardSuccess = async () => {
+    const response = await api.post('/api/discards', getDiscardData());
+    if(response.status>=400) {
+      //erro
+    }
+    else{
+      setCongrats(true);
+    }
   }
 
   const handleDiscardFailure = () => {
