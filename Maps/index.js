@@ -39,8 +39,10 @@ export default class Map extends Component {
                  }
             });
             if(this.state.discardNow) {
-                const permission = CalculatePermission(latitude, longitude)
-                this.props.handleNavigation(permission);
+                const placePermitted = CalculatePermission(latitude, longitude);
+                if(placePermitted) {
+                 this.props.handleNavigation(true);
+                }
             }
             
         }

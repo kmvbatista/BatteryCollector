@@ -13,7 +13,7 @@ export default function Main( { navigation } ) {
             handlebackPress
           )
     );
-    const handleNavigation = (condition) => {
+    const handleNavigationPermission = (condition) => {
       if(condition){
         navigation.navigate('DiscardPage');
       }
@@ -28,7 +28,7 @@ export default function Main( { navigation } ) {
     return (
       <Container>
   
-          <Map handleNavigation= {handleNavigation}>
+          <Map handleNavigationPermission= {handleNavigationPermission}>
           </Map>
 
       </Container>

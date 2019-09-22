@@ -1,6 +1,5 @@
 import { Platform, PixelRatio } from 'react-native';
-import Calculate from './src/CalculatePermission/haversine';
-import Geolocation from '@react-native-community/geolocation';
+import CalculateDistance from './src/CalculatePermission/haversine';
 
 export function getPixelSize(pixels) {
     return Platform.select({
@@ -10,6 +9,7 @@ export function getPixelSize(pixels) {
 }
 const Prefeitura = 
     {
+        id: 1,
         latitude: -26.913829,
         longitude: -49.069169,
         title: 'Prefeitura',
@@ -17,6 +17,7 @@ const Prefeitura =
     }
     const Neumarkt = 
     {
+        id: 2,
         latitude: -26.920532,
         longitude: -49.069610,
         title: "Neumarkt",
@@ -24,6 +25,7 @@ const Prefeitura =
     }
     const Furb =
     {
+        id: 3,
         latitude: -26.891123,
         longitude: -49.084850,
         title: "Furb Campus 2",
@@ -38,8 +40,8 @@ export function GetPlacesArray() {
     return [Prefeitura, Furb, Neumarkt];
 }
 
-export function CalculatePermission(lat, long) {
-    return Calculate(lat, long);
+export function getPlacePermitted(lat, long) {
+    return CalculateDistance(lat, long);
 } 
 
 export function getRadioPermitted() {

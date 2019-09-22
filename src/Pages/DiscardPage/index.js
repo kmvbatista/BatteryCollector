@@ -20,27 +20,38 @@ export default function DiscardPage() {
   const [quantity, setQuantity] = useState(0);
   const [congrats, setCongrats] = useState(false);
   const [isDiscarding, setisDiscarding] = useState(true);
-  
-  const handleDiscardPress = () => {
+  const [userLogged, setUserLogged] = useState( () => getUserLoggedStorage());
+
+  const getUserLoggedStorage = async () => {
+    let userLogged= await AsyncStorage.getItem('@BatteryCollector:user');
+     if(userLogged) {
+       userLogged = JSON.parse(userLogged);
+       setUserLogged(userLogged);
+     }
+  }
+
+  const handleDiscardPress =async () => {
     try {
-      setQuantity(parseInt(quantity));
-      if(quantity>0 && selectedItem != null){
-        handleDiscardSuccess();
+      if(parseInt(quantity)>0 && selectedItem != null){
+         handleDiscardSuccess();
       }
       else {
-        handleDiscardFailure();
+         handleDiscardFailure();
       }
     }
     catch (err){
-      console.log(err);
+      console.error()
       handleDiscardFailure();
     }
   }
 
   const getDiscardData = () => {
     const discardData = {
-      selectedItem,
+      MaterialId: selectedItem.id,
       quantity,
+      PlaceId: nextPlace.id,
+      UserId: userLogged.id,
+      User: userLogged
     }
     return discardData;
   }

@@ -25,6 +25,20 @@ const getDistanceFromLatLonInMeters = (lat1, long1, curLat, curLong) => {
   }
 
   let verifyPlaces = (radioPermitted, places, curLat, curLong) => {
-    let placesPermitted = places.filter((el) => getDistanceFromLatLonInMeters(el.latitude, el.longitude, curLat, curLong)<=radioPermitted);
-    return placesPermitted.length > 0;
+    let nextPlace = places[0];
+    let nextPlaceDistance= getDistanceFromLatLonInMeters(nextPlace.latitude,
+      nextPlace.longitude, curLat, curLong);
+
+    places.forEach((currentPlace) => {
+      let curArrayDistance = getDistanceFromLatLonInMeters(curArrayPlace.latitude,
+        curArrayPlace.longitude, curLat, curLong);
+      if(placeDistance < nextPlaceDistance) {
+        nextPlace= currentPlace;
+        nextPlaceDistance = curArrayDistance;
+      }
+    });
+    if(nextPlaceDistance <=radioPermitted ) {
+      return nextPlace;
+    } 
+    return undefined;
   }

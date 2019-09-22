@@ -1,19 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, 
   Image, Dimensions, TextInput, Alert } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../Api'
 import logo from '../../images/logo.png';
 import AnimatedLoader from 'react-native-animated-loader'
 
-// if (__DEV__) {
-//   require('react-devtools');
-// }
-// this.state={
-//   loggedInUser: null,
-//   errorMessage: null,
-//   token: null,
-// }
+if (__DEV__) {
+  require('react-devtools');
+}
 const {width : WIDTH} = Dimensions.get('window');
 
 export default function Login( { navigation } ) {
@@ -21,41 +16,61 @@ export default function Login( { navigation } ) {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const [userLogged, setuserLogged] = useState('');
+  const [tokenActive, setToken] = useState('');
+
+  const getUserLoggedStorage = async () => {
+    let userLogged= await AsyncStorage.getItem('@BatteryCollector:user');
+     if(userLogged) {
+       userLogged = JSON.parse(userLogged);
+       setuserLogged(userLogged);
+     }
+  }
+
+  const getTokenStorage = async () => {
+    const token = await AsyncStorage.getItem('@BatteryCollector:token');
+    if(token) {
+      setToken(token);
+    }
+  }
+  
+  const MultisetStorage = async (logIn, token) => {
+    await AsyncStorage.multiSet([
+      ['@BatteryCollector:token', token],
+      ['@BatteryCollector:user', JSON.stringify(logIn)]
+    ]);
+  }
+
+  const verifyUserLogged = async () => {
+    await getUserLoggedStorage();
+    await getTokenStorage();
+    // if(_token) {
+    //   setToken(_token);
+    // }
+    debugger;
+    if(userLogged && tokenActive) {
+      navigation.navigate('Main');
+      return;
+    }
+  }
 
   const signIn = async () => {
-    const loggedIn= await AsyncStorage.getItem('@BatteryCollector:user');
-    if(loggedIn) {
-      loggedIn = JSON.parse(loggedIn);
+    await verifyUserLogged();
+    try {
+      const response = await Api.post('/api/token', {
+        email:user,
+        password:password
+      });
+      MultisetStorage( response.data.user, response.data.token.value.token);
+      Alert.alert(`Bem vindo, ${user}`);
+      navigation.navigate('Main', {user});
     }
-    const _token = await AsyncStorage.getItem('@BatteryCollector:token');
-    if(loggedIn) {
-      this.setState({loggedInUser: loggedIn});
-    }
-    if(_token) {
-    this.setState({token: _token})
-    }
-    navigation.navigate('Main');
-  
-    // try {
-    //  const response = await Api.post('/api/token', {
-    //    email:user,
-    //    password:password
-    //  });
-    //  console.log(response);
-    //  const _user= response.data.user;
-
-    // //   await AsyncStorage.multiSet([
-    // //     ['@BatteryCollector:token', response.data.token.value.token],
-    // //     ['@BatteryCollector:user', JSON.stringify(response.data.user)]
-    // //   ]);
-    // //   this.setState({loggedInUser: _user});
-    // Alert.alert(`Bem vindo, ${_user.name}`);
-    // navigation.navigate('Main', {_user});
-    // }
-    //  catch(response) {
-    //    Alert.alert(response);
-    //  } 
+    catch(error) {
+      console.error();
+      
+    } 
   }
+  
   const toggleLoader = () => {
     this.setTimeout(() => {
       setIsLoading(false);
@@ -67,15 +82,11 @@ export default function Login( { navigation } ) {
   }
 
   return (
-    
     <View  style={styles.backgroundContainer}>
-
       {isLoading &&(
         <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)'  animationStyle={styles.lottie}
           speed={1}  source={require("../Components/4.json")}></AnimatedLoader>)}
-      
       {toggleLoader()}
- 
       { !isLoading &&(
       <>  
         <KeyboardAvoidingView
