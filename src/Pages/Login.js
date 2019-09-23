@@ -16,21 +16,21 @@ export default function Login( { navigation } ) {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
-  const [userLogged, setuserLogged] = useState('');
-  const [tokenActive, setToken] = useState('');
+  let [userLogged, setuserLogged] = useState('');
+  let [tokenActive, setToken] = useState('');
 
   const getUserLoggedStorage = async () => {
-    let userLogged= await AsyncStorage.getItem('@BatteryCollector:user');
-     if(userLogged) {
-       userLogged = JSON.parse(userLogged);
-       setuserLogged(userLogged);
+    let userFound= await AsyncStorage.getItem('@BatteryCollector:user');
+     if(userFound) {
+      userFound = JSON.parse(userFound);
+      userLogged = userFound;
      }
   }
 
   const getTokenStorage = async () => {
-    const token = await AsyncStorage.getItem('@BatteryCollector:token');
-    if(token) {
-      setToken(token);
+    const tokenFound = await AsyncStorage.getItem('@BatteryCollector:token');
+    if(tokenFound) {
+      tokenActive = tokenFound;
     }
   }
   
@@ -44,31 +44,29 @@ export default function Login( { navigation } ) {
   const verifyUserLogged = async () => {
     await getUserLoggedStorage();
     await getTokenStorage();
-    // if(_token) {
-    //   setToken(_token);
-    // }
-    debugger;
     if(userLogged && tokenActive) {
-      navigation.navigate('Main');
-      return;
+      return true;
     }
   }
 
   const signIn = async () => {
-    await verifyUserLogged();
-    try {
-      const response = await Api.post('/api/token', {
-        email:user,
-        password:password
-      });
-      MultisetStorage( response.data.user, response.data.token.value.token);
-      Alert.alert(`Bem vindo, ${user}`);
-      navigation.navigate('Main', {user});
+    if(/*await verifyUserLogged()*/false) {
+      navigation.navigate('Main');
     }
-    catch(error) {
-      console.error();
-      
-    } 
+    else{
+      try {
+        const response = await Api.post('/api/token', {
+          email:user,
+          password:password
+        });
+        MultisetStorage( response.data.user, response.data.token.value.token);
+        Alert.alert(`Bem vindo, ${user}`);
+        navigation.navigate('Main', {user});
+      }
+      catch(error) {
+        console.error();
+      } 
+    }
   }
   
   const toggleLoader = () => {

@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import DiscardingPage from './DiscardingPage'
 import AfterDiscardPage from './AfterDiscardPage'
 import api from '../../Api'
+import AsyncStorage from '@react-native-community/async-storage'
+
 
 const list = [
 	{Id: 1, Name: 'Bateria', Value: 'Test1 Value'},
@@ -17,22 +19,42 @@ const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
 
 export default function DiscardPage() {
   const [selectedItem, setSelected] = useState(null);
-  const [quantity, setQuantity] = useState(0);
   const [congrats, setCongrats] = useState(false);
   const [isDiscarding, setisDiscarding] = useState(true);
-  const [userLogged, setUserLogged] = useState( () => getUserLoggedStorage());
+  let [quantity, setQuantity] = useState(0);
+  let [userLogged, setUserLogged] = useState();
+  let [nextPlace, setNextPlace] = useState();
 
   const getUserLoggedStorage = async () => {
-    let userLogged= await AsyncStorage.getItem('@BatteryCollector:user');
-     if(userLogged) {
-       userLogged = JSON.parse(userLogged);
-       setUserLogged(userLogged);
+    try {
+      let userFound= await AsyncStorage.getItem('@BatteryCollector:user');
+     if(userFound) {
+      userFound = JSON.parse(userFound);
+       userLogged = userFound;
      }
+    }
+    catch{
+      alert('Ocorreu um erro');
+    }
+  }
+
+  const getNextPlaceStorage = async () => {
+    try {
+      let nextPlaceFound= await AsyncStorage.getItem('@BatteryCollector:nextPlace');
+     if(nextPlaceFound) {
+      nextPlaceFound = JSON.parse(nextPlaceFound);
+       nextPlace = nextPlaceFound;
+     }
+    }
+    catch{
+      alert('Ocorreu um erro');
+    }
   }
 
   const handleDiscardPress =async () => {
     try {
-      if(parseInt(quantity)>0 && selectedItem != null){
+      quantity = parseInt(quantity);
+      if(quantity > 0 && selectedItem != null){
          handleDiscardSuccess();
       }
       else {
@@ -45,24 +67,48 @@ export default function DiscardPage() {
     }
   }
 
-  const getDiscardData = () => {
-    const discardData = {
-      MaterialId: selectedItem.id,
+  const getDiscardData = async () => {
+    try {
+      await getUserLoggedStorage();
+      await getNextPlaceStorage();
+      const discardData = {
+      Material: selectedItem,
+      MaterialId: selectedItem.Id,
       quantity,
+      Place: nextPlace,
       PlaceId: nextPlace.id,
+      User: userLogged,
       UserId: userLogged.id,
-      User: userLogged
     }
     return discardData;
+    }
+    catch {
+      alert('Ocorreu um erro na aplicação')
+    }
   }
 
   const handleDiscardSuccess = async () => {
-    const response = await api.post('/api/discards', getDiscardData());
-    if(response.status>=400) {
-      //erro
+    try {
+      await getUserLoggedStorage();
+      await getNextPlaceStorage();
+      const response = await api.post('/api/discards', {
+        Material: selectedItem,
+        MaterialId: selectedItem.Id,
+        quantity,
+        Place: nextPlace,
+        PlaceId: nextPlace.id,
+        User: userLogged,
+        UserId: userLogged.id,
+      });
+      if(response.status>=400) {
+        alert('Tente Novamente mais tarde');
+      }
+      else{
+        setCongrats(true);
+      }
     }
-    else{
-      setCongrats(true);
+    catch {
+      alert('Tente Novamente mais tarde');
     }
   }
 

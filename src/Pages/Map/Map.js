@@ -13,6 +13,7 @@ export default function Main( { navigation } ) {
             handlebackPress
           )
     );
+    //centralizar no index
     const handleNavigationPermission = (condition) => {
       if(condition){
         navigation.navigate('DiscardPage');

@@ -6,7 +6,7 @@ import Directions from '../src/Components/Destinations/index'
 import markerImage from '../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
 import Search from '../src/Components/Search'
-import { GetPlacesObject, getPixelSize, GetPlacesArray, CalculatePermission } from '../utils'
+import { GetPlacesObject, getPixelSize, GetPlacesArray, getPlacePermitted } from '../utils'
 import AnimatedLoader from 'react-native-animated-loader'
 import DiscardButton from '../src/Pages/Map/DiscardButton'
 
@@ -25,23 +25,23 @@ export default class Map extends Component {
         discardNow: false
     };
 
-    updateCurrentPosition = () => { 
-        const goSuccess= (position) => {
+    async updateCurrentPosition() { 
+        const goSuccess= async (position) => {
             const longitude = position.coords.longitude;
             const latitude = position.coords.latitude;
 
              this.setState({
                  region: {
-                     latitude,
-                     longitude,
-                     latitudeDelta: 0.0143,
-                     longitudeDelta: 0.0134
+                    latitude,
+                    longitude,
+                    latitudeDelta: 0.0143,
+                    longitudeDelta: 0.0134
                  }
             });
             if(this.state.discardNow) {
-                const placePermitted = CalculatePermission(latitude, longitude);
+                const placePermitted = await getPlacePermitted(latitude, longitude);
                 if(placePermitted) {
-                 this.props.handleNavigation(true);
+                 this.props.handleNavigationPermission(true);
                 }
             }
             
