@@ -41,7 +41,7 @@ export default function Statistics({navigation}) {
         
         <Container>
         {isLoading &&(<AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'
-        speed={1} animationType={'fade'} source={require("../../Components/rocket.json")}></AnimatedLoader>)}
+        speed={1} animationType={'fade'} source={require("../../Components/Animations/rocket.json")}></AnimatedLoader>)}
         {isLoading && toggleLoader()}
         {!isLoading && (
             <>

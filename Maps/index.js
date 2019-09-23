@@ -89,7 +89,7 @@ export default class Map extends Component {
         <View style={{ flex:1 }}>
                 {!this.state.region &&(
           <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)' 
-          speed={1}  source={require("../src/Components/bigLixeira.json")}></AnimatedLoader>
+          speed={1}  source={require("../src/Components/Animations/bigLixeira.json")}></AnimatedLoader>
         )}
 
         { this.state.region &&(

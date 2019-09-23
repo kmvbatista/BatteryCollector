@@ -20,7 +20,7 @@ class Tabs extends React.Component {
 
         <AnimationContainer>
         <LottieView  visible={true} style={{backgroundColor: 'rgba(21, 219, 10, 1)' }} autoSize={true}
-          resizeMode={"contain"} source={require("../../Components/trophy2.json")} autoPlay={true} loop={false}>
+          resizeMode={"contain"} source={require("../../Components/Animations/trophy2.json")} autoPlay={true} loop={false}>
             
           </LottieView>
         </AnimationContainer>

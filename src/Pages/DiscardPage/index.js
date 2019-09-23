@@ -128,7 +128,7 @@ export default function DiscardPage() {
     <Container>
         {congrats &&(
          <AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'
-          speed={1} animationType={'fade'} source={require("../../Components/trophy.json")}></AnimatedLoader>)}
+          speed={1} animationType={'fade'} source={require("../../Components/Animations/trophy.json")}></AnimatedLoader>)}
         {congrats && toggleLoader()}
         {isDiscarding &&(
           <DiscardingPage 

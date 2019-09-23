@@ -83,7 +83,7 @@ export default function Login( { navigation } ) {
     <View  style={styles.backgroundContainer}>
       {isLoading &&(
         <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)'  animationStyle={styles.lottie}
-          speed={1}  source={require("../Components/4.json")}></AnimatedLoader>)}
+          speed={1}  source={require("../Components/Animations/lineDel.json")}></AnimatedLoader>)}
       {toggleLoader()}
       { !isLoading &&(
       <>  

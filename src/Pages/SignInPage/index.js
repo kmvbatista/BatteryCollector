@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Text, View , Dimensions, BackHandler} from 'react-native';
+import { Dimensions, BackHandler} from 'react-native';
 import { Container, ButtonText, StyledText} from './styles'
 import api from '../../Api';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -68,9 +68,16 @@ function handlebackPress(){
   const updateUserData = async ()  => {
     const { id } = Json.Parse(await AsyncStorage.getItem('@BatteryCollector:user'));
     const userToSend = getUserData();
-    userToSend.id = id;
-    api.put("api/users", userToSend);
+    const response = await api.put("/api/users", getUserData());
+    if(response.status >= 400) {
+      console.log(`erro de requisição ${response.status}`)
+    }
+    else {
+      navigation.navigate('Main');
+      console.log(response);
+    }
   }
+  
 
   const handleSignUpButton = () => {
     if(!verifyPasswords()) {
@@ -78,7 +85,7 @@ function handlebackPress(){
       return;
     }
     try{
-      postUserData();
+      updateUserData();
     }
     catch {
       alert('Tente mais tarde!');
