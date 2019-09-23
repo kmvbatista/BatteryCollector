@@ -55,13 +55,13 @@ export default function Login( { navigation } ) {
     }
     else{
       try {
-        const response = await Api.post('/api/token', {
+        const {data} = await Api.post('/api/token', {
           email:user,
           password:password
         });
-        MultisetStorage( response.data.user, response.data.token.value.token);
-        Alert.alert(`Bem vindo, ${user}`);
-        navigation.navigate('Main', {user});
+        MultisetStorage( data.user, data.token.value.token);
+        Alert.alert(`Bem vindo, ${data.user.name}`);
+        navigation.navigate('Main', {data});
       }
       catch(error) {
         console.error();

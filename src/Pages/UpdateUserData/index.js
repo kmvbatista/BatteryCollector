@@ -8,11 +8,12 @@ import SignUpComponent from '../../Components/SignUpSignIn/index';
 
 
 
-export default function SignUpPage( { navigation } ) {
+export default function UpdateUserData( { navigation } ) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [nickName, setNickName] = useState('');
+  let [userLogged, setUserLogged] = useState();
 
   this._didFocusSubscription = navigation.addListener(  
     'didFocus',
@@ -43,7 +44,7 @@ function handlebackPress(){
   const getUserData = () => {
     const user = {
       name: userName,
-      nickName: nickName,
+      email: nickName,
       password: password,
     }
     return user;
@@ -66,15 +67,19 @@ function handlebackPress(){
   }
 
   const updateUserData = async ()  => {
-    const { id } = Json.Parse(await AsyncStorage.getItem('@BatteryCollector:user'));
-    const userToSend = getUserData();
-    const response = await api.put("/api/users", getUserData());
-    if(response.status >= 400) {
-      console.log(`erro de requisição ${response.status}`)
+    try {
+      const { id } = JSON.parse(await AsyncStorage.getItem('@BatteryCollector:user'));
+      const userToSend = getUserData();
+      userToSend.id = id;
+      const response = await api.put("/api/users", userToSend);
+      if(response.status<400) {
+        alert('Atualizado com sucesso');
+        navigation.navigate('Main');
+        console.log(response);
+      }
     }
-    else {
-      navigation.navigate('Main');
-      console.log(response);
+    catch {
+      console.error();
     }
   }
   
@@ -98,10 +103,10 @@ function handlebackPress(){
         handleSignUpButton = {handleSignUpButton}
         handlePasswordChange = {handlePasswordChange}
         handlePasswordConfirmChange= {handlePasswordConfirmChange}
-        ButtonText = {<ButtonText>Cadastrar-se</ButtonText>}
+        ButtonText = {<ButtonText>Confirmar</ButtonText>}
         handleNickNameChange = {handleNickNameChange}
         handleNameChange = {handleNameChange}
-        Title = {<StyledText>Contribua com a Natureza ;)</StyledText>}
+        Title = {<StyledText>Deseja atualizar seus dados? </StyledText>}
       >
       </SignUpComponent>
     </Container>

@@ -6,6 +6,7 @@ import Map from './Pages/Map/Map'
 import Statistics from './Pages/Statistics/Statistics'
 import DiscardPage from './Pages/DiscardPage/index'
 import SignUp from './Pages/SignUpPage/index'
+import UpdateUserData from './Pages/UpdateUserData/index'
 
 export default createAppContainer(
     createSwitchNavigator
@@ -15,6 +16,7 @@ export default createAppContainer(
         Map,
         DiscardPage,
         Statistics,
-        SignUp
+        SignUp,
+        UpdateUserData
     }),
 )
