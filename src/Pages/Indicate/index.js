@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import { Container, ButtonStyled, TextInputStyled, TextStyled, 
-  Item, ListItemContainer, ContentsContainer, RadioButtonContainer } from './styles'
+import { Container, ButtonStyled, TextInputStyled, TextStyled,
+   ContentsContainer, RadioButtonContainer } from './styles'
 import {StyleSheet, Text, Dimensions} from 'react-native'
-import PickerModal from 'react-native-picker-modal-view';
+import AsyncStorage from '@react-native-community/async-storage';
 import RadioButton from '../../Components/RadioButton';
 import Header from '../../Components/Header/index';
+import Api from '../../Api'
 
 const list = [
 	{Id: 1, Name: 'Bateria', Value: 'Test1 Value'},
@@ -14,7 +15,6 @@ const list = [
 ]
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
-
 
 export default function DiscardingPage(props) {
 
@@ -28,12 +28,24 @@ export default function DiscardingPage(props) {
     setDescSelected(selected == 'Material' ? 'Material relacionado' : 'Tipo material');
   }
 
-  const handleSendEmail = () => {
-    const dataToSend = {
-      emissor: 'esse cara',
-      feature: selected,
-      complement: descriptionSelected
+  const handleSendEmail = async () => {
+    try {
+      const materialToSend = selected == 'Material' ? featureText : undefined;
+      const localToSend = selected == 'Local' ? featureText : undefined;
+      const userFound = await AsyncStorage.getItem('@BatteryCollector:token');
+      debugger;
+      const dataToSend = {
+        sender: userFound,
+        material: materialToSend,
+        local: localToSend,
+        description: description
+      }
+      await Api.post('/api/FeatureHint', dataToSend);
     }
+    catch {
+
+    }
+    
   }
   return (
       <Container>
