@@ -5862,6 +5862,11 @@ react-native-picker-modal-view@^1.2.6:
   resolved "https://registry.yarnpkg.com/react-native-picker-modal-view/-/react-native-picker-modal-view-1.2.6.tgz#02fdf2bd446670e9b491789e7651fa3d14bd76d5"
   integrity sha512-kHyuqigAuPZCoA1Pt0l0reVxBgOc+T2o6cD6qznq5I+F7Ltg+GhfcstzLH1RXQSfhCImEcSVmgX3+FeoPXapxQ==
 
+react-native-radio-buttons-group@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-radio-buttons-group/-/react-native-radio-buttons-group-1.0.7.tgz#176acaaa72e8e0d81baaf96abecd478ee8982b71"
+  integrity sha512-ddBQsmKUNrLli+v/MDkEcYZyRCrKhU+OqzveMPve6ix0D0O7YbwdxSmKJ3NHUItlN/oBOwbi0rFMmOwETdJgqQ==
+
 react-native-reanimated@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.2.0.tgz#9219227a52a5dfa4d34c324596d6726ccd874293"

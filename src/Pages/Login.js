@@ -50,7 +50,7 @@ export default function Login( { navigation } ) {
   }
 
   const signIn = async () => {
-    if(/*await verifyUserLogged()*/false) {
+    if(await verifyUserLogged()) {
       navigation.navigate('Main');
     }
     else{

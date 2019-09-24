@@ -26,6 +26,7 @@
     "react-native-maps": "^0.25.0",
     "react-native-maps-directions": "^1.7.0",
     "react-native-picker-modal-view": "^1.2.6",
+    "react-native-radio-buttons-group": "^1.0.7",
     "react-native-reanimated": "^1.2.0",
     "react-native-responsive-linechart": "^2.1.0",
     "react-native-svg": "^9.8.4",
