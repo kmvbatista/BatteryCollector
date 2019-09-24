@@ -20,11 +20,20 @@ export default function DiscardingPage(props) {
 
   let [selected, setSelected] = useState('Insira um Local');
   let [descriptionSelected, setDescSelected] = useState('Material relacionado');
+  const [featureText, setFeatureText] = useState();
+  const [description, setDescription] = useState();
 
   const handleRadioButton = (data) => {
-    debugger;
     setSelected(data.label);
     setDescSelected(selected == 'Material' ? 'Material relacionado' : 'Tipo material');
+  }
+
+  const handleSendEmail = () => {
+    const dataToSend = {
+      emissor: 'esse cara',
+      feature: selected,
+      complement: descriptionSelected
+    }
   }
   return (
       <Container>
@@ -46,7 +55,7 @@ export default function DiscardingPage(props) {
             placeholderTextColor={'rgba(0,0,0, 0.7)'}
             underlineColorAndroid ={'#ddd'}
             // value= {this.state.places.title}
-            onChangeText={(value) => props.setQuantity(value)}
+            onChangeText={(value) => setFeatureText(value)}
 
           />
           <TextInputStyled
@@ -57,13 +66,11 @@ export default function DiscardingPage(props) {
             placeholder={descriptionSelected}
             placeholderTextColor={'rgba(0,0,0, 0.7)'}
             underlineColorAndroid ={'#ddd'}
-            // value= {this.state.places.title}
-            keyboardType= 'number-pad'
-            onChangeText={(value) => props.setQuantity(value)}
+            onChangeText={(value) => setDescription(value)}
           />
           <ButtonStyled
-            onPress={props.handleDiscardPress}
-          ><TextStyled>Finalizar descarte</TextStyled></ButtonStyled>
+            onPress={handleSendEmail}
+          ><TextStyled>Enviar agora</TextStyled></ButtonStyled>
         </ContentsContainer>
       </Container>
   );

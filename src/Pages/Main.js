@@ -19,7 +19,7 @@ export default function Main( { navigation } ) {
 
   return( 
     <Container1>
-      <Header></Header>
+      <Header Text={`Seja bem vindo`}></Header>
         <Tabs></Tabs>
     </Container1>
   );

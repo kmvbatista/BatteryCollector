@@ -49,19 +49,9 @@ class Tabs extends React.Component {
           }} 
           underlayColor= {"rgba(255, 255, 255, 0.6)"}>
             <TabItem>
-              <Icon name="location-city" size={35} color="#fff" ></Icon>
-              <TabText>Indicar local</TabText>
+              <Icon name="record-voice-over" size={35} color="#fff" ></Icon>
+              <TabText>Indicar feature</TabText>
             </TabItem>
-          </TouchableHighlight>
-
-          <TouchableHighlight onPress={() => { 
-              this.props.navigation.navigate('Indicate')
-            }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
-
-              <TabItem>
-                <Icon name="emoji-people" size={35} color="#fff" ></Icon>
-                <TabText>Indicar Material</TabText>
-              </TabItem>
           </TouchableHighlight>
 
           <TabItem>
