@@ -18,29 +18,34 @@ const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
 
 export default function DiscardingPage(props) {
 
-  let [selected, setSelected] = useState('Insira um Local');
-  let [descriptionSelected, setDescSelected] = useState('Material relacionado');
+  let [selected, setSelected] = useState('Local');
+  let [descriptionSelected, setDescSelected] = useState('Material');
   const [featureText, setFeatureText] = useState();
   const [description, setDescription] = useState();
+  const [adress, setAdress] = useState();
 
   const handleRadioButton = (data) => {
     setSelected(data.label);
+    debugger;
     setDescSelected(selected == 'Material' ? 'Material relacionado' : 'Tipo material');
   }
 
   const handleSendEmail = async () => {
     try {
       const materialToSend = selected == 'Material' ? featureText : undefined;
+      debugger;
       const localToSend = selected == 'Local' ? featureText : undefined;
-      const userFound = await AsyncStorage.getItem('@BatteryCollector:token');
+      const userFound = JSON.parse(await AsyncStorage.getItem('@BatteryCollector:user'));
       debugger;
       const dataToSend = {
         sender: userFound,
         material: materialToSend,
         local: localToSend,
+        address: adress,
         description: description
       }
-      await Api.post('/api/FeatureHint', dataToSend);
+      const response = await Api.post('/api/featurehint', dataToSend);
+      console.log(response);
     }
     catch {
 
@@ -80,6 +85,16 @@ export default function DiscardingPage(props) {
             underlineColorAndroid ={'#ddd'}
             onChangeText={(value) => setDescription(value)}
           />
+          {selected=='Local' && (<TextInputStyled
+            blurOnSubmit = {true}
+            autoCapitalize= "sentences"
+            style={styles.inputPlace}
+            autoCorrect= {false}
+            placeholder={'Endereço'}
+            placeholderTextColor={'rgba(0,0,0, 0.7)'}
+            underlineColorAndroid ={'#ddd'}
+            onChangeText={(value) => setAdress(value)}
+          />)}
           <ButtonStyled
             onPress={handleSendEmail}
           ><TextStyled>Enviar agora</TextStyled></ButtonStyled>

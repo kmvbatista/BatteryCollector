@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, DataText, DataTitle, OverallDataContainer,
    YearDataContainer, MonthDataContainer, YearDataBox, MonthDataBox } from './styles'
-import { Dimensions, View} from 'react-native'
+import { Dimensions, View, Text} from 'react-native'
 
 
    const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
@@ -10,6 +10,7 @@ export default function UserData() {
   const weekData = ['20', '30', '7', '3']
   return(
     <View style={{width:WIDTH, height: HEIGHT, justifyContent: "center", alignItems: 'stretch', flex: 1}}>
+      <View style={{alignItems: "center", alignSelf: "center",  justifyContent: "center", backgroundColor: "#000"}}><DataTitle>Esse Mẽs</DataTitle></View>
       <MonthDataContainer>
         <MonthDataBox>
           <DataTitle>Semana 1</DataTitle>
@@ -30,7 +31,9 @@ export default function UserData() {
       </MonthDataContainer>
 
       <YearDataContainer>
-        <View style={{flex: 1, justifyContent: "center", alignItems: "center", flexDirection: "row", flexWrap: "wrap"}}>
+        <View style={{alignItems: "center", alignSelf: "center",  justifyContent: "center", backgroundColor:'#000', width: 200}}><DataTitle>Esse Ano</DataTitle></View>
+
+        <View style={{flex: 1, justifyContent: "center", alignItems: "center", flexDirection: "row", flexWrap: "wrap", alignSelf: "stretch"}}>
           <YearDataBox>
             <DataTitle>Jan</DataTitle>
             <DataText>22 pontos</DataText>

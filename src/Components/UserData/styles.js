@@ -27,8 +27,6 @@ export const MonthDataContainer = styled.View`
   justify-content: center;
   border-bottom-color: #ddd;
   border-bottom-width: 2px;
-  border-top-color: #ddd;
-  border-top-width: 2px;
 `;
 
 export const YearDataContainer = styled.View`

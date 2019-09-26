@@ -17,8 +17,13 @@ const getData = () => {
 
 export default function Statistics({navigation}) {
     const [isLoading, setisLoading] = useState(true);
+    const [scrolled, setScrolled] = useState(false);
 
     const data= ['30', '19', '20', '24', '0', '0', '0', '0', '0', '0', '0', '0'];
+
+    const handleScroll = () => {
+        setScrolled(!scrolled);
+    }
 
     const toggleLoader = () => {
         setTimeout(() => {
@@ -46,10 +51,11 @@ export default function Statistics({navigation}) {
         {!isLoading && (
             <>
             <Header>
+                <Icon accessible={false} name="keyboard-arrow-left" size={35} color="#fff" ></Icon>
                 <Title >
                     Gire para o lado
                 </Title>
-                <Icon name="keyboard-arrow-right" size={35} color="#fff" ></Icon>
+                {!scrolled &&(<Icon  name="keyboard-arrow-right" size={35} color="#fff" ></Icon>)}
             </Header>
 
             <StyledScrollView
@@ -58,22 +64,30 @@ export default function Statistics({navigation}) {
                 pagingEnabled= {true}
                 showsHorizontalScrollIndicator={false}
                 contentInset= {{top: 90, left: -100, bottom: 0, right: 0}
-            }
-            >
-                <LineContainer style={{width: WIDTH}}>
-                    <LineChart data={data} ></LineChart>
-                </LineContainer>
-                <BarContainer style={{width: WIDTH}}> 
-                    <BarChart>
-                    </BarChart>
-                </BarContainer>
-                <ContributionContainer style={{width: WIDTH}}>
-                    <PieChart>
-                    </PieChart>
-                </ContributionContainer>
+            }>
+                <StyledScrollView
+                contentContainerStyle
+                    horizontal= {false}
+                    pagingEnabled= {false}
+                    showsVerticalScrollIndicator={false}
+                    contentInset= {{top: 90, left: -100, bottom: 0, right: 0}
+                }
+                >
+                    <LineContainer style={{width: WIDTH}}>
+                        <LineChart data={data} ></LineChart>
+                    </LineContainer>
+                    <BarContainer style={{width: WIDTH}}> 
+                        <BarChart>
+                        </BarChart>
+                    </BarContainer>
+                    <ContributionContainer style={{width: WIDTH}}>
+                        <PieChart>
+                        </PieChart>
+                    </ContributionContainer>
+                </StyledScrollView>
+                <UserData></UserData>
             </StyledScrollView>
             
-            <UserData></UserData>
         </>
         )}
         </Container>

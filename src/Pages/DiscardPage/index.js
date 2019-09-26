@@ -91,21 +91,21 @@ export default function DiscardPage() {
     try {
       await getUserLoggedStorage();
       await getNextPlaceStorage();
-      const response = await api.post('/api/discards', {
-        Material: selectedItem,
-        MaterialId: selectedItem.Id,
-        quantity,
-        Place: nextPlace,
-        PlaceId: nextPlace.id,
-        User: userLogged,
-        UserId: userLogged.id,
-      });
-      if(response.status>=400) {
-        alert('Tente Novamente mais tarde');
-      }
-      else{
+      // const response = await api.post('/api/discards', {
+      //   Material: selectedItem,
+      //   MaterialId: selectedItem.Id,
+      //   quantity,
+      //   Place: nextPlace,
+      //   PlaceId: nextPlace.id,
+      //   User: userLogged,
+      //   UserId: userLogged.id,
+      // });
+      // if(response.status>=400) {
+      //   alert('Tente Novamente mais tarde');
+      // }
+      // else{
         setCongrats(true);
-      }
+      // }
     }
     catch {
       alert('Tente Novamente mais tarde');
