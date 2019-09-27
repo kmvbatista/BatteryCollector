@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity,
   Image, Dimensions, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../Api'
-import logo from '../../images/logo.png';
+import logo from '../../images/terra-entre-as-maos.png';
 import AnimatedLoader from 'react-native-animated-loader'
 
 if (__DEV__) {

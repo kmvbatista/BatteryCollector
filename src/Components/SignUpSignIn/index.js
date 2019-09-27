@@ -24,12 +24,13 @@ export default function SignUpSignIn(props) {
         </InputContainer>
 
         <InputContainer>
-          <Input placeholder={'Apelido'}
+          <Input placeholder={'Email'}
             secureTextEntry={false}
+            autoCapitalize="none"
             placeholderTextColor={'rgba(0,0,0, 0.7)'}
             underlineColorAndroid ='transparent'
             autoCorrect={false}
-            onChangeText={(el) => props.handleNickNameChange(el)}
+            onChangeText={(el) => props.handleEmailChange(el)}
           ></Input>
         </InputContainer>
 

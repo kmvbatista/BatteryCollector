@@ -12,7 +12,7 @@ export default function SignUpPage( { navigation } ) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [nickName, setNickName] = useState('');
+  const [email, setemail] = useState('');
 
   this._didFocusSubscription = navigation.addListener(  
     'didFocus',
@@ -30,8 +30,8 @@ function handlebackPress(){
   const handleNameChange = (name) => {
     setUserName(name);
   }
-  const handleNickNameChange = (nickName) => {
-    setNickName(nickName);
+  const handleEmailChange = (email) => {
+    setemail(email);
   }
   const handlePasswordChange = (password) => {
     setPassword(password);
@@ -43,7 +43,7 @@ function handlebackPress(){
   const getUserData = () => {
     const user = {
       name: userName,
-      nickName: nickName,
+      email: email,
       password: password,
     }
     return user;
@@ -56,8 +56,9 @@ function handlebackPress(){
   const postUserData = async () => {
     
     const response = await api.post("/api/users", getUserData());
+    debugger;
     if(response.status >= 400) {
-      console.log(`erro de requisição ${response.status}`)
+      alert('Ocorreu um erro. Tente mais tarde');
     }
     else {
       navigation.navigate('Main');
@@ -92,7 +93,7 @@ function handlebackPress(){
         handlePasswordChange = {handlePasswordChange}
         handlePasswordConfirmChange= {handlePasswordConfirmChange}
         ButtonText = {<ButtonText>Cadastrar-se</ButtonText>}
-        handleNickNameChange = {handleNickNameChange}
+        handleEmailChange = {handleEmailChange}
         handleNameChange = {handleNameChange}
         Title = {<StyledText>Contribua com a Natureza ;)</StyledText>}
       >

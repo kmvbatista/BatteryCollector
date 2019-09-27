@@ -1,7 +1,10 @@
 import React from 'react'
 import { Container, DataText, DataTitle, OverallDataContainer,
-   YearDataContainer, MonthDataContainer, YearDataBox, MonthDataBox } from './styles'
+   YearDataContainer, MonthDataContainer, YearDataBox,
+    MonthDataBox, HeaderStrap, ContainerAlignCenter } from './styles'
 import { Dimensions, View, Text} from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler';
+import { StyledScrollView } from '../../Pages/Statistics/styles';
 
 
    const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
@@ -9,8 +12,9 @@ import { Dimensions, View, Text} from 'react-native'
 export default function UserData() {
   const weekData = ['20', '30', '7', '3']
   return(
-    <View style={{width:WIDTH, height: HEIGHT, justifyContent: "center", alignItems: 'stretch', flex: 1}}>
-      <View style={{alignItems: "center", alignSelf: "center",  justifyContent: "center", backgroundColor: "#000"}}><DataTitle>Esse Mẽs</DataTitle></View>
+    <StyledScrollView>
+    <View style={{width:WIDTH, height: HEIGHT, justifyContent: "center", alignItems: 'stretch', flex: 0.6}}>
+      <HeaderStrap><DataTitle>Esse Mês</DataTitle></HeaderStrap>
       <MonthDataContainer>
         <MonthDataBox>
           <DataTitle>Semana 1</DataTitle>
@@ -30,70 +34,91 @@ export default function UserData() {
         </MonthDataBox>
       </MonthDataContainer>
 
-      <YearDataContainer>
-        <View style={{alignItems: "center", alignSelf: "center",  justifyContent: "center", backgroundColor:'#000', width: 200}}><DataTitle>Esse Ano</DataTitle></View>
+        <HeaderStrap><DataTitle>Esse Ano</DataTitle></HeaderStrap>
+        <YearDataContainer>
+          <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
+          
+            <YearDataBox>
+              <DataTitle>Jan</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+            <YearDataBox>
+              <DataTitle>Fev</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+            <YearDataBox>
+              <DataTitle>Mar</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+            <YearDataBox>
+              <DataTitle>Abr</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+           </View>
+          <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
 
-        <View style={{flex: 1, justifyContent: "center", alignItems: "center", flexDirection: "row", flexWrap: "wrap", alignSelf: "stretch"}}>
-          <YearDataBox>
-            <DataTitle>Jan</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-          <YearDataBox>
-            <DataTitle>Fev</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-          <YearDataBox>
-            <DataTitle>Mar</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-          <YearDataBox>
-            <DataTitle>Abr</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-          <YearDataBox>
-            <DataTitle>Jun</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-        </View>
+            <YearDataBox>
+              <DataTitle>Mai</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
 
-          <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row", flexWrap: "wrap"}}>
-          <YearDataBox>
-            <DataTitle>Jul</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-          <YearDataBox>
-            <DataTitle>Ago</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-          <YearDataBox>
-            <DataTitle>Set</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-          <YearDataBox>
-            <DataTitle>Out</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-          <YearDataBox>
-            <DataTitle>Nov</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-          <YearDataBox>
-            <DataTitle>Dez</DataTitle>
-            <DataText>22 pontos</DataText>
-          </YearDataBox>
-        </View>
-      </YearDataContainer>
+            <YearDataBox>
+              <DataTitle>Jun</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
 
-      <OverallDataContainer>
-      <DataTitle>Mês de maior contribuição: </DataTitle>
-        <DataText> Outubro</DataText>
-        <DataTitle> Material mais descartado: </DataTitle>
-        <DataText>Pilhas</DataText>
-        <DataTitle>Local mais frequente: </DataTitle>
-        <DataText>Furb</DataText>
-      </OverallDataContainer>
+            <YearDataBox>
+              <DataTitle>Jul</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+            <YearDataBox>
+              <DataTitle>Ago</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+            </View>
+            <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
+            <YearDataBox>
+              <DataTitle>Set</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+            <YearDataBox>
+              <DataTitle>Out</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+            <YearDataBox>
+              <DataTitle>Nov</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+            <YearDataBox>
+              <DataTitle>Dez</DataTitle>
+              <DataText>22 pontos</DataText>
+            </YearDataBox>
+            </View>
+
+        </YearDataContainer>
+
+      <HeaderStrap><DataTitle>Dados Gerais</DataTitle></HeaderStrap>
+        <OverallDataContainer>
+        
+
+        <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
+          <DataTitle>Mês de maior contribuição: </DataTitle>
+          <DataText> Outubro</DataText>
+          </View>
+
+          <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
+          <DataTitle> Material mais descartado: </DataTitle>
+          <DataText>Pilhas</DataText>
+          </View>
+
+          <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
+          <DataTitle>Local mais frequente: </DataTitle>
+          <DataText>Furb</DataText>
+          </View>
+        </OverallDataContainer>
         
     </View>
+    </StyledScrollView>
   );
           
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const DataText = styled.Text`
-  font-size: 11px;
+  font-size: 14px;
   color: #fff;
 `;
 
@@ -21,7 +21,7 @@ export const MonthDataBox = styled.View`
 
 export const MonthDataContainer = styled.View`
   display: flex;
-  flex: 1;
+  flex: 0.6;
   flex-flow: row;
   align-items: center;
   justify-content: center;
@@ -29,26 +29,41 @@ export const MonthDataContainer = styled.View`
   border-bottom-width: 2px;
 `;
 
-export const YearDataContainer = styled.View`
+export const ContainerAlignCenter = styled.View`
+  align-items: center;
   flex: 1;
-  flex-wrap: wrap;
+
+`;
+
+export const YearDataContainer = styled.View`
+  flex: 1.4;
   border-bottom-color: #ddd;
   border-bottom-width: 2px;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const YearDataBox = styled.View`
   flex: 1;
   align-items: center;
   justify-content: space-around;
-  flex-wrap: wrap;
 `;
 
 export const OverallDataContainer = styled.View`
   display: flex;
   flex: 1;
-  flex-flow: wrap;
+  flex-flow: column;
   align-items: center;
   justify-content: space-around;
   border-bottom-color: #ddd;
   border-bottom-width: 2px;
+`;
+
+export const HeaderStrap = styled.View`
+  align-items: center;
+  align-self: stretch;
+  justify-content: center;
+  background-color: #000;
+  width: 100%;
 `;
