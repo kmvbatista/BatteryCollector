@@ -71,16 +71,16 @@ export default function DiscardPage() {
     try {
       await getUserLoggedStorage();
       await getNextPlaceStorage();
-      const discardData = {
-      Material: selectedItem,
-      MaterialId: selectedItem.Id,
-      quantity,
-      Place: nextPlace,
-      PlaceId: nextPlace.id,
-      User: userLogged,
-      UserId: userLogged.id,
-    }
-    return discardData;
+      debugger;
+      return { 
+        Material: selectedItem,
+        MaterialId: selectedItem.Id,
+        Place: nextPlace,
+        PlaceId: nextPlace.id,
+        Quantity: quantity,
+        User: userLogged,
+        UserId: userLogged.id
+      };
     }
     catch {
       alert('Ocorreu um erro na aplicação')
@@ -89,25 +89,20 @@ export default function DiscardPage() {
 
   const handleDiscardSuccess = async () => {
     try {
-      await getUserLoggedStorage();
-      await getNextPlaceStorage();
-      // const response = await api.post('/api/discards', {
-      //   Material: selectedItem,
-      //   MaterialId: selectedItem.Id,
-      //   quantity,
-      //   Place: nextPlace,
-      //   PlaceId: nextPlace.id,
-      //   User: userLogged,
-      //   UserId: userLogged.id,
-      // });
-      // if(response.status>=400) {
-      //   alert('Tente Novamente mais tarde');
-      // }
-      // else{
-        setCongrats(true);
-      // }
+      console.log('passow')
+      debugger;
+      getDiscardData().then( (toSend) => {
+        api.post('/api/discards', toSend).then((response) => {
+          if(response.status>=400) {
+            alert('Tente Novamente mais tarde');
+          }
+          else{
+            setCongrats(true);
+          }
+        })
+      });
     }
-    catch {
+    catch(error) {
       alert('Tente Novamente mais tarde');
     }
   }

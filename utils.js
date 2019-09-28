@@ -15,17 +15,10 @@ const Prefeitura =
         title: 'Prefeitura',
         subtitle: 'Prefeitura Blumenau'
     }
-    const Neumarkt = 
-    {
-        id: 2,
-        latitude: -26.920532,
-        longitude: -49.069610,
-        title: "Neumarkt",
-        subtitle: "Neumarkt Shopping"
-    }
+
     const Furb =
     {
-        id: 3,
+        id: 2,
         latitude: -26.891123,
         longitude: -49.084850,
         title: "Furb Campus 2",
@@ -33,11 +26,11 @@ const Prefeitura =
     }
 
 export function GetPlacesObject() {
-    return  {Prefeitura, Furb, Neumarkt };
+    return  {Prefeitura, Furb};
 }
 
 export function GetPlacesArray() {
-    return [Prefeitura, Furb, Neumarkt];
+    return [Prefeitura, Furb];
 }
 
 export function getPlacePermitted(lat, long) {

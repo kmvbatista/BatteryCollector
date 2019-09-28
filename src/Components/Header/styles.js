@@ -12,10 +12,12 @@ margin-top:-35px;
 `;
 
 export const Title = styled.Text`
-  font-size: 18px;
+  font-size: 22px;
   color: #fff;
   font-weight: bold;
   margin-left: 8px;
+  margin-top: 5px;
+  font-family: fantasy;
 `;
 
 export const Logo = styled.Image`

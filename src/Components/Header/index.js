@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet, Image } from 'react-native'
 import{ Container, Top, Title, Logo} from './styles'
-import logo from '../../../images/terra-entre-as-maos.png'
+import logo from '../../../images/recicl-o-simbolo-de-tres-folhas.png'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Header(props) {

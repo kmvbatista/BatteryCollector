@@ -4,10 +4,9 @@ import {StyleSheet, Text, Dimensions} from 'react-native'
 import PickerModal from 'react-native-picker-modal-view';
 
 const list = [
-	{Id: 1, Name: 'Bateria', Value: 'Test1 Value'},
-	{Id: 2, Name: 'Óleo', Value: 'Test2 Value'},
-	{Id: 3, Name: 'Pilha', Value: 'Test3 Value'},
-	{Id: 4, Name: 'Test4 Name', Value: 'Test4 Value'}
+	{Id: 1, Name: 'Bateria'},
+	{Id: 2, Name: 'Óleo'},
+	{Id: 3, Name: 'Pilha'},
 ]
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')

@@ -25,40 +25,7 @@ export default class Map extends Component {
         discardNow: false
     };
 
-    async updateCurrentPosition() { 
-        const goSuccess= async (position) => {
-            const longitude = position.coords.longitude;
-            const latitude = position.coords.latitude;
-
-             this.setState({
-                 region: {
-                    latitude,
-                    longitude,
-                    latitudeDelta: 0.0143,
-                    longitudeDelta: 0.0134
-                 }
-            });
-            if(this.state.discardNow) {
-                const placePermitted = await getPlacePermitted(latitude, longitude);
-                if(placePermitted) {
-                 this.props.handleNavigationPermission(true);
-                }
-            }
-            
-        }
-        const goFailure= () => {
-            this.setState({permission: false});
-            console.log('Verifique seu GPS, por favor :(')
-        }
-
-        const options= 
-        {
-            timeout: 2000,
-            enableHighAccuracy: false,
-            maximumAge: 17000
-        }
-        return Geolocation.getCurrentPosition(goSuccess, goFailure, options);
-    }
+    
 
     componentDidMount() {
         this.handlePermission();
@@ -68,7 +35,7 @@ export default class Map extends Component {
         this.updateCurrentPosition();
     }
 
-    handleDiscardButton = ( ) => {
+    handleDiscardButton = () => {
         this.state.discardNow = true;
         this.handlePermission();
     }
@@ -87,12 +54,7 @@ export default class Map extends Component {
         return (
             
         <View style={{ flex:1 }}>
-                {!this.state.region &&(
-          <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)' 
-          speed={1}  source={require("../src/Components/Animations/bigLixeira.json")}></AnimatedLoader>
-        )}
-
-        { this.state.region &&(
+        { true &&(
         <>
             <MapView
                 style={{ flex:1 }}
@@ -112,14 +74,7 @@ export default class Map extends Component {
                     >
                     </MapView.Marker>
                     
-                    <MapView.Marker
-                        coordinate={{latitude: -26.920532,
-                            longitude: -49.069610}}
-                        title={this.state.places.Neumarkt.title}
-                        description={"Descarte suas baterias aqui"}
-                        image = {markerImage}
-                    ></MapView.Marker>
-
+                    
                     <MapView.Marker
                         coordinate={{latitude: -26.891123,
                             longitude: -49.084850}}

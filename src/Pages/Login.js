@@ -155,9 +155,11 @@ const styles = StyleSheet.create({
   },
   logoText : {
     color: 'white',
-    fontSize: 27,
+    fontSize: 33,
     fontWeight:'500',
-    marginBottom: 150
+    marginBottom: 120,
+    fontFamily: 'fantasy'
+    
   },
   inputUsername: {
     width: WIDTH-80,
