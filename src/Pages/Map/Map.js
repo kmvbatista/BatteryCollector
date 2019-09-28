@@ -37,31 +37,29 @@ export default function Main( { navigation } ) {
         return navigation.navigate('Main');
     }
 
-      updateCurrentPosition = async () => { 
+    async function updateCurrentPosition() { 
       const goSuccess= async (position) => {
-          const longitude = position.coords.longitude;
-          const latitude = position.coords.latitude;
-          const region =  {
-             latitude,
-             longitude,
-             latitudeDelta: 0.0143,
-             longitudeDelta: 0.0134
-          }
-          setRegion(region);
-          setInitial(false);
-          if(this.state.discardNow) {
-              const placePermitted = await getPlacePermitted(latitude, longitude);
-              if(placePermitted) {
-               this.props.handleNavigationPermission(true);
-              }
-          }
-          
+        const longitude = position.coords.longitude;
+        const latitude = position.coords.latitude;
+        const region =  {
+            latitude,
+            longitude,
+            latitudeDelta: 0.0143,
+            longitudeDelta: 0.0134
+        }
+        setRegion(region);
+        setInitial(false);
+        if(this.state.discardNow) {
+            const placePermitted = await getPlacePermitted(latitude, longitude);
+            if(placePermitted) {
+              this.props.handleNavigationPermission(true);
+            }
+        }
       }
       const goFailure= () => {
-          this.setState({permission: false});
-          this.props.navigation.navigate('Main');
-          alert('Verifique seu GPS, por favor :(');
-
+        this.setState({permission: false});
+        this.props.navigation.navigate('Main');
+        alert('Verifique seu GPS, por favor :(');
       }
       const options= 
       {
@@ -69,18 +67,17 @@ export default function Main( { navigation } ) {
           enableHighAccuracy: false,
           maximumAge: 17000
       }
-      return Geolocation.getCurrentPosition(goSuccess, goFailure, options);
-    }
+      Geolocation.getCurrentPosition(goSuccess, goFailure, options);
+  }
     return (
       <Container>
           {initial && (
             <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)' 
             speed={1}  source={require("../../Components/Animations/bigLixeira.json")}></AnimatedLoader>
           )}
-          {initial && updateCurrentPosition()}
+          {updateCurrentPosition()}
           {!initial && (
           <Map handleNavigationPermission= {handleNavigationPermission}
-              region = {region}
               setRegion = {handleSetRegion}>
           </Map>
           )}
