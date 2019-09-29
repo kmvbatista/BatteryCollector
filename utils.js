@@ -1,5 +1,6 @@
 import { Platform, PixelRatio } from 'react-native';
 import CalculateDistance from './src/CalculatePermission/haversine';
+import Api from './src/Api'
 
 export function getPixelSize(pixels) {
     return Platform.select({
@@ -9,7 +10,7 @@ export function getPixelSize(pixels) {
 }
 const Prefeitura = 
     {
-        id: 1,
+        id: 4,
         latitude: -26.913829,
         longitude: -49.069169,
         title: 'Prefeitura',
@@ -18,7 +19,7 @@ const Prefeitura =
 
     const Furb =
     {
-        id: 2,
+        id: 5,
         latitude: -26.891123,
         longitude: -49.084850,
         title: "Furb Campus 2",
@@ -39,4 +40,12 @@ export function getPlacePermitted(lat, long) {
 
 export function getRadioPermitted() {
     return 9000;
+}
+
+export function getChartStatistics() {
+
+}
+
+export function getGeneralStatistics() {
+
 }

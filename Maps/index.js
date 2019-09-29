@@ -6,7 +6,7 @@ import Directions from '../src/Components/Destinations/index'
 import markerImage from '../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
 import Search from '../src/Components/Search'
-import { GetPlacesObject, getPixelSize, GetPlacesArray, getPlacePermitted } from '../utils'
+import { GetPlacesObject, getPixelSize, GetPlacesArray } from '../utils'
 import AnimatedLoader from 'react-native-animated-loader'
 import DiscardButton from '../src/Pages/Map/DiscardButton'
 
@@ -20,24 +20,16 @@ export default class Map extends Component {
         PickerValue: null,
         directionsResult: null,
         placeToGo: null,
-        places: GetPlacesObject(),
+        places: GetPlacesArray(),
         isLoading: true,
-        discardNow: false
     };
 
-    
-
     componentDidMount() {
-        this.handlePermission();
-    }
-
-    handlePermission() {
-        this.props.updateCurrentPosition();
     }
 
     handleDiscardButton = () => {
-        this.state.discardNow = true;
-        this.handlePermission();
+        debugger;
+        this.props.handlePermission();
     }
 
     toggleLoader() {
@@ -61,69 +53,61 @@ export default class Map extends Component {
                     region={region}
                     showsUserLocation
                     loadingEnabled
-                    annotations={this.state.places.Prefeitura}
                     ref= {el => this.mapView= el}
                 >
-                <MapView.Marker
-                    coordinate={{latitude: -26.913829,
-                        longitude: -49.069169
-                    }}
-                    title={this.state.places.Prefeitura.title}
-                    description={"Descarte suas baterias aqui"}
-                    image = {markerImage}
-                >
-                </MapView.Marker>
-                        
-                <MapView.Marker
-                    coordinate={{latitude: -26.891123,
-                        longitude: -49.084850}}
-                    title={this.state.places.Furb.title}
-                    description={"Descarte suas baterias aqui"}
-                    image = {markerImage}
-                ></MapView.Marker>
-
-                { !!this.state.destination &&(
-                    <>
-                        <Directions
-                            origin= {region}
-                            destination= {this.state.destination}
-                            onReady= {
-                                result =>{
-                                    this.setState({directionsResult: result})
-                                    this.mapView.fitToCoordinates(result.coordinates, {
-                                        edgePadding: {
-                                            right: getPixelSize(50),
-                                            left: getPixelSize(50),
-                                            top: getPixelSize(20),
-                                            bottom: getPixelSize(20)
-                                        }
-                                    });
-                                }
-                            }
+                    {this.state.places.map((place)  => 
+                        <MapView.Marker
+                        coordinate={{latitude: place.latitude,
+                            longitude: place.longitude
+                        }}
+                        title={place.title}
+                        image = {markerImage}
                         >
-                        </Directions>
+                        </MapView.Marker>
+                    )}
+
+                    {!!this.state.destination &&(
                         <>
-                            {
-                            !!this.state.directionsResult && (
-                                <MapView.Marker coordinate={region} >   
-                                    <ContainerStyle>
-                                        <LocationBox>
-                                            <LocationText>
-                                                {this.state.directionsResult.distance} km
-                                            </LocationText>
-                                        </LocationBox>
-                                        <LocationBox2>
-                                            <LocationText2>
-                                                Até 
-                                            </LocationText2>
-                                        </LocationBox2>
-                                    </ContainerStyle>
-                                </MapView.Marker>
-                            )
-                            }
+                            <Directions
+                                origin= {region}
+                                destination= {this.state.destination}
+                                onReady= {
+                                    result =>{
+                                        this.setState({directionsResult: result})
+                                        this.mapView.fitToCoordinates(result.coordinates, {
+                                            edgePadding: {
+                                                right: getPixelSize(50),
+                                                left: getPixelSize(50),
+                                                top: getPixelSize(20),
+                                                bottom: getPixelSize(20)
+                                            }
+                                        });
+                                    }
+                                }
+                            >
+                            </Directions>
+                            <>
+                                {
+                                !!this.state.directionsResult && (
+                                    <MapView.Marker coordinate={region} >   
+                                        <ContainerStyle>
+                                            <LocationBox>
+                                                <LocationText>
+                                                    {this.state.directionsResult.distance} km
+                                                </LocationText>
+                                            </LocationBox>
+                                            <LocationBox2>
+                                                <LocationText2>
+                                                    Até 
+                                                </LocationText2>
+                                            </LocationBox2>
+                                        </ContainerStyle>
+                                    </MapView.Marker>
+                                )
+                                }
+                            </>
                         </>
-                    </>
-                )}
+                    )}
                 </MapView>
             </>)}
                 <Search handleLocationSelected={handleLocationSelected}></Search>

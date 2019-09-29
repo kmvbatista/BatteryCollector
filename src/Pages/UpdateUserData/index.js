@@ -12,7 +12,7 @@ export default function UpdateUserData( { navigation } ) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [nickName, setNickName] = useState('');
+  const [email, setemail] = useState('');
   let [userLogged, setUserLogged] = useState();
 
   this._didFocusSubscription = navigation.addListener(  
@@ -22,7 +22,11 @@ export default function UpdateUserData( { navigation } ) {
         'hardwareBackPress',
         handlebackPress
       )
-);
+  );
+
+  const handleEmailChange = (email) => {
+    setemail(email);
+  }
 
 function handlebackPress(){
     return navigation.navigate('Login');
@@ -31,9 +35,7 @@ function handlebackPress(){
   const handleNameChange = (name) => {
     setUserName(name);
   }
-  const handleNickNameChange = (nickName) => {
-    setNickName(nickName);
-  }
+  
   const handlePasswordChange = (password) => {
     setPassword(password);
   }
@@ -44,7 +46,7 @@ function handlebackPress(){
   const getUserData = () => {
     const user = {
       name: userName,
-      email: nickName,
+      email: email,
       password: password,
     }
     return user;
@@ -54,32 +56,24 @@ function handlebackPress(){
     return password.length > 0 && password===passwordConfirm;
   }
 
-  const postUserData = async () => {
-    
-    const response = await api.post("/api/users", getUserData());
-    if(response.status >= 400) {
-      console.log(`erro de requisição ${response.status}`)
-    }
-    else {
-      navigation.navigate('Main');
-      console.log(response);
-    }
-  }
-
   const updateUserData = async ()  => {
     try {
       const { id } = JSON.parse(await AsyncStorage.getItem('@BatteryCollector:user'));
       const userToSend = getUserData();
       userToSend.id = id;
-      const response = await api.put("/api/users", userToSend);
-      if(response.status<400) {
-        alert('Atualizado com sucesso');
-        navigation.navigate('Main');
-        console.log(response);
-      }
+      api().put("/api/users", userToSend).then( (response) => {
+        debugger;
+        if(response.status<400) {
+          alert('Atualizado com sucesso');
+          navigation.navigate('Main');
+          console.log(response);
+        }
+      })
+      .catch( (error) => { console.log(error)} ) 
+      
     }
-    catch {
-      console.error();
+    catch(error) {
+      console.log(error);
     }
   }
   
@@ -104,8 +98,8 @@ function handlebackPress(){
         handlePasswordChange = {handlePasswordChange}
         handlePasswordConfirmChange= {handlePasswordConfirmChange}
         ButtonText = {<ButtonText>Confirmar</ButtonText>}
-        handleNickNameChange = {handleNickNameChange}
         handleNameChange = {handleNameChange}
+        handleEmailChange = {handleEmailChange}
         Title = {<StyledText>Deseja atualizar seus dados? </StyledText>}
       >
       </SignUpComponent>

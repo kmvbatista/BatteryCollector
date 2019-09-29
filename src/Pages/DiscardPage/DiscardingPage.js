@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, ButtonStyled, TextInputStyled, TextStyled, Item, ListItemContainer, ContentsContainer } from './styles'
 import {StyleSheet, Text, Dimensions} from 'react-native'
 import PickerModal from 'react-native-picker-modal-view';
+import DiscardingHeader from './DiscardingHeader'
 
 const list = [
 	{Id: 1, Name: 'Bateria'},
@@ -15,6 +16,7 @@ const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
 export default function DiscardingPage(props) {
   return (
     <ContentsContainer>
+        <DiscardingHeader></DiscardingHeader>
         <PickerModal
           onSelected={(selected) => props.setSelected(selected)}
           onClosed={()=> {}}

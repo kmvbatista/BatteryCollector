@@ -10,6 +10,26 @@ export const Container = styled.View`
   flex-direction: column;
 `;
 
+export const Title = styled.Text`
+  font-size: 22px;
+  color: #fff;
+  font-weight: bold;
+  margin-left: 8px;
+  margin-top: 5px;
+  font-family: fantasy;
+`;
+
+export const HeaderContainer = styled.View`
+  align-items: center;
+  padding: 40px 0 30px;
+`;
+
+export const Top = styled.View`
+margin-top:-35px;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const TextInputStyled = styled.TextInput`
   height: 40px;
   margin: 0px 0px 0px 0px;

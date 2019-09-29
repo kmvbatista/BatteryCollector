@@ -73,11 +73,16 @@ export default function DiscardPage() {
       await getNextPlaceStorage();
       debugger;
       return { 
-        Material: selectedItem,
+        Material: {id: selectedItem.Id, description: selectedItem.Name},
         MaterialId: selectedItem.Id,
-        Place: nextPlace,
-        PlaceId: nextPlace.id,
         Quantity: quantity,
+        Place: {
+          id: nextPlace.id, 
+          Name:nextPlace.title,
+          latitude: nextPlace.latitude,
+          longitude: nextPlace.longitude,
+        },
+        PlaceId: nextPlace.id,
         User: userLogged,
         UserId: userLogged.id
       };
@@ -89,7 +94,6 @@ export default function DiscardPage() {
 
   const handleDiscardSuccess = async () => {
     try {
-      console.log('passow')
       debugger;
       getDiscardData().then( (toSend) => {
         api.post('/api/discards', toSend).then((response) => {
@@ -100,6 +104,9 @@ export default function DiscardPage() {
             setCongrats(true);
           }
         })
+        .catch( () => {
+          alert('Tente Novamente mais tarde');
+        }); 
       });
     }
     catch(error) {

@@ -20,8 +20,4 @@ export const Title = styled.Text`
   font-family: fantasy;
 `;
 
-export const Logo = styled.Image`
-  margin-top:-7px;
-
-`;
 export default Container;

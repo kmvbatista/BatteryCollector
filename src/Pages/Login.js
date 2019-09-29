@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, 
   Image, Dimensions, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Api from '../Api'
+import { Api } from '../Api'
 import logo from '../../images/terra-entre-as-maos.png';
 import AnimatedLoader from 'react-native-animated-loader'
 
@@ -45,28 +45,30 @@ export default function Login( { navigation } ) {
     await getUserLoggedStorage();
     await getTokenStorage();
     if(userLogged && tokenActive) {
-      return true;
+      return userLogged;
     }
+    return false
   }
 
   const signIn = async () => {
-    if(await verifyUserLogged()) {
-      navigation.navigate('Main');
-    }
-    else{
+    // const userLogged = await verifyUserLogged();
+    // if(userLogged) {
+    //   navigation.navigate('Main', userLogged);
+    // }
+    // else{
       try {
-        const {data} = await Api.post('/api/token', {
-          email:user,
-          password:password
-        });
-        MultisetStorage( data.user, data.token.value.token);
-        Alert.alert(`Bem vindo, ${data.user.name}`);
-        navigation.navigate('Main', {data});
+        // const {data} = await Api.post('/api/token', {
+        //   email:user,
+        //   password:password
+        // });
+        // MultisetStorage( data.user, data.token.value.token);
+        // Alert.alert(`Bem vindo, ${data.user.name}`);
+        navigation.navigate('Main');
       }
       catch(error) {
-        console.error();
+        console.log(error);
       } 
-    }
+    // }
   }
   
   const toggleLoader = () => {
