@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Container, DataText, DataTitle, OverallDataContainer,
    YearDataContainer, MonthDataContainer, YearDataBox,
     MonthDataBox, HeaderStrap, ContainerAlignCenter } from './styles'
@@ -9,8 +9,13 @@ import { StyledScrollView } from '../../Pages/Statistics/styles';
 
    const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
 
-export default function UserData() {
-  const weekData = ['20', '30', '7', '3']
+export default function UserData(props) {
+  let [weekData, setWeekData] = useState(props.chartsData.weekPoints);
+  let [yearData, setYearData] = useState(props.chartsData.yearPoints);
+  let [generalData, setGeneralData] = useState(props.generalData);
+
+  weekData = props.chartsData.weekPoints;
+  yearData = props.chartsData.yearPoints;
   return(
     <StyledScrollView>
     <View style={{width:WIDTH, height: HEIGHT, justifyContent: "center", alignItems: 'stretch', flex: 0.6}}>
@@ -18,19 +23,19 @@ export default function UserData() {
       <MonthDataContainer>
         <MonthDataBox>
           <DataTitle>Semana 1</DataTitle>
-          <DataText>22 pontos</DataText>
+          <DataText>{weekData[0]} pontos</DataText>
         </MonthDataBox>
         <MonthDataBox>
         <DataTitle>Semana 2</DataTitle>
-          <DataText>23 pontos</DataText>
+          <DataText>{weekData[1]} pontos</DataText>
         </MonthDataBox>
         <MonthDataBox>
         <DataTitle>Semana 3</DataTitle>
-          <DataText>14 pontos</DataText>
+          <DataText>{weekData[2]} pontos</DataText>
         </MonthDataBox>
         <MonthDataBox>
         <DataTitle>Semana 4</DataTitle>
-          <DataText>13 pontos</DataText>
+          <DataText>{weekData[3]} pontos</DataText>
         </MonthDataBox>
       </MonthDataContainer>
 
@@ -40,58 +45,58 @@ export default function UserData() {
           
             <YearDataBox>
               <DataTitle>Jan</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[0]} pontos</DataText>
             </YearDataBox>
             <YearDataBox>
               <DataTitle>Fev</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[1]} pontos</DataText>
             </YearDataBox>
             <YearDataBox>
               <DataTitle>Mar</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[2]} pontos</DataText>
             </YearDataBox>
             <YearDataBox>
               <DataTitle>Abr</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[3]} pontos</DataText>
             </YearDataBox>
            </View>
           <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
 
             <YearDataBox>
               <DataTitle>Mai</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[4]} pontos</DataText>
             </YearDataBox>
 
             <YearDataBox>
               <DataTitle>Jun</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[5]} pontos</DataText>
             </YearDataBox>
 
             <YearDataBox>
               <DataTitle>Jul</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[6]} pontos</DataText>
             </YearDataBox>
             <YearDataBox>
               <DataTitle>Ago</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[7]} pontos</DataText>
             </YearDataBox>
             </View>
             <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
             <YearDataBox>
               <DataTitle>Set</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[8]} pontos</DataText>
             </YearDataBox>
             <YearDataBox>
               <DataTitle>Out</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[9]} pontos</DataText>
             </YearDataBox>
             <YearDataBox>
               <DataTitle>Nov</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[10]} pontos</DataText>
             </YearDataBox>
             <YearDataBox>
               <DataTitle>Dez</DataTitle>
-              <DataText>22 pontos</DataText>
+              <DataText>{yearData[11]} pontos</DataText>
             </YearDataBox>
             </View>
 
@@ -103,17 +108,22 @@ export default function UserData() {
 
         <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
           <DataTitle>Mês de maior contribuição: </DataTitle>
-          <DataText> Outubro</DataText>
+          <DataText> {generalData.mostDiscardedMonth}</DataText>
           </View>
 
           <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
           <DataTitle> Material mais descartado: </DataTitle>
-          <DataText>Pilhas</DataText>
+          <DataText>{generalData.mostDiscarded}</DataText>
           </View>
 
           <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
           <DataTitle>Local mais frequente: </DataTitle>
-          <DataText>Furb</DataText>
+          <DataText>{generalData.mostVisited}</DataText>
+          </View>
+
+          <View style={{flex: 1, justifyContent: "space-around", alignItems: "center", flexDirection: "row"}}>
+          <DataTitle>Total de Pontos: </DataTitle>
+          <DataText>{generalData.totalPoints}</DataText>
           </View>
         </OverallDataContainer>
         

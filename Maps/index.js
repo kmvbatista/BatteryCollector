@@ -28,7 +28,6 @@ export default class Map extends Component {
     }
 
     handleDiscardButton = () => {
-        debugger;
         this.props.handlePermission();
     }
 

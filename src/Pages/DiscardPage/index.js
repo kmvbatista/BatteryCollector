@@ -71,7 +71,6 @@ export default function DiscardPage() {
     try {
       await getUserLoggedStorage();
       await getNextPlaceStorage();
-      debugger;
       return { 
         Material: {id: selectedItem.Id, description: selectedItem.Name},
         MaterialId: selectedItem.Id,
@@ -94,7 +93,6 @@ export default function DiscardPage() {
 
   const handleDiscardSuccess = async () => {
     try {
-      debugger;
       getDiscardData().then( (toSend) => {
         api.post('/api/discards', toSend).then((response) => {
           if(response.status>=400) {

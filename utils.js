@@ -42,10 +42,15 @@ export function getRadioPermitted() {
     return 9000;
 }
 
-export function getChartStatistics() {
-
+export async function getChartStatistics() {
+    const {data} = await Api().post('/api/discards/all', {id: 3});
+    return data;
 }
 
 export function getGeneralStatistics() {
+
+}
+
+export function getYearDiscards() {
 
 }
