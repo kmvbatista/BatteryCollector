@@ -56,7 +56,6 @@ function handlebackPress(){
   const postUserData = async () => {
     
     const response = await api.post("/api/users", getUserData());
-    debugger;
     if(response.status >= 400) {
       alert('Ocorreu um erro. Tente mais tarde');
     }

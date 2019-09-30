@@ -62,7 +62,7 @@ function handlebackPress(){
       const userToSend = getUserData();
       userToSend.id = id;
       api().put("/api/users", userToSend).then( (response) => {
-        debugger;
+        ;
         if(response.status<400) {
           alert('Atualizado com sucesso');
           navigation.navigate('Main');

@@ -5,7 +5,7 @@ import { Dimensions, StyleSheet, View } from 'react-native'
 
 const {width : WIDTH} = Dimensions.get('window');
 
-export default function Bar() {
+export default function Bar(props) {
   return(
         <BarChart
         data={{
@@ -17,7 +17,7 @@ export default function Bar() {
           ],
           datasets: [
             {
-              data: [7, 3, 2, 5],
+              data: props.data,
             },
           ],
         }}

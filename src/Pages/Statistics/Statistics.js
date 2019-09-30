@@ -9,26 +9,32 @@ import UserData from '../../Components/UserData/index'
 import {View, StyleSheet, Dimensions, BackHandler} from 'react-native'
 const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
 import AnimatedLoader from 'react-native-animated-loader'
+import {getChartStatistics} from '../../../utils'
 
-const getData = () => {
-    return ['30', '19', '20', '24', '0', '0', '0', '0', '0', '0', '0', '0']
-}
+
 
 
 export default function Statistics({navigation}) {
     const [isLoading, setisLoading] = useState(true);
     const [scrolled, setScrolled] = useState(false);
+    let [chartsData, setChartsData] = useState();
+    let [generalUserData, setGeneralUserData] = useState();
 
-    const data= ['30', '19', '20', '24', '0', '0', '0', '0', '0', '0', '0', '0'];
+    const getData = () => {
+        return getChartStatistics().then( (dataDragged) => {
+            setChartsData(dataDragged.alldiscards);
+            setGeneralUserData(dataDragged.generalData);
+        })
+    }
 
     const handleScroll = () => {
         setScrolled(!scrolled);
     }
 
-    const toggleLoader = () => {
-        setTimeout(() => {
+    const callApi = () => {
+        getData().then( () => {
             setisLoading(false);
-        }, 1500);
+        });
     }
     this._didFocusSubscription = navigation.addListener(  
         'didFocus',
@@ -47,7 +53,7 @@ export default function Statistics({navigation}) {
         <Container>
         {isLoading &&(<AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'
         speed={1} animationType={'fade'} source={require("../../Components/Animations/rocket.json")}></AnimatedLoader>)}
-        {isLoading && toggleLoader()}
+        {isLoading && callApi()}
         {!isLoading && (
             <>
             <Header>
@@ -74,10 +80,10 @@ export default function Statistics({navigation}) {
                 }
                 >
                     <LineContainer style={{width: WIDTH}}>
-                        <LineChart data={data} ></LineChart>
+                        <LineChart data={chartsData.yearPoints} ></LineChart>
                     </LineContainer>
                     <BarContainer style={{width: WIDTH}}> 
-                        <BarChart>
+                        <BarChart data = {chartsData.weekPoints}>
                         </BarChart>
                     </BarContainer>
                     <ContributionContainer style={{width: WIDTH}}>
@@ -85,7 +91,10 @@ export default function Statistics({navigation}) {
                         </PieChart>
                     </ContributionContainer>
                 </StyledScrollView>
-                <UserData></UserData>
+                <UserData 
+                    generalData = {generalUserData}
+                    chartsData = {chartsData}
+                ></UserData>
             </StyledScrollView>
             
         </>

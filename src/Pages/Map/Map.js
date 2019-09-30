@@ -47,21 +47,16 @@ export default function Main( { navigation } ) {
     const handleDiscardNow = () => {
       const placesToPut = GetPlacesArray();
       setPlacesSet(placesToPut);
-      debugger;
     }
 
     const handlePermission = () => {
-      debugger;
       updateCurrentPosition().then( () => {
-        debugger;
         getPlacePermitted(region.latitude, region.longitude).then( placePermitted => {
-          debugger;
           if(placePermitted) {
             handleNavigationPermission(true);
           }
         })
       }) 
-      debugger;
     }
 
     function updateCurrentPosition() { 

@@ -26,17 +26,14 @@ export default function DiscardingPage(props) {
 
   const handleRadioButton = (data) => {
     setSelected(data.label);
-    debugger;
     setDescSelected(selected == 'Material' ? 'Material relacionado' : 'Tipo material');
   }
 
   const handleSendEmail = async () => {
     try {
       const materialToSend = selected == 'Material' ? featureText : undefined;
-      debugger;
       const localToSend = selected == 'Local' ? featureText : undefined;
       const userFound = JSON.parse(await AsyncStorage.getItem('@BatteryCollector:user'));
-      debugger;
       const dataToSend = {
         sender: userFound,
         material: materialToSend,
