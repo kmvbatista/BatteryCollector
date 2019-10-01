@@ -4,7 +4,7 @@ import {Container1, TextHint, TextHintContainer} from './styles';
 import Header from '../../Components/Header/index'
 import Tabs from '../../Components/Tabs/index'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import headerLogo from '../../../images/recicl-o-simbolo-de-tres-folhas.png'
 
 export default function Main( { navigation } ) {
   this._didFocusSubscription = navigation.addListener(  
@@ -21,7 +21,7 @@ export default function Main( { navigation } ) {
 
   return( 
     <Container1>
-      <Header Text={`Seja bem vindo`}></Header>
+      <Header Text={`Seja bem vindo`} logo={headerLogo}></Header>
       <TextHintContainer>
         <TextHint>Gire para opções </TextHint>
         <Icon name="keyboard-arrow-right" size={20} color="#fff"/>

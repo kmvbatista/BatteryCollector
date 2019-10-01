@@ -1,20 +1,20 @@
 import React from 'react'
 import { Text, View, StyleSheet, Image } from 'react-native'
-import{ Container, Top, Title, Logo} from './styles'
+import{Top, Title, HeaderContainer } from './styles'
+import logo from '../../../images/ranking.png'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export default function Header(props) {
+export default function DiscardingHeader(props) {
     return (
-      <Container>
+      <HeaderContainer>
         <Top>
-        <View style={styles.logoContainer}>
-                    <Image source={props.logo} style={styles.logo}/>
-                    <Title >{props.Text}</Title>
+          <View style={styles.logoContainer}>
+              <Image source={logo} style={styles.logo}/>
+              <Title >Olhe só quem tá no Topo</Title>
           </View>
-          
         </Top>
         <Icon name="keyboard-arrow-down" size={20} color="#fff"/>
-      </Container>
+      </HeaderContainer>
     )
 }
 const styles = StyleSheet.create({
@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
     height: 120,
   },
   logoContainer: {
-    alignItems:'center'
+    alignItems:'center',
+    flexDirection: "column"
   },
   logoText : {
     color: 'white',
     fontSize: 27,
     fontWeight:'500',
-    marginBottom: 150
   }
 })

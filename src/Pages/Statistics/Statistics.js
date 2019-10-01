@@ -21,7 +21,7 @@ export default function Statistics({navigation}) {
     let [generalUserData, setGeneralUserData] = useState();
 
     const getData = () => {
-        return getChartStatistics().then( (dataDragged) => {
+        return getChartStatistics(3).then( (dataDragged) => {
             setChartsData(dataDragged.alldiscards);
             setGeneralUserData(dataDragged.generalData);
         })

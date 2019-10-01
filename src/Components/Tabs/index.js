@@ -25,13 +25,22 @@ class Tabs extends React.Component {
             </TabItem>
             </TouchableHighlight>
 
-            <TouchableHighlight onPress={() => { 
+          <TouchableHighlight onPress={() => { 
             this.props.navigation.navigate('Statistics');
-          }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
+            }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
           <TabItem>
             <Icon name="trending-up" size={35} color="#fff" ></Icon>
             <TabText>Estatísticas</TabText>
           </TabItem>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={() => { 
+              this.props.navigation.navigate('Ranking');
+            }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
+            <TabItem>
+              <Icon name="trending-up" size={35} color="#fff" ></Icon>
+              <TabText>Ranking</TabText>
+            </TabItem>
           </TouchableHighlight>
 
           <TouchableHighlight onPress={ () => {

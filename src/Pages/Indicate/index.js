@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import RadioButton from '../../Components/RadioButton';
 import Header from '../../Components/Header/index';
 import Api from '../../Api'
+import headerLogo from '../../../images/email.png'
 
 const list = [
 	{Id: 1, Name: 'Bateria', Value: 'Test1 Value'},
@@ -53,7 +54,10 @@ export default function DiscardingPage(props) {
       <Container>
         <ContentsContainer>
 
-          <Header Text={`O que falta nesse app ?`}></Header>
+          <Header 
+            Text={`O que falta nesse app ?`}
+            logo={headerLogo}
+          ></Header>
 
           <RadioButtonContainer>
             <RadioButton handleRadioButton={handleRadioButton}>

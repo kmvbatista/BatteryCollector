@@ -8,6 +8,7 @@ import DiscardPage from './Pages/DiscardPage/index'
 import SignUp from './Pages/SignUpPage/index'
 import UpdateUserData from './Pages/UpdateUserData/index'
 import Indicate from './Pages/Indicate/index'
+import Ranking from './Pages/Ranking/index'
 
 export default createAppContainer(
     createSwitchNavigator
@@ -19,6 +20,7 @@ export default createAppContainer(
         Statistics,
         SignUp,
         UpdateUserData,
-        Indicate
+        Indicate,
+        Ranking
     }),
 )

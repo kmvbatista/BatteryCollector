@@ -8,7 +8,7 @@ const api = () => {
     }});
     
     instance.interceptors.request.use(function (config) {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiICIsImV4cCI6MTU2OTczOTExMywiaXNzIjoia2VubmVkeUJhdHRlcnlQcm9qZWN0IiwiYXVkIjoiQmF0dGVyeUNvbGxlY3RvclVzZXJzIn0.5lQvtJLsC_EtrgQYsDDRI7UlISJF8Z0C-zK-JDXtHeA'
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMyIsImV4cCI6MTU2OTg3NzczNCwiaXNzIjoia2VubmVkeUJhdHRlcnlQcm9qZWN0IiwiYXVkIjoiQmF0dGVyeUNvbGxlY3RvclVzZXJzIn0.dkwQN3KBLmYqWubSS0huafj8RAq5lCWFARD_JCP-Kkw'
         config.headers.Authorization =  token ? `Bearer ${token}` : '';
         return config;
     });
@@ -16,3 +16,4 @@ const api = () => {
 }
 
 export default api;
+   

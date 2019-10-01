@@ -94,7 +94,7 @@ export default function DiscardPage() {
   const handleDiscardSuccess = async () => {
     try {
       getDiscardData().then( (toSend) => {
-        api.post('/api/discards', toSend).then((response) => {
+        api().post('/api/discards', toSend).then((response) => {
           if(response.status>=400) {
             alert('Tente Novamente mais tarde');
           }
