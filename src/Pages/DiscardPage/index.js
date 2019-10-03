@@ -17,7 +17,7 @@ const list = [
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
 
-export default function DiscardPage() {
+export default function DiscardPage({navigation}) {
   const [selectedItem, setSelected] = useState(null);
   const [congrats, setCongrats] = useState(false);
   const [isDiscarding, setisDiscarding] = useState(true);
@@ -93,13 +93,16 @@ export default function DiscardPage() {
 
   const handleDiscardSuccess = async () => {
     try {
+      setCongrats(true);
       getDiscardData().then( (toSend) => {
         api().post('/api/discards', toSend).then((response) => {
           if(response.status>=400) {
             alert('Tente Novamente mais tarde');
+            navigation.navigate('Map');
           }
           else{
-            setCongrats(true);
+            setCongrats(false);
+            setisDiscarding(false)
           }
         })
         .catch( () => {
@@ -116,20 +119,12 @@ export default function DiscardPage() {
     Alert.alert("Por favor, insira valores válidos!")
   }
 
-  const toggleLoader = () => {
-    setTimeout(() => {
-      setCongrats(false);
-      setisDiscarding(false)
-    }, 1500);
-  }
-
   return (
     
     <Container>
         {congrats &&(
          <AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'
           speed={1} animationType={'fade'} source={require("../../Components/Animations/trophy.json")}></AnimatedLoader>)}
-        {congrats && toggleLoader()}
         {isDiscarding &&(
           <DiscardingPage 
             handleDiscardPress={handleDiscardPress} 

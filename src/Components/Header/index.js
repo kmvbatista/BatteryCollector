@@ -9,7 +9,8 @@ export default function Header(props) {
         <Top>
         <View style={styles.logoContainer}>
                     <Image source={props.logo} style={styles.logo}/>
-                    <Title >{props.Text}</Title>
+                    <Title>{props.Text1}</Title>
+                    <Title>{props.Text2}</Title>
           </View>
           
         </Top>

@@ -47,7 +47,7 @@ export default function Ranking({navigation}) {
       speed={1} animationType={'fade'} source={require("../../Components/Animations/rocket.json")}></AnimatedLoader>)}
       {isLoading && callApi()} */}
       {/* {!isLoading && ( */}
-        <RankingHeader Text={'Olhe quem está no topo'} logo = {logo}></RankingHeader>
+        <RankingHeader Text1={'Olhe quem está no topo'} logo = {logo}></RankingHeader>
       <TableContainer>
           <Table dataComming={tableData}></Table>
       </TableContainer>

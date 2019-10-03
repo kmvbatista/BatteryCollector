@@ -21,7 +21,7 @@ export default function Main( { navigation } ) {
 
   return( 
     <Container1>
-      <Header Text={`Seja bem vindo`} logo={headerLogo}></Header>
+      <Header Text1={`Seja bem vindo, `} Text2={`Kennedy`} logo={headerLogo}></Header>
       <TextHintContainer>
         <TextHint>Gire para opções </TextHint>
         <Icon name="keyboard-arrow-right" size={20} color="#fff"/>

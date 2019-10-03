@@ -9,6 +9,7 @@ export const Top = styled.View`
 margin-top:-35px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `;
 
 export const Title = styled.Text`

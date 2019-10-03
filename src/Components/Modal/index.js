@@ -42,7 +42,8 @@ export default class AddModal extends Component {
       >
       <Container>
         <TitleContainer>
-          <DialogText>O local mais próximo é {this.getNextPlaceName()}</DialogText>
+          <DialogText>O local mais próximo é </DialogText>
+          <DialogText>{this.getNextPlaceName()}</DialogText>
           <DialogText>Queres continuar?</DialogText>
         </TitleContainer>
         <ButtonContainers>

@@ -19,16 +19,14 @@ export default function Statistics({navigation}) {
     const [scrolled, setScrolled] = useState(false);
     let [chartsData, setChartsData] = useState();
     let [generalUserData, setGeneralUserData] = useState();
+    let [materialsDiscarded, setMaterialsDiscarded]= useState();
 
     const getData = () => {
         return getChartStatistics(3).then( (dataDragged) => {
             setChartsData(dataDragged.alldiscards);
             setGeneralUserData(dataDragged.generalData);
+            setMaterialsDiscarded(dataDragged.materialsDiscarded);
         })
-    }
-
-    const handleScroll = () => {
-        setScrolled(!scrolled);
     }
 
     const callApi = () => {
@@ -87,7 +85,7 @@ export default function Statistics({navigation}) {
                         </BarChart>
                     </BarContainer>
                     <ContributionContainer style={{width: WIDTH}}>
-                        <PieChart>
+                        <PieChart data={materialsDiscarded}>
                         </PieChart>
                     </ContributionContainer>
                 </StyledScrollView>

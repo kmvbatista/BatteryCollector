@@ -25,9 +25,11 @@ export default class Map extends Component {
     
     handleDiscardPress = () => {
         this.props.handleDiscardButton().then( (placePermitted) => {
-            this.setState({placePermitted: placePermitted})
-            debugger;
-            this.refs.addModal.showAddModal();
+            if(placePermitted) {
+                this.setState({placePermitted: placePermitted})
+                debugger;
+                this.refs.addModal.showAddModal();
+            }
         })
     }
 

@@ -3,13 +3,21 @@ import React from 'react'
 import { Dimensions} from 'react-native'
 
 const screenWidth = Dimensions.get('window').width;
-export default function PieChartGraph(){
-  const data = [
-    { name: 'Pilha', population: 40, color: 'rgba(131, 167, 234, 1)', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-    { name: 'Bateria', population: 30, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-    { name: 'Óleo', population: 20, color: 'black', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-   
-  ]
+export default function PieChartGraph(props){
+  const colors = ['#F00', 'black', 'rgba(131, 167, 234, 1)', '#fff', 'yellow']
+  const getPieData = () => {
+    let filteredData = props.data.map((el, index) => {
+      return {
+        name: el.key + '(s)',
+        population: el.value,
+        color: colors[index],
+        legendFontColor: '#fff',
+        legendFontSize: 15
+      }
+    });
+    return filteredData;
+  }
+  const data = getPieData();
   const chartConfig= {
     backgroundColor: '#1cc910',
     backgroundGradientFrom: '#eff3ff',

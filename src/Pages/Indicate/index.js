@@ -55,7 +55,7 @@ export default function DiscardingPage(props) {
         <ContentsContainer>
 
           <Header 
-            Text={`O que falta nesse app ?`}
+            Text1={`O que falta nesse app ?`}
             logo={headerLogo}
           ></Header>
 
