@@ -1,5 +1,5 @@
 import Map from '../../../Maps/index'
-import {BackHandler, View, Text, Dimensions, Alert} from 'react-native'
+import {BackHandler, ActivityIndicator} from 'react-native'
 import { Container } from './styles'
 import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
@@ -16,6 +16,7 @@ export default function Main( { navigation } ) {
     const [placesSet, setPlacesSet] = useState([]);
     const [destination, setDestination] = useState();
     const [placePermitted, setPlacePermitted] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
     this._didFocusSubscription = navigation.addListener(  
         'didFocus',
@@ -97,6 +98,7 @@ export default function Main( { navigation } ) {
     }
 
     const handleLocationSelected = (itemIndex) => {
+      setIsLoading(true)
       setDestination(GetPlacesArray()[itemIndex]);
     }
     return (
@@ -119,6 +121,13 @@ export default function Main( { navigation } ) {
               viewRoutePress = {viewRoutePress}
               confirmButtonPress = {confirmButtonPress}
           >
+            {isLoading && (
+              <ActivityIndicator
+                size="large"
+                color="#fff"
+              >
+              </ActivityIndicator>
+            )}
           </Map>
           )}
       </Container>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Picker } from 'react-native'
+import { View, StyleSheet, ActivityIndicator  } from 'react-native'
 import  MapView from 'react-native-maps'
 import Directions from '../src/Components/Destinations/index'
 import markerImage from '../images/resizedIcon48.png'
@@ -68,7 +68,7 @@ export default class Map extends Component {
                         </MapView.Marker>
                     )}
 
-                    {!!this.props.destination &&(
+                    {!!this.props.destination && (
                         <>
                             <Directions
                                 origin= {region}
@@ -90,7 +90,8 @@ export default class Map extends Component {
                             </Directions>
                             <>
                                 {
-                                !!this.state.directionsResult && (
+                                !!this.state.directionsResult && 
+                                 (
                                     <MapView.Marker coordinate={region} >   
                                         <ContainerStyle>
                                             <LocationBox>
