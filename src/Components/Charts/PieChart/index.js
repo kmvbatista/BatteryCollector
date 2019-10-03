@@ -12,7 +12,7 @@ export default function PieChartGraph(props){
         population: el.value,
         color: colors[index],
         legendFontColor: '#fff',
-        legendFontSize: 15
+        legendFontSize: 17
       }
     });
     return filteredData;

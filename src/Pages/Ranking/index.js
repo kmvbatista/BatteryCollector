@@ -26,7 +26,7 @@ export default function Ranking({navigation}) {
       )
   )
   function handlebackPress(){
-    return navigation.goBack(null);
+    return navigation.navigate('Main');
   }
 
   const getData = () => {

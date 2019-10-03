@@ -30,6 +30,12 @@ export default class Map extends Component {
                 debugger;
                 this.refs.addModal.showAddModal();
             }
+            else {
+                alert("Você não está em uma localidade permitida");
+            }
+        })
+        .catch( () => {
+            alert("Houve um problema na requisição. Tente mais tarde.");
         })
     }
 

@@ -39,7 +39,7 @@ export function getPlacePermitted(lat, long) {
 } 
 
 export function getRadioPermitted() {
-    return 9000;
+    return 20;
 }
 
 export function getChartStatistics(userId) {

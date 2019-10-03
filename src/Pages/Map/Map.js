@@ -30,14 +30,6 @@ export default function Main( { navigation } ) {
     const handleSetRegion = (_region) => {
       setRegion(_region);
     }
-    const handleNavigationPermission = (condition) => {
-      if(condition){
-        navigation.navigate('DiscardPage');
-      }
-      else {
-        Alert.alert("Você não está em uma localidade permitida");
-      }
-    }
 
     function handlebackPress(){
         return navigation.navigate('Main');
@@ -116,7 +108,6 @@ export default function Main( { navigation } ) {
           {initial && doUpdate()}
           {!initial && (
           <Map
-              handleNavigationPermission= {handleNavigationPermission}
               handlePermission = {handlePermission}
               setRegion = {handleSetRegion}
               region = {region}
