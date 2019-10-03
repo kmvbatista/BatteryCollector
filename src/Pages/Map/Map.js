@@ -14,6 +14,8 @@ export default function Main( { navigation } ) {
     const [region, setRegion] = useState();
     const [discardNow, setDiscardNow] = useState(false); 
     const [placesSet, setPlacesSet] = useState([]);
+    const [destination, setDestination] = useState();
+    const [placePermitted, setPlacePermitted] = useState();
 
     this._didFocusSubscription = navigation.addListener(  
         'didFocus',
@@ -36,9 +38,6 @@ export default function Main( { navigation } ) {
         Alert.alert("Você não está em uma localidade permitida");
       }
     }
-    function nothing() {
-
-    }
 
     function handlebackPress(){
         return navigation.navigate('Main');
@@ -50,11 +49,10 @@ export default function Main( { navigation } ) {
     }
 
     const handlePermission = () => {
-      updateCurrentPosition().then( () => {
-        getPlacePermitted(region.latitude, region.longitude).then( placePermitted => {
-          if(placePermitted) {
-            handleNavigationPermission(true);
-          }
+      return updateCurrentPosition().then( () => {
+        return getPlacePermitted(region.latitude, region.longitude).then( placePermitted => {
+          setPlacePermitted(placePermitted);
+          return placePermitted;
         })
       }) 
     }
@@ -90,6 +88,25 @@ export default function Main( { navigation } ) {
     const doUpdate = () => {
       updateCurrentPosition().then( () => {});
     }
+    const handleDiscardButton = async () => {
+      const placePermittedFound = await handlePermission();
+      if(placePermitted) {
+          debugger;
+          setPlacePermitted(placePermittedFound);
+      }
+    }
+
+    const toggleLoader = () => {
+      this.setState({isLoading: false});
+    }
+
+    const viewRoutePress = () => {
+      this.setState({destination: placePermitted})
+    }
+
+    const handleLocationSelected = (itemIndex) => {
+      this.setState({destination: GetPlacesArray()[itemIndex]})
+    }
     return (
       <Container>
           {initial && (
@@ -105,6 +122,10 @@ export default function Main( { navigation } ) {
               region = {region}
               setDiscardNow = {handleDiscardNow}
               updateCurrentPosition = {updateCurrentPosition}
+              handleDiscardButton = {handleDiscardButton}
+              destination = {destination}
+              handleLocationSelected = {handleLocationSelected}
+              viewRoutePress = {viewRoutePress}
           >
           </Map>
           )}

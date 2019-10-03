@@ -1,120 +1,100 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, Picker } from 'react-native'
 import  MapView from 'react-native-maps'
-import Geolocation from '@react-native-community/geolocation';
 import Directions from '../src/Components/Destinations/index'
 import markerImage from '../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
 import Search from '../src/Components/Search'
 import { GetPlacesObject, getPixelSize, GetPlacesArray } from '../utils'
-import AnimatedLoader from 'react-native-animated-loader'
 import DiscardButton from '../src/Pages/Map/DiscardButton'
+import AddModal from '../src/Components/Modal/index'
 
-export default class Map extends Component {
-    constructor(props) {
-        super(props);
-      }
-    state = {
-        region: null,
-        destination: null,
-        PickerValue: null,
-        directionsResult: null,
-        placeToGo: null,
-        places: GetPlacesArray(),
-        isLoading: true,
-    };
+export default function Map(props) {
+    const [region, setRegion] = useState(props.region);
+    const [destination, setDestination] = useState();
+    const [placePermitted, setPlacePermitted] = useState();
+    const [directionsResult, setDirectionsResult] = useState();
+    const [placeToGo, setPlaceToGo] = useState();
+    const [places, setPlaces] = useState(GetPlacesArray());
+    const [isLoading, setIsLoading] = useState(true);
 
-    componentDidMount() {
+    const handleDiscardPress = () => {
+        props.handleDiscardButton().then( () => {
+        })
     }
-
-    handleDiscardButton = () => {
-        this.props.handlePermission();
-    }
-
-    toggleLoader() {
-        this.setState({isLoading: false});
-    }
-
-    render() {
-        const places = this.state.places;
-
-        handleLocationSelected = (itemIndex) => {
-            this.setState({destination: GetPlacesArray()[itemIndex]})
-        }
-        const region = this.props.region;
-        return (
-            <View style={{ flex:1 }}>
+    return (
+        <View style={{ flex:1 }}>
             { true &&(
-            <>
-            
-                <MapView
-                    style={{ flex:1 }}
-                    region={region}
-                    showsUserLocation
-                    loadingEnabled
-                    ref= {el => this.mapView= el}
-                >
-                    {this.state.places.map((place)  => 
-                        <MapView.Marker
-                        coordinate={{latitude: place.latitude,
-                            longitude: place.longitude
-                        }}
-                        title={place.title}
-                        image = {markerImage}
-                        >
-                        </MapView.Marker>
-                    )}
-
-                    {!!this.state.destination &&(
-                        <>
-                            <Directions
-                                origin= {region}
-                                destination= {this.state.destination}
-                                onReady= {
-                                    result =>{
-                                        this.setState({directionsResult: result})
-                                        this.mapView.fitToCoordinates(result.coordinates, {
-                                            edgePadding: {
-                                                right: getPixelSize(50),
-                                                left: getPixelSize(50),
-                                                top: getPixelSize(20),
-                                                bottom: getPixelSize(20)
-                                            }
-                                        });
-                                    }
-                                }
+                <>
+                    <MapView
+                        style={{ flex:1 }}
+                        region={region}
+                        showsUserLocation
+                        loadingEnabled
+                        ref= {el => this.mapView= el}
+                    >
+                        {places.map((place)  => 
+                            <MapView.Marker
+                            coordinate={{latitude: place.latitude,
+                                longitude: place.longitude
+                            }}
+                            title={place.title}
+                            image = {markerImage}
                             >
-                            </Directions>
+                            </MapView.Marker>
+                        )}
+
+                        {!!props.destination &&(
                             <>
-                                {
-                                !!this.state.directionsResult && (
-                                    <MapView.Marker coordinate={region} >   
-                                        <ContainerStyle>
-                                            <LocationBox>
-                                                <LocationText>
-                                                    {this.state.directionsResult.distance} km
-                                                </LocationText>
-                                            </LocationBox>
-                                            <LocationBox2>
-                                                <LocationText2>
-                                                    Até 
-                                                </LocationText2>
-                                            </LocationBox2>
-                                        </ContainerStyle>
-                                    </MapView.Marker>
-                                )
-                                }
+                                <Directions
+                                    origin= {region}
+                                    destination= {props.destination}
+                                    onReady= {
+                                        result =>{
+                                            setDirectionsResult(result);
+                                            this.mapView.fitToCoordinates(result.coordinates, {
+                                                edgePadding: {
+                                                    right: getPixelSize(50),
+                                                    left: getPixelSize(50),
+                                                    top: getPixelSize(20),
+                                                    bottom: getPixelSize(20)
+                                                }
+                                            });
+                                        }
+                                    }
+                                >
+                                </Directions>
+                                <>
+                                    {
+                                        !!directionsResult && (
+                                            <MapView.Marker coordinate={region} >   
+                                                <ContainerStyle>
+                                                    <LocationBox>
+                                                        <LocationText>
+                                                            {directionsResult.distance} km
+                                                        </LocationText>
+                                                    </LocationBox>
+                                                    <LocationBox2>
+                                                        <LocationText2>
+                                                            Até 
+                                                        </LocationText2>
+                                                    </LocationBox2>
+                                                </ContainerStyle>
+                                            </MapView.Marker>
+                                        )
+                                    }
+                                </>
                             </>
-                        </>
-                    )}
-                </MapView>
-            </>)}
-                <Search handleLocationSelected={handleLocationSelected}></Search>
-                <DiscardButton onclick={this.handleDiscardButton}></DiscardButton>
-            </View>
-        );
-    }   
-}
+                        )}
+                    </MapView>
+                </>
+            )}
+            <Search handleLocationSelected={props.handleLocationSelected}></Search>
+            <DiscardButton onclick={handleDiscardPress}></DiscardButton>
+            <AddModal ref={'addModal'} placePermitted={placePermitted}></AddModal>
+        </View>
+    );
+}  
 const styles = StyleSheet.create({
     Tabs: {
         backgroundColor: 'rgba(21, 219, 10, 1)'
@@ -123,3 +103,4 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(21, 219, 10, 1)',
     }
 });
+

@@ -44,7 +44,7 @@ export function getRadioPermitted() {
 
 export function getChartStatistics(userId) {
     return Api().post('/api/discards/all', {id: userId}).then( ({data}) => {
-    return data;
+        return data;
     })
     .catch( (err) => {
     console.log(err);
