@@ -1,5 +1,5 @@
 import Modal from 'react-native-modalbox'
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import {View, Text} from 'react-native'
 import { Container, TitleContainer, ConfirmButton, ViewRouteButton, 
   ButtonText, ButtonContainers, DialogText, ButtonContainer } from './styles';
@@ -12,15 +12,19 @@ export default class AddModal extends Component {
   }
 
   getNextPlaceName = () => {
-    const placePermitted = this.props.placePermitted;
-    if(placePermitted) {
-      return placePermitted.title;
+    debugger;
+    if(this.props.placePermitted) {
+      return this.props.placePermitted.title;
     }
     return 'Nenhum';
   }
   showAddModal = () => {
     this.refs.myModal.open();
     debugger;
+  }
+
+  closeModal = () => {
+    this.refs.myModal.close();
   }
   render() {
     return (
@@ -48,7 +52,7 @@ export default class AddModal extends Component {
             </ViewRouteButton>
           </ButtonContainer>
           <ButtonContainer>
-            <ConfirmButton onPress={this.props.confirmPress}>
+            <ConfirmButton onPress={this.props.confirmButtonPress}>
               <ButtonText>Confirmar</ButtonText>
             </ConfirmButton>
           </ButtonContainer>

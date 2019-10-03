@@ -90,22 +90,22 @@ export default function Main( { navigation } ) {
     }
     const handleDiscardButton = async () => {
       const placePermittedFound = await handlePermission();
-      if(placePermitted) {
-          debugger;
-          setPlacePermitted(placePermittedFound);
+      if(placePermittedFound) {
+          return placePermittedFound;
       }
     }
 
-    const toggleLoader = () => {
-      this.setState({isLoading: false});
+    const confirmButtonPress = () => {
+      debugger;
+      navigation.navigate('DiscardPage');
     }
 
     const viewRoutePress = () => {
-      this.setState({destination: placePermitted})
+      setDestination(placePermitted);
     }
 
     const handleLocationSelected = (itemIndex) => {
-      this.setState({destination: GetPlacesArray()[itemIndex]})
+      setDestination(GetPlacesArray()[itemIndex]);
     }
     return (
       <Container>
@@ -126,6 +126,7 @@ export default function Main( { navigation } ) {
               destination = {destination}
               handleLocationSelected = {handleLocationSelected}
               viewRoutePress = {viewRoutePress}
+              confirmButtonPress = {confirmButtonPress}
           >
           </Map>
           )}
