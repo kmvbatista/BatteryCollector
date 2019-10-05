@@ -6,7 +6,7 @@ import {StyleSheet, BackHandler, Dimensions,
 import AsyncStorage from '@react-native-community/async-storage';
 import RadioButton from '../../Components/RadioButton';
 import Header from '../../Components/Header/index';
-import Api from '../../Api'
+import Api from '../../Services/Api'
 import headerLogo from '../../../images/email.png'
 
 const list = [

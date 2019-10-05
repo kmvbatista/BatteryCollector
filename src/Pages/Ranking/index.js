@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Container, HeaderContainer, TableContainer } from './styles'
 import {StyleSheet, Text, Dimensions, View} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
-import Api from '../../Api'
+import Api from '../../Services/Api'
 import Table from '../../Components/Table/index'
 import {getRankingData} from '../../../utils' 
 import AnimatedLoader from 'react-native-animated-loader'

@@ -4,7 +4,7 @@ import AnimatedLoader from 'react-native-animated-loader'
 import React, { useState } from 'react';
 import DiscardingPage from './DiscardingPage'
 import AfterDiscardPage from './AfterDiscardPage'
-import api from '../../Api'
+import api from '../../Services/Api'
 import AsyncStorage from '@react-native-community/async-storage'
 
 

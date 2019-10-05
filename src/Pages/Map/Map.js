@@ -1,4 +1,4 @@
-import Map from '../../../Maps/index'
+import Map from '../../Maps/index'
 import {BackHandler, ActivityIndicator} from 'react-native'
 import { Container } from './styles'
 import React, {useState, useEffect} from 'react';

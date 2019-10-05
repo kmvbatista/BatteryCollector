@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Text, View , Dimensions, BackHandler} from 'react-native';
 import { Container, ButtonText, StyledText} from './styles'
-import api from '../../Api';
+import api from '../../Services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
 import SignUpComponent from '../../Components/SignUpSignIn/index';
