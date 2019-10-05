@@ -1,4 +1,4 @@
-import { getRadioPermitted, GetPlacesArray } from '../../utils'
+import { getRadioPermitted, getPlacesArray } from '../Services/LocalizationService'
 import AsyncStorage from '@react-native-community/async-storage';
 
 const getDistanceFromLatLonInMeters = (lat1, long1, curLat, curLong) => {
@@ -21,7 +21,7 @@ const getDistanceFromLatLonInMeters = (lat1, long1, curLat, curLong) => {
 
   export default async function CalculatePermission (lat, long) {
     const radioPermitted = getRadioPermitted();
-    const places = GetPlacesArray();
+    const places = getPlacesArray();
     const placePermitted = await verifyPlaces(radioPermitted, places, lat, long);
     return placePermitted;
   }

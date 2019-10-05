@@ -4,7 +4,7 @@ import {StyleSheet, Text, Dimensions, View} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../../Services/Api'
 import Table from '../../Components/Table/index'
-import {getRankingData} from '../../../utils' 
+import getRankingData from '../../Services/GetRankingData' 
 import AnimatedLoader from 'react-native-animated-loader'
 import { BackHandler } from 'react-native';
 import logo from '../../../images/ranking.png'

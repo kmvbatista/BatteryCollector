@@ -4,12 +4,9 @@ import { Container } from './styles'
 import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import AnimatedLoader from 'react-native-animated-loader'
-import { getPlacePermitted, GetPlacesArray } from '../../../utils'
-
-
+import { getPlacePermitted, GetPlacesArray } from '../../Services/LocalizationService'
 
 export default function Main( { navigation } ) {
-
     const [initial, setInitial] =  useState(true);
     const [region, setRegion] = useState();
     const [discardNow, setDiscardNow] = useState(false); 

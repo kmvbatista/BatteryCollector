@@ -5,7 +5,8 @@ import Directions from '../src/Components/Destinations/index'
 import markerImage from '../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
 import Search from '../src/Components/Search'
-import { GetPlacesObject, getPixelSize, GetPlacesArray } from '../utils'
+import { getPlacesArray } from '../Services/LocalizationService'
+import getPixelSize from '../Services/GetPixelsSize'
 import DiscardButton from '../src/Pages/Map/DiscardButton'
 import AddModal from '../src/Components/Modal/index'
 
@@ -18,7 +19,7 @@ export default class Map extends Component {
         destination: null,
         directionsResult: null,
         placeToGo: null,
-        places: GetPlacesArray(),
+        places: getPlacesArray(),
         isLoading: true,
         placePermitted: null
     };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {View, TextInput, StyleSheet, Text } from 'react-native'
 import { FlatList, ActivityIndicator, TouchableHighlight, TouchableWithoutFeedback } from 'react-native'
-import { GetPlacesArray } from '../../../utils'
+import { getPlacesArray } from '../../Services/LocalizationService'
 import { Container, TextInputContainer, TextInputStyled, ListContainer, Item, ListItemContainer } from './styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
@@ -13,7 +13,7 @@ export default class Search extends Component{
   state={
     SearchedPlace: null,
     placesInMemory: null,
-    places: GetPlacesArray(),
+    places: getPlacesArray(),
     isLoading: false
   }
 
