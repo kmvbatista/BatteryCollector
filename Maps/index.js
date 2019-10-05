@@ -62,7 +62,7 @@ export default class Map extends Component {
                         coordinate={{latitude: place.latitude,
                             longitude: place.longitude
                         }}
-                        title={place.title}
+                        title={place.name}
                         image = {markerImage}
                         >
                         </MapView.Marker>

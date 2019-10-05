@@ -13,7 +13,7 @@ export const TextHint = styled.Text`
   margin-left: 6%;
 `;
 
-export const Container1 = styled.View`
+export const Container1 = styled.ScrollView`
   flex: 1;
   background-color: 'rgba(21, 219, 10, 1)';
 `;

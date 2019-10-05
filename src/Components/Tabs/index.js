@@ -29,7 +29,7 @@ class Tabs extends React.Component {
             this.props.navigation.navigate('Statistics');
             }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
           <TabItem>
-            <Icon name="trending-up" size={35} color="#fff" ></Icon>
+            <Icon name="insert-chart" size={35} color="#fff" ></Icon>
             <TabText>Estatísticas</TabText>
           </TabItem>
           </TouchableHighlight>

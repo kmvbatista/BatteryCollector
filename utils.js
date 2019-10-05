@@ -8,30 +8,17 @@ export function getPixelSize(pixels) {
         android: PixelRatio.getPixelSizeForLayoutSize(pixels)
     })
 }
-const Prefeitura = 
-    {
-        id: 4,
-        latitude: -26.913829,
-        longitude: -49.069169,
-        title: 'Prefeitura',
-        subtitle: 'Prefeitura Blumenau'
-    }
-
-    const Furb =
-    {
-        id: 5,
-        latitude: -26.891123,
-        longitude: -49.084850,
-        title: "Furb Campus 2",
-        subtitle: "Furb Campus 2"
-    }
 
 export function GetPlacesObject() {
-    return  {Prefeitura, Furb};
+    return Api().get('/api/places').then( dataArray  => {
+        return dataArray[0];
+    })
 }
 
 export function GetPlacesArray() {
-    return [Prefeitura, Furb];
+    Api().get('/api/places').then( dataArray  => {
+        return dataArray;
+    })
 }
 
 export function getPlacePermitted(lat, long) {
