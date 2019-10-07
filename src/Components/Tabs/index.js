@@ -2,12 +2,15 @@ import React from 'react'
 import {Container, TabsContainer, TabItem, TabText} from './styles'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import {withNavigation} from 'react-navigation'
+import {withNavigation} from 'react-navigation';
+import AsyncStorage from '@react-native-community/async-storage'
 
 function Tabs(props) {
 
   const handleSair = () => {
-    return props.navigation.navigate('Login')
+    AsyncStorage.removeItem('@BatteryCollector:token').then( () => {
+      return props.navigation.navigate('Login')
+    })
   }
 
     return (
