@@ -15,14 +15,14 @@ export default function UpdateUserData( { navigation } ) {
   const [email, setemail] = useState('');
   let [userLogged, setUserLogged] = useState();
 
-  this._didFocusSubscription = navigation.addListener(  
-    'didFocus',
-    payload =>
-      BackHandler.addEventListener(
-        'hardwareBackPress',
-        handlebackPress
-      )
-  );
+  useEffect( () => {
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      handlebackPress
+    );
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', handlebackPress);
+  })  
 
   const handleEmailChange = (email) => {
     setemail(email);

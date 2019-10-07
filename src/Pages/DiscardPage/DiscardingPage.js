@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, ButtonStyled, TextInputStyled, TextStyled, Item, ListItemContainer, ContentsContainer } from './styles'
-import {StyleSheet, Text, Dimensions} from 'react-native'
+import {StyleSheet, KeyboardAvoidingView, Dimensions} from 'react-native'
 import PickerModal from 'react-native-picker-modal-view';
 import DiscardingHeader from '../../Components/Header'
 import headerLogo from '../../../images/recipiente-de-lixo-para-reciclagem.png'
@@ -18,6 +18,7 @@ const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
 export default function DiscardingPage(props) {
   return (
     <ContentsContainer>
+      <KeyboardAvoidingView>
         <Header Text1={'Selecione material'} Text2={'e a quantidade'} logo={headerLogo}></Header>
         <PickerModal
           onSelected={(selected) => props.setSelected(selected)}
@@ -50,6 +51,7 @@ export default function DiscardingPage(props) {
         <ButtonStyled
           onPress={props.handleDiscardPress}
         ><TextStyled>Finalizar descarte</TextStyled></ButtonStyled>
+        </KeyboardAvoidingView>
       </ContentsContainer>
   );
 }

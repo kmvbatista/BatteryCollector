@@ -10,19 +10,18 @@ export default function Main( { navigation } ) {
     const [initial, setInitial] =  useState(true);
     const [region, setRegion] = useState();
     const [discardNow, setDiscardNow] = useState(false); 
-    const [placesSet, setPlacesSet] = useState([]);
     const [destination, setDestination] = useState();
     const [placePermitted, setPlacePermitted] = useState();
     const [isLoading, setIsLoading] = useState(false);
 
-    this._didFocusSubscription = navigation.addListener(  
-        'didFocus',
-        payload =>
-          BackHandler.addEventListener(
-            'hardwareBackPress',
-            handlebackPress
-          )
-    );
+    useEffect( () => {
+      BackHandler.addEventListener(
+        'hardwareBackPress',
+        handlebackPress
+      );
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', handlebackPress);
+    })  
     //centralizar no index
 
     const handleSetRegion = (_region) => {
@@ -33,18 +32,14 @@ export default function Main( { navigation } ) {
         return navigation.navigate('Main');
     }
 
-    const handleDiscardNow = () => {
-      const placesToPut = GetPlacesArray();
-      setPlacesSet(placesToPut);
-    }
-
-    const handlePermission = () => {
+    const handlePermission = (places) => {
       return updateCurrentPosition().then( () => {
-        return getPlacePermitted(region.latitude, region.longitude).then( placePermitted => {
+        const placePermitted= getPlacePermitted(region.latitude, region.longitude, places);
+          debugger;
           setPlacePermitted(placePermitted);
+          debugger
           return placePermitted;
-        })
-      }) 
+      });
     }
 
     function updateCurrentPosition() { 
@@ -78,11 +73,17 @@ export default function Main( { navigation } ) {
     const doUpdate = () => {
       updateCurrentPosition().then( () => {});
     }
-    const handleDiscardButton = async () => {
-      const placePermittedFound = await handlePermission();
-      if(placePermittedFound) {
+    const handleDiscardButton = (places) => {
+      debugger;
+      return handlePermission(places).then( placePermittedFound => {
+        if(placePermittedFound) {
           return placePermittedFound;
-      }
+        }
+      })
+    }
+
+    const handleLocationSelected = (itemIndex, places) => {
+      setDestination(places[itemIndex]);
     }
 
     const confirmButtonPress = () => {
@@ -91,12 +92,8 @@ export default function Main( { navigation } ) {
     }
 
     const viewRoutePress = () => {
+      debugger;
       setDestination(placePermitted);
-    }
-
-    const handleLocationSelected = (itemIndex) => {
-      setIsLoading(true)
-      setDestination(GetPlacesArray()[itemIndex]);
     }
     return (
       <Container>
@@ -110,13 +107,12 @@ export default function Main( { navigation } ) {
               handlePermission = {handlePermission}
               setRegion = {handleSetRegion}
               region = {region}
-              setDiscardNow = {handleDiscardNow}
               updateCurrentPosition = {updateCurrentPosition}
               handleDiscardButton = {handleDiscardButton}
               destination = {destination}
-              handleLocationSelected = {handleLocationSelected}
               viewRoutePress = {viewRoutePress}
               confirmButtonPress = {confirmButtonPress}
+              handleLocationSelected = {handleLocationSelected}
           >
             {isLoading && (
               <ActivityIndicator

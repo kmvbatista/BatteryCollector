@@ -2,7 +2,7 @@ import LineChart from '../../Components/Charts/LineChart/index'
 import BarChart from '../../Components/Charts/BarChart/index'
 import PieChart from '../../Components/Charts/PieChart/index'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Container, LineContainer, BarContainer, ContributionContainer, Title,
      Header, StyledScrollView} from './styles';
 import UserData from '../../Components/UserData/index'
@@ -34,14 +34,14 @@ export default function Statistics({navigation}) {
             setisLoading(false);
         });
     }
-    this._didFocusSubscription = navigation.addListener(  
-        'didFocus',
-        payload =>
-          BackHandler.addEventListener(
-            'hardwareBackPress',
-            handlebackPress
-          )
-    );
+    useEffect( () => {
+        BackHandler.addEventListener(
+          'hardwareBackPress',
+          handlebackPress
+        );
+        return () =>
+          BackHandler.removeEventListener('hardwareBackPress', handlebackPress);
+      })  
 
     function handlebackPress(){
         return navigation.navigate('Main');
@@ -50,7 +50,7 @@ export default function Statistics({navigation}) {
         
         <Container>
         {isLoading &&(<AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'
-        speed={1} animationType={'fade'} source={require("../../Components/Animations/rocket.json")}></AnimatedLoader>)}
+        speed={1} animationType={'fade'} source={require("../../Components/Animations/graficos.json")}></AnimatedLoader>)}
         {isLoading && callApi()}
         {!isLoading && (
             <>

@@ -4,7 +4,6 @@ export const Container = styled.View`
 
   width: 100%;
   height: 100%;
-  background: rgba(21, 219, 10, 1);
   display: flex;
   flex-flow: column;
   flex-direction: column;

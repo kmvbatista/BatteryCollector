@@ -1,6 +1,6 @@
 
 import { createAppContainer, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
-import Login from './Pages/Login'
+import Login from './Pages/LoginPage/index'
 import Main from './Pages/MainPage/index'
 import Map from './Pages/Map/Map'
 import Statistics from './Pages/Statistics/Statistics'
@@ -21,6 +21,7 @@ export default createAppContainer(
         SignUp,
         UpdateUserData,
         Indicate,
-        Ranking
+        Ranking, 
+        
     }),
 )

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Container, ButtonStyled, TextInputStyled, TextStyled,
    ContentsContainer, RadioButtonContainer } from './styles'
 import {StyleSheet, BackHandler, Dimensions, 
@@ -19,14 +19,15 @@ const list = [
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
 
 export default function Indicate({navigation}) {
-  this._didFocusSubscription = navigation.addListener(  
-    'didFocus',
-    payload =>
-      BackHandler.addEventListener(
-        'hardwareBackPress',
-        handlebackPress
-      )
-  )
+  useEffect( () => {
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      handlebackPress
+    );
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', handlebackPress);
+  })  
+
   function handlebackPress(){
       return navigation.navigate('Main');
   }

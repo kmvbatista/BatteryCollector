@@ -107,6 +107,7 @@ export default function DiscardPage({navigation}) {
         })
         .catch( () => {
           alert('Tente Novamente mais tarde');
+          navigation.navigate('Map');
         }); 
       });
     }

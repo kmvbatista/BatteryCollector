@@ -24,6 +24,6 @@ export const HeaderText = styled.Text`
 
 export const HeaderContainer = styled.View`
   background-color: rgba(0,0,0,0.5);
-  height: 30;
+  height: 70;
   align-items: center;
 `;

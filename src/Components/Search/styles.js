@@ -35,17 +35,18 @@ export const TextInputStyled = styled.TextInput`
   padding: 0px 20px 0px 20px;
 `;
 
-
-export const ListItemContainer = styled.View`
-`;
-
-export const ItemText = styled.Text`
-  color: black;
-  font-weight: bold;
-`;
-
-export const Item = styled.TouchableOpacity`
+export const Item = styled.TouchableHighlight`
   justify-content: center;
   height: 32px;
   margin-bottom: 5px;
+  width: 100%;
 `;
+
+export const ListItemContainer = styled.ScrollView.attrs({
+  contentContainerStyle: {paddingLeft: 10, paddingRight: 20},
+  showsHorizontalScrollIndicator: false,
+  bounces: true,
+  horizontal:true,
+  centerContent:true,
+})``;
+

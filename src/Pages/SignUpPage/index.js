@@ -14,14 +14,14 @@ export default function SignUpPage( { navigation } ) {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [email, setemail] = useState('');
 
-  this._didFocusSubscription = navigation.addListener(  
-    'didFocus',
-    payload =>
-      BackHandler.addEventListener(
-        'hardwareBackPress',
-        handlebackPress
-      )
-);
+  useEffect( () => {
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      handlebackPress
+    );
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', handlebackPress);
+  })  
 
 function handlebackPress(){
     return navigation.navigate('Login');
@@ -55,23 +55,15 @@ function handlebackPress(){
 
   const postUserData = async () => {
     
-    const response = await api.post("/api/users", getUserData());
+    const response = await api().post("/api/users", getUserData());
     if(response.status >= 400) {
       alert('Ocorreu um erro. Tente mais tarde');
     }
     else {
+      alert('Cadastrado com sucesso. Faça Login!');
       navigation.navigate('Main');
-      console.log(response);
     }
   }
-
-  const updateUserData = async ()  => {
-    const { id } = Json.Parse(await AsyncStorage.getItem('@BatteryCollector:user'));
-    const userToSend = getUserData();
-    userToSend.id = id;
-    api.put("api/users", userToSend);
-  }
-
   const handleSignUpButton = () => {
     if(!verifyPasswords()) {
       alert('As senhas não batem')

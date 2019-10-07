@@ -56,11 +56,12 @@ export default class Search extends Component{
             contentContainerStyle={{ alignItems: "center", justifyContent: "space-between" }}
               data={getResults()}
               renderItem={({item}) => 
-              <ListItemContainer>
-                <Item onPress={() => {this.props.handleLocationSelected(item.index)}}>
+                <Item onPress={() => {this.props.handleLocationSelected(item.index)}}
+                  underlayColor={"rgba(21, 219, 10, 1)"}
+                >
                   <Text>{item.key}</Text>
                 </Item>
-              </ListItemContainer>}
+}
               ListEmptyComponent= {() => 
                <Text style={{color: '#000'}}>Nada encontrado</Text>
               }

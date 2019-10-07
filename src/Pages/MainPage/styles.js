@@ -15,5 +15,4 @@ export const TextHint = styled.Text`
 
 export const Container1 = styled.ScrollView`
   flex: 1;
-  background-color: 'rgba(21, 219, 10, 1)';
 `;

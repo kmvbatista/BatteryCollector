@@ -4,20 +4,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import {withNavigation} from 'react-navigation'
 
-class Tabs extends React.Component {
+function Tabs(props) {
 
-  handleSair() {
-    return this.props.navigation.goBack(null)
+  const handleSair = () => {
+    return props.navigation.navigate('Login')
   }
 
-  render() {
     return (
       <Container>
         <TabsContainer>
           
 
           <TouchableHighlight onPress={() => { 
-            this.props.navigation.navigate('Map');
+            props.navigation.navigate('Map');
           }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
             <TabItem>
               <Icon name="delete" size={35} color="#fff" ></Icon>
@@ -26,7 +25,7 @@ class Tabs extends React.Component {
             </TouchableHighlight>
 
           <TouchableHighlight onPress={() => { 
-            this.props.navigation.navigate('Statistics');
+            props.navigation.navigate('Statistics');
             }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
           <TabItem>
             <Icon name="insert-chart" size={35} color="#fff" ></Icon>
@@ -35,7 +34,7 @@ class Tabs extends React.Component {
           </TouchableHighlight>
 
           <TouchableHighlight onPress={() => { 
-              this.props.navigation.navigate('Ranking');
+              props.navigation.navigate('Ranking');
             }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
             <TabItem>
               <Icon name="trending-up" size={35} color="#fff" ></Icon>
@@ -44,7 +43,7 @@ class Tabs extends React.Component {
           </TouchableHighlight>
 
           <TouchableHighlight onPress={ () => {
-            this.props.navigation.navigate('UpdateUserData');
+            props.navigation.navigate('UpdateUserData');
           }} 
           underlayColor= {"rgba(255, 255, 255, 0.6)"}>
             <TabItem>
@@ -54,7 +53,7 @@ class Tabs extends React.Component {
           </TouchableHighlight>
 
           <TouchableHighlight onPress={ () => {
-            this.props.navigation.navigate('Indicate');
+            props.navigation.navigate('Indicate');
           }} 
           underlayColor= {"rgba(255, 255, 255, 0.6)"}>
             <TabItem>
@@ -63,12 +62,8 @@ class Tabs extends React.Component {
             </TabItem>
           </TouchableHighlight>
 
-          <TabItem>
-            <Icon name="info" size={35} color="#fff" ></Icon>
-            <TabText>Informações</TabText>
-          </TabItem>
           <TouchableHighlight onPress={() => { 
-            this.handleSair();
+            handleSair();
             }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
 
               <TabItem>
@@ -80,6 +75,5 @@ class Tabs extends React.Component {
         </TabsContainer>
       </Container>
     );
-  }
 }
 export default withNavigation(Tabs);

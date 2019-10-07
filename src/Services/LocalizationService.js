@@ -1,12 +1,13 @@
 import Api from './Api'
+import CalculateDistance from '../CalculatePermission/haversine'
 
-export function getPlacePermitted(lat, long) {
-  return CalculateDistance(lat, long);
+export function getPlacePermitted(lat, long, places) {
+  return CalculateDistance(lat, long, places);
 }
 
 export function getPlacesArray() {
-  return Api().get('/api/places').then( dataArray  => {
-      return dataArray;
+  return Api().get('/api/places').then( ({data})  => {
+      return data;
   })
 }
 
@@ -16,6 +17,6 @@ export function getPlacesObject() {
   })
 }
 
-export default function getRadioPermitted() {
-  return 20;
+export function getRadioPermitted() {
+  return 9000;
 }

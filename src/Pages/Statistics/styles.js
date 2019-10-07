@@ -18,9 +18,8 @@ export const Header = styled.View`
 export const Container = styled.View`
   align-items: center;
   justify-content: center;
-  background-Color: 'rgba(21, 219, 10, 1)';
-flex: 1;
-flex-flow: column;
+  flex: 1;
+  flex-flow: column;
 
 `;
 

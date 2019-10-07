@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, ActivityIndicator  } from 'react-native'
 import  MapView from 'react-native-maps'
-import Directions from '../src/Components/Destinations/index'
-import markerImage from '../images/resizedIcon48.png'
+import Directions from '../Components/Destinations/index'
+import markerImage from '../../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
-import Search from '../src/Components/Search'
+import Search from '../Components/Search'
 import { getPlacesArray } from '../Services/LocalizationService'
 import getPixelSize from '../Services/GetPixelsSize'
-import DiscardButton from '../src/Pages/Map/DiscardButton'
-import AddModal from '../src/Components/Modal/index'
+import DiscardButton from '../Pages/Map/DiscardButton'
+import AddModal from '../Components/Modal/index'
 
 export default class Map extends Component {
     constructor(props) {
@@ -19,13 +19,21 @@ export default class Map extends Component {
         destination: null,
         directionsResult: null,
         placeToGo: null,
-        places: getPlacesArray(),
+        places: null,
         isLoading: true,
-        placePermitted: null
+        placePermitted: null,
+        firstDestination: true
     };
-    
+
+    getPlaces() {
+        getPlacesArray().then( (result) => {
+            this.setState({places: result});
+        })
+    }
+
+
     handleDiscardPress = () => {
-        this.props.handleDiscardButton().then( (placePermitted) => {
+        this.props.handleDiscardButton(this.state.places).then( (placePermitted) => {
             if(placePermitted) {
                 this.setState({placePermitted: placePermitted})
                 debugger;
@@ -45,11 +53,16 @@ export default class Map extends Component {
         this.refs.addModal.closeModal();
     }
 
+    handleLocationSelected = (itemIndex) => {
+        this.props.handleLocationSelected(itemIndex, this.state.places);
+    }
+
     render() {
         const region = this.props.region;
         return (
             <View style={{ flex:1 }}>
-            { true &&(
+            { !this.state.places && this.getPlaces()}
+            { this.state.places &&(
             <>
                 <MapView
                     style={{ flex:1 }}
@@ -63,13 +76,14 @@ export default class Map extends Component {
                         coordinate={{latitude: place.latitude,
                             longitude: place.longitude
                         }}
+                        key={place.id}
                         title={place.name}
                         image = {markerImage}
                         >
                         </MapView.Marker>
                     )}
-
-                    {!!this.props.destination && (
+                    
+                    {!!this.props.destination &&(
                         <>
                             <Directions
                                 origin= {region}
@@ -86,6 +100,7 @@ export default class Map extends Component {
                                             }
                                         });
                                     }
+                                    
                                 }
                             >
                             </Directions>
@@ -112,10 +127,15 @@ export default class Map extends Component {
                             </>
                         </>
                     )}
+                    
                 </MapView>
-            </>)}
-                <Search handleLocationSelected={this.props.handleLocationSelected}></Search>
-                <DiscardButton onclick={this.handleDiscardPress}></DiscardButton>
+            </>
+            )}
+            {this.state.places &&(
+                <Search handleLocationSelected={this.handleLocationSelected} places={this.state.places}></Search>
+            )}
+             <DiscardButton onclick={this.handleDiscardPress}></DiscardButton>
+            {this.state.places &&(   
                 <AddModal 
                     ref={'addModal'} 
                     placePermitted={this.state.placePermitted}
@@ -123,6 +143,7 @@ export default class Map extends Component {
                     confirmButtonPress = {this.props.confirmButtonPress}
                 >
                 </AddModal>
+            )}
             </View>
         );
     }   

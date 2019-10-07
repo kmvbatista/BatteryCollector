@@ -14,8 +14,7 @@ export default class ddExampleThree extends Component {
  
   render() {
     const state = this.state;
-    //const tableData = this.props.dataComming.map((el) => [el.name, el.points]);
-    const tableData = [['Kennedy', 19], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13], ['Gabriel', 13]];
+    const tableData = this.props.dataComming.map((el) => [el.name, el.points]);
     return (
       <View style={styles.container}>
         <ScrollView horizontal={true}>
