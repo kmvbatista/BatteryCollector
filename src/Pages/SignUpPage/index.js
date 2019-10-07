@@ -24,7 +24,7 @@ export default function SignUpPage( { navigation } ) {
   })  
 
 function handlebackPress(){
-    return navigation.navigate('Login');
+    return navigation.navigate('Login', navigation.state.params);
   }
 
   const handleNameChange = (name) => {

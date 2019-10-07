@@ -16,7 +16,7 @@ function Tabs(props) {
           
 
           <TouchableHighlight onPress={() => { 
-            props.navigation.navigate('Map');
+            props.navigation.navigate('Map', props.user);
           }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
             <TabItem>
               <Icon name="delete" size={35} color="#fff" ></Icon>
@@ -25,7 +25,7 @@ function Tabs(props) {
             </TouchableHighlight>
 
           <TouchableHighlight onPress={() => { 
-            props.navigation.navigate('Statistics');
+            props.navigation.navigate('Statistics', props.user);
             }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
           <TabItem>
             <Icon name="insert-chart" size={35} color="#fff" ></Icon>
@@ -34,7 +34,7 @@ function Tabs(props) {
           </TouchableHighlight>
 
           <TouchableHighlight onPress={() => { 
-              props.navigation.navigate('Ranking');
+              props.navigation.navigate('Ranking', props.user);
             }} underlayColor= {"rgba(255, 255, 255, 0.6)"}>
             <TabItem>
               <Icon name="trending-up" size={35} color="#fff" ></Icon>
@@ -43,7 +43,7 @@ function Tabs(props) {
           </TouchableHighlight>
 
           <TouchableHighlight onPress={ () => {
-            props.navigation.navigate('UpdateUserData');
+            props.navigation.navigate('UpdateUserData', props.user);
           }} 
           underlayColor= {"rgba(255, 255, 255, 0.6)"}>
             <TabItem>
@@ -53,7 +53,7 @@ function Tabs(props) {
           </TouchableHighlight>
 
           <TouchableHighlight onPress={ () => {
-            props.navigation.navigate('Indicate');
+            props.navigation.navigate('Indicate', props.user);
           }} 
           underlayColor= {"rgba(255, 255, 255, 0.6)"}>
             <TabItem>

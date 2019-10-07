@@ -23,7 +23,7 @@ export default function Ranking({navigation}) {
       BackHandler.removeEventListener('hardwareBackPress', handlebackPress);
   })  
   function handlebackPress(){
-    return navigation.navigate('Main');
+    return navigation.navigate('Main', navigation.state.params);
   }
 
   const getData = () => {

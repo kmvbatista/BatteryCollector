@@ -44,7 +44,7 @@ export default function Statistics({navigation}) {
       })  
 
     function handlebackPress(){
-        return navigation.navigate('Main');
+        return navigation.navigate('Main', navigation.state.params);
       }
     return (
         
