@@ -1,5 +1,4 @@
-import { getRadioPermitted, getPlacesArray } from '../Services/LocalizationService'
-import AsyncStorage from '@react-native-community/async-storage';
+import { getRadioPermitted } from '../Services/LocalizationService'
 
 const getDistanceFromLatLonInMeters = (lat1, long1, curLat, curLong) => {
     var R = 6371; // Radius of the earth in km
@@ -19,14 +18,13 @@ const getDistanceFromLatLonInMeters = (lat1, long1, curLat, curLong) => {
     return deg * (Math.PI/180)
   }
 
-  export default async function CalculatePermission (lat, long) {
+  export default function CalculatePermission (lat, long, places) {
     const radioPermitted = getRadioPermitted();
-    const places = getPlacesArray();
-    const placePermitted = await verifyPlaces(radioPermitted, places, lat, long);
+    const placePermitted = verifyPlaces(radioPermitted, places, lat, long);
     return placePermitted;
   }
 
-  const verifyPlaces = async (radioPermitted, places, curLat, curLong) => {
+  const verifyPlaces = (radioPermitted, places, curLat, curLong) => {
     let nextPlace = places[0];
     let nextPlaceDistance= getDistanceFromLatLonInMeters(nextPlace.latitude,
       nextPlace.longitude, curLat, curLong);
@@ -38,13 +36,11 @@ const getDistanceFromLatLonInMeters = (lat1, long1, curLat, curLong) => {
           nextPlace= curArrayPlace;
           nextPlaceDistance = curArrayDistance;
         }
-        });
+      });
         if(nextPlaceDistance <=radioPermitted) {
-          await AsyncStorage.setItem(
-            '@BatteryCollector:nextPlace', JSON.stringify(nextPlace)
-          );
           return nextPlace;
         }
+        return undefined;
     }
     catch {
       console.error();

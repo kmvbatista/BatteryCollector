@@ -34,7 +34,6 @@ export const Button = styled.TouchableOpacity`
     margin:  auto;
 `;
 
-
 export const Input = styled.TextInput`
       border-color: rgba(0,0,0,1);
       background-color: rgba(255,255,255,0.7);
@@ -44,7 +43,6 @@ export const Input = styled.TextInput`
       text-align: center;
       width: 80%;
       border-radius: 40;
-
 `;
 
 export const StyledText = styled.Text`

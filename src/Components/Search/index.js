@@ -13,16 +13,15 @@ export default class Search extends Component{
   state={
     SearchedPlace: null,
     placesInMemory: null,
-    places: getPlacesArray(),
     isLoading: false
   }
 
   render() {
     const handleFindPlace = (value) => {
         this.state.SearchedPlace = value;
-        const filteredPlaces = this.state.places.filter( 
+        const filteredPlaces = this.props.places.filter( 
           place => {
-            let placeLowerCase = place.title.toLowerCase();
+            let placeLowerCase = place.name.toLowerCase();
             let searchTermLowerCase = value.toLowerCase();
             return placeLowerCase.indexOf(searchTermLowerCase)> -1;
           }
@@ -33,8 +32,8 @@ export default class Search extends Component{
     const getResults = () => {
       var places= this.state.placesInMemory;
       if(places){
-        i = 0
-        var placesToShow = places.map(el => {return {key: `${el.title}`, index: i++}});
+        i = 0;
+        let placesToShow = places.map(el => {return {key: `${el.name}`, index: i++}});
         return placesToShow;
       }
     }
@@ -48,7 +47,6 @@ export default class Search extends Component{
                       placeholder={'Escolha um local pra depositar'}
                       placeholderTextColor={'rgba(0,0,0, 0.7)'}
                       underlineColorAndroid ='transparent'
-                      value= {this.state.places.title}
                       onChangeText= {(value) => handleFindPlace(value)}
                       />
         </TextInputContainer>

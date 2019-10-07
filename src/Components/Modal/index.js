@@ -12,15 +12,13 @@ export default class AddModal extends Component {
   }
 
   getNextPlaceName = () => {
-    debugger;
     if(this.props.placePermitted) {
-      return this.props.placePermitted.title;
+      return this.props.placePermitted.name;
     }
     return 'Nenhum';
   }
   showAddModal = () => {
     this.refs.myModal.open();
-    debugger;
   }
 
   closeModal = () => {
@@ -42,7 +40,7 @@ export default class AddModal extends Component {
       >
       <Container>
         <TitleContainer>
-          <DialogText>O local mais próximo é </DialogText>
+          <DialogText>O local mais próximo é {this.getNextPlaceName()}</DialogText>
           <DialogText>{this.getNextPlaceName()}</DialogText>
           <DialogText>Queres continuar?</DialogText>
         </TitleContainer>

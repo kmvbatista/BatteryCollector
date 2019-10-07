@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet, Image } from 'react-native'
-import{ Container, Top, Title, Logo} from './styles'
+import{ Container, Top, Title, Logo, LoginTitle} from './styles'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Header(props) {
@@ -8,13 +8,14 @@ export default function Header(props) {
       <Container>
         <Top>
         <View style={styles.logoContainer}>
-                    <Image source={props.logo} style={styles.logo}/>
-                    <Title>{props.Text1}</Title>
-                    <Title>{props.Text2}</Title>
+            <Image source={props.logo} style={styles.logo}/>
+            {!!props.Text1 &&(<Title>{props.Text1}</Title>)}
+            {!!props.Text2 &&(<Title>{props.Text2}</Title>)}
+            {!!props.LoginText &&(<LoginTitle>{props.LoginText}</LoginTitle>)}
+          <Icon name="keyboard-arrow-down" size={20} color="#fff"/>
+
           </View>
-          
         </Top>
-        <Icon name="keyboard-arrow-down" size={20} color="#fff"/>
       </Container>
     )
 }
@@ -27,10 +28,4 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems:'center'
   },
-  logoText : {
-    color: 'white',
-    fontSize: 27,
-    fontWeight:'500',
-    marginBottom: 150
-  }
 })
