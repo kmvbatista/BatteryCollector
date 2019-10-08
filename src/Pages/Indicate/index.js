@@ -57,16 +57,17 @@ export default function Indicate({navigation}) {
         address: adress,
         description: description
       }
-      debugger;
-      Api().post('/api/featurehint', dataToSend).then( (response) => {
-        if(response.status >=400) {
-          setIsLoading(false);
-          alert('Não foi possível enviar. Tente mais tarde');
-        }
-        else  {
-          setIsLoading(false);
-          handleSendSuccess();
-        }
+      return Api().then(api => {
+        return api.post('/api/featurehint', dataToSend).then( (response) => {
+          if(response.status >=400) {
+            setIsLoading(false);
+            alert('Não foi possível enviar. Tente mais tarde');
+          }
+          else  {
+            setIsLoading(false);
+            handleSendSuccess();
+          }
+        })
       }) 
     }
     catch(err){
