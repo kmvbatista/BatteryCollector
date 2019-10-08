@@ -55,17 +55,19 @@ export default function Login( { navigation } ) {
 
   const signIn = () => {
       try {
-         Api().post('/api/login', {
-           email:user,
-           password:password
-         }).then( ( {data}) => {
-          MultisetStorage( data.user, data.token.value.token);
-          Alert.alert(`Bem vindo, ${data.userToSend.name}`);
-          navigation.navigate('Main', data.userToSend);
-         }).catch( () => {
-           alert('Senha ou email inválidos');
+         Api().then( api => {
+          api.post('/api/login', {
+            email:user,
+            password:password
+          }).then( ( {data}) => {
+           MultisetStorage( data.user, data.token.value.token);
+           Alert.alert(`Bem vindo, ${data.userToSend.name}`);
+           navigation.navigate('Main', data.userToSend);
+          }).catch( (error) => {
+            console.log(error.message);
+            alert('Senha ou email inválidos');
+          })
          })
-         
       }
       catch(error) {
         console.log(error);

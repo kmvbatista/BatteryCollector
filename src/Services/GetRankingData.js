@@ -1,10 +1,12 @@
 import Api from './Api'
 
 export default function getRankingData() {
-  return Api().get('/api/users/ranking').then( ({data}) => {
+  return Api().then( api => {
+    return api.get('/api/users/ranking').then( ({data}) => {
       return data;
+    })
   })
     .catch( (err) => {
-    console.log(err);
+    alert('Houve um erro, tente novamente');
   })
 }
