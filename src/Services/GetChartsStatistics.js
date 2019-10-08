@@ -1,10 +1,14 @@
 import Api from './Api'
 
 export default function getChartStatistics(userId) {
-  return Api().post('/api/discards/all', {id: userId}).then( ({data}) => {
-      return data;
-  })
-  .catch( (err) => {
-  console.log(err);
+  return Api().then(api => {
+    return api.post('/api/discards/all', {id: userId}).then( (response) => {
+      if(response.data) {
+        return response.data;
+      }
+    })
+    .catch( (err) => {
+      alert('Houve um erro na requisição');
+    })
   })
 }

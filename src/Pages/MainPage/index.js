@@ -45,7 +45,7 @@ export default function Main( { navigation } ) {
               <TextHint>Gire para opções </TextHint>
               <Icon name="keyboard-arrow-right" size={20} color="#fff"/>
             </TextHintContainer>
-            <Tabs user={navigation.state.params.name}></Tabs>
+            <Tabs user={navigation.state.params}></Tabs>
             <Accordion asks={asks}></Accordion>
           </>
         )}

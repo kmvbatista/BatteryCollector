@@ -1,10 +1,10 @@
-import { Container, ContentsContainer, TextInputStyled, ButtonStyled, TextStyled } from './styles'
-import { Text, Dimensions, StyleSheet, Alert} from 'react-native'
+import { Container } from './styles'
+import {  Alert} from 'react-native'
 import AnimatedLoader from 'react-native-animated-loader'
 import React, { useState } from 'react';
 import DiscardingPage from './DiscardingPage'
 import AfterDiscardPage from './AfterDiscardPage'
-import api from '../../Services/Api'
+import Api from '../../Services/Api';
 import AsyncStorage from '@react-native-community/async-storage'
 
 
@@ -15,43 +15,14 @@ const list = [
 	{Id: 4, Name: 'Test4 Name', Value: 'Test4 Value'}
 ]
 
-const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
-
 export default function DiscardPage({navigation}) {
   const [selectedItem, setSelected] = useState(null);
   const [congrats, setCongrats] = useState(false);
   const [isDiscarding, setisDiscarding] = useState(true);
   let [quantity, setQuantity] = useState(0);
   let [userLogged, setUserLogged] = useState();
-  let [nextPlace, setNextPlace] = useState();
 
-  const getUserLoggedStorage = async () => {
-    try {
-      let userFound= await AsyncStorage.getItem('@BatteryCollector:user');
-     if(userFound) {
-      userFound = JSON.parse(userFound);
-       userLogged = userFound;
-     }
-    }
-    catch{
-      alert('Ocorreu um erro');
-    }
-  }
-
-  const getNextPlaceStorage = async () => {
-    try {
-      let nextPlaceFound= await AsyncStorage.getItem('@BatteryCollector:nextPlace');
-     if(nextPlaceFound) {
-      nextPlaceFound = JSON.parse(nextPlaceFound);
-       nextPlace = nextPlaceFound;
-     }
-    }
-    catch{
-      alert('Ocorreu um erro');
-    }
-  }
-
-  const handleDiscardPress =async () => {
+  const handleDiscardPress = () => {
     try {
       quantity = parseInt(quantity);
       if(quantity > 0 && selectedItem != null){
@@ -67,57 +38,57 @@ export default function DiscardPage({navigation}) {
     }
   }
 
-  const getDiscardData = async () => {
+  const getDiscardData = () => {
     try {
-      await getUserLoggedStorage();
-      await getNextPlaceStorage();
-      return { 
-        Material: {id: selectedItem.Id, description: selectedItem.Name},
-        MaterialId: selectedItem.Id,
-        Quantity: quantity,
-        Place: {
-          id: nextPlace.id, 
-          Name:nextPlace.title,
-          latitude: nextPlace.latitude,
-          longitude: nextPlace.longitude,
-        },
-        PlaceId: nextPlace.id,
-        User: userLogged,
-        UserId: userLogged.id
-      };
+      return AsyncStorage.getItem('@BatteryCollector:user').then( (user) => {
+        const nextPlace = navigation.state.params.nextPlace;
+        const userJson = JSON.parse(user);
+        return { 
+          Material: {id: selectedItem.Id, description: selectedItem.Name},
+          MaterialId: selectedItem.Id,
+          Quantity: quantity,
+          Place: {
+            id: nextPlace.id, 
+            Name:nextPlace.name,
+            latitude: nextPlace.latitude,
+            longitude: nextPlace.longitude,
+          },
+          PlaceId: nextPlace.id,
+          User: userJson,
+          UserId: userJson.id
+        };
+      })
+      
     }
     catch {
       alert('Ocorreu um erro na aplicação')
     }
   }
 
-  const handleDiscardSuccess = async () => {
-    try {
+  const handleDiscardSuccess = () => {
       setCongrats(true);
-      getDiscardData().then( (toSend) => {
-        api().post('/api/discards', toSend).then((response) => {
-          if(response.status>=400) {
+      return getDiscardData().then( discardToSend => {
+        return Api().then( api => {
+          return api.post('/api/discards', discardToSend).then((response) => {
+            if(response.status>=400) {
+              alert('Tente Novamente mais tarde');
+              navigation.navigate('Map');
+            }
+            else{
+              setCongrats(false);
+              setisDiscarding(false)
+            }
+          })
+          .catch( (error) => {
+            console.log(error);
             alert('Tente Novamente mais tarde');
             navigation.navigate('Map');
-          }
-          else{
-            setCongrats(false);
-            setisDiscarding(false)
-          }
+          });
         })
-        .catch( () => {
-          alert('Tente Novamente mais tarde');
-          navigation.navigate('Map');
-        }); 
-      });
+      })
     }
-    catch(error) {
-      alert('Tente Novamente mais tarde');
-    }
-  }
-
   const handleDiscardFailure = () => {
-    Alert.alert("Por favor, insira valores válidos!")
+    alert("Por favor, insira valores válidos!")
   }
 
   return (

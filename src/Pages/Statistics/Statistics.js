@@ -22,10 +22,15 @@ export default function Statistics({navigation}) {
     let [materialsDiscarded, setMaterialsDiscarded]= useState();
 
     const getData = () => {
-        return getChartStatistics(3).then( (dataDragged) => {
-            setChartsData(dataDragged.alldiscards);
-            setGeneralUserData(dataDragged.generalData);
-            setMaterialsDiscarded(dataDragged.materialsDiscarded);
+        return getChartStatistics(navigation.state.params.id).then( (dataDragged) => {
+            if(dataDragged) {
+                setChartsData(dataDragged.alldiscards);
+                setGeneralUserData(dataDragged.generalData);
+                setMaterialsDiscarded(dataDragged.materialsDiscarded);
+            }
+            else{
+                setVoiddata();
+            }
         })
     }
 

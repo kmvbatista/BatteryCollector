@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Dimensions, BackHandler} from 'react-native';
 import { Container, ButtonText, StyledText} from './styles'
-import api from '../../Services/Api';
+import Api from '../../Services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
 import SignUpComponent from '../../Components/SignUpSignIn/index';
@@ -57,24 +57,20 @@ function handlebackPress(){
   }
 
   const updateUserData = async ()  => {
-    try {
       const { id } = JSON.parse(await AsyncStorage.getItem('@BatteryCollector:user'));
       const userToSend = getUserData();
       userToSend.id = id;
-      api().put("/api/users", userToSend).then( (response) => {
-        ;
-        if(response.status<400) {
-          alert('Atualizado com sucesso');
-          navigation.navigate('Main');
-          console.log(response);
-        }
-      })
-      .catch( (error) => { console.log(error)} ) 
-      
-    }
-    catch(error) {
-      console.log(error);
-    }
+      return Api().then( api => {
+        return api.put("/api/users", userToSend).then( (response) => {
+            AsyncStorage.setItem('@BatteryCollector:user', JSON.stringify(userToSend)).then(() =>{
+              navigation.navigate('Main', userToSend);
+              alert('Atualizado com sucesso');
+            })
+        })
+        .catch( (error) => { 
+          alert('Houve um erro na requisição');
+        }) 
+      });
   }
   
 

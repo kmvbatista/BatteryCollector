@@ -35,9 +35,7 @@ export default function Main( { navigation } ) {
     const handlePermission = (places) => {
       return updateCurrentPosition().then( () => {
         const placePermitted= getPlacePermitted(region.latitude, region.longitude, places);
-          debugger;
           setPlacePermitted(placePermitted);
-          debugger
           return placePermitted;
       });
     }
@@ -58,7 +56,7 @@ export default function Main( { navigation } ) {
         }
       }
       const goFailure= () => {
-        navigation.navigate('Main');
+        navigation.navigate('Main', navigation.state.params);
         alert('Verifique seu GPS, por favor :(');
       }
       const options= 
@@ -74,7 +72,6 @@ export default function Main( { navigation } ) {
       updateCurrentPosition().then( () => {});
     }
     const handleDiscardButton = (places) => {
-      debugger;
       return handlePermission(places).then( placePermittedFound => {
         if(placePermittedFound) {
           return placePermittedFound;
@@ -87,12 +84,10 @@ export default function Main( { navigation } ) {
     }
 
     const confirmButtonPress = () => {
-      debugger;
-      navigation.navigate('DiscardPage');
+      navigation.navigate('DiscardPage', {user: navigation.state.params, nextPlace: placePermitted});
     }
 
     const viewRoutePress = () => {
-      debugger;
       setDestination(placePermitted);
     }
     return (

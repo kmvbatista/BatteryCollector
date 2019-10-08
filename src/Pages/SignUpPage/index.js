@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Text, View , Dimensions, BackHandler} from 'react-native';
 import { Container, ButtonText, StyledText} from './styles'
-import api from '../../Services/Api';
+import Api from '../../Services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
 import SignUpComponent from '../../Components/SignUpSignIn/index';
@@ -53,17 +53,20 @@ function handlebackPress(){
     return password.length > 0 && password===passwordConfirm;
   }
 
-  const postUserData = async () => {
-    
-    const response = await api().post("/api/users", getUserData());
-    if(response.status >= 400) {
-      alert('Ocorreu um erro. Tente mais tarde');
-    }
-    else {
-      alert('Cadastrado com sucesso. Faça Login!');
-      navigation.navigate('Main');
-    }
+  const postUserData = () => {
+    return Api().then(api => {
+      return api.post("/api/users", getUserData()).then( response => {
+        if(response.status >= 400) {
+          alert('Ocorreu um erro. Tente mais tarde');
+        }
+        else {
+          alert('Cadastrado com sucesso. Faça Login!');
+          navigation.navigate('Login');
+        }
+      })
+    }) 
   }
+  
   const handleSignUpButton = () => {
     if(!verifyPasswords()) {
       alert('As senhas não batem')

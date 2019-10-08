@@ -36,7 +36,6 @@ export default class Map extends Component {
         this.props.handleDiscardButton(this.state.places).then( (placePermitted) => {
             if(placePermitted) {
                 this.setState({placePermitted: placePermitted})
-                debugger;
                 this.refs.addModal.showAddModal();
             }
             else {

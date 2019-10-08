@@ -36,11 +36,13 @@ export default function Login( { navigation } ) {
     }
   }
   
-  const MultisetStorage = async (logIn, token) => {
-    await AsyncStorage.multiSet([
+  const MultisetStorage = (logIn, token) => {
+    return AsyncStorage.multiSet([
       ['@BatteryCollector:token', token],
       ['@BatteryCollector:user', JSON.stringify(logIn)]
-    ]);
+    ]).then( () => {
+      
+    })
   }
 
   const verifyUserLogged = () => {
@@ -54,24 +56,20 @@ export default function Login( { navigation } ) {
   }
 
   const signIn = () => {
-      try {
-         Api().then( api => {
-          api.post('/api/login', {
-            email:user,
-            password:password
-          }).then( ( {data}) => {
-           MultisetStorage( data.user, data.token.value.token);
-           Alert.alert(`Bem vindo, ${data.userToSend.name}`);
-           navigation.navigate('Main', data.userToSend);
-          }).catch( (error) => {
-            console.log(error.message);
-            alert('Senha ou email inválidos');
-          })
-         })
-      }
-      catch(error) {
-        console.log(error);
-      } 
+    return Api().then( api => {
+      return api.post('/api/login', {
+        email:user,
+        password:password
+      }).then( ( {data}) => {
+        return MultisetStorage( data.userToSend, data.token.value.token).then( () => {
+          Alert.alert(`Bem vindo, ${data.userToSend.name}`);
+          navigation.navigate('Main', data.userToSend);
+        })
+      }).catch( (error) => {
+        console.log(error.message);
+        alert('Senha ou email inválidos');
+      })
+    })
   }
   
   const toggleLoader = () => {
