@@ -2,6 +2,7 @@
 import React from 'react';
 import Routes from './src/routes'
 import { StatusBar, View } from 'react-native'
+console.disableYellowBox = true;
 const App = () => (
     <>
         <StatusBar barStyle='light-content' backgroundColor="rgba(21, 219, 10, 1)"></StatusBar>

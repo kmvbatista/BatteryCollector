@@ -4,15 +4,23 @@ import { Container } from './styles'
 import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import AnimatedLoader from 'react-native-animated-loader'
-import { getPlacePermitted, GetPlacesArray } from '../../Services/LocalizationService'
+import { getPlacePermitted, getPlacesArray } from '../../Services/LocalizationService'
+
 
 export default function Main( { navigation } ) {
     const [initial, setInitial] =  useState(true);
     const [region, setRegion] = useState();
-    const [discardNow, setDiscardNow] = useState(false); 
     const [destination, setDestination] = useState();
     const [placePermitted, setPlacePermitted] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    const [places, setPlaces] = useState();
+
+
+    const getPlaces = () => {
+      getPlacesArray().then( (result) => {
+          setPlaces(result);
+      })
+    }
 
     useEffect( () => {
       BackHandler.addEventListener(
@@ -92,12 +100,13 @@ export default function Main( { navigation } ) {
     }
     return (
       <Container>
-          {initial && (
+          {places == undefined &&(
             <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)' 
             speed={1}  source={require("../../Components/Animations/bigLixeira.json")}></AnimatedLoader>
           )}
           {initial && doUpdate()}
-          {!initial && (
+          {initial && getPlaces()}
+          {places != undefined && (
           <Map
               handlePermission = {handlePermission}
               setRegion = {handleSetRegion}
@@ -108,6 +117,7 @@ export default function Main( { navigation } ) {
               viewRoutePress = {viewRoutePress}
               confirmButtonPress = {confirmButtonPress}
               handleLocationSelected = {handleLocationSelected}
+              places ={places}
           >
             {isLoading && (
               <ActivityIndicator

@@ -6,19 +6,14 @@ import DiscardingHeader from '../../Components/Header'
 import headerLogo from '../../../images/recipiente-de-lixo-para-reciclagem.png'
 import Header from '../../Components/Header/index'
 
-const list = [
-	{Id: 1, Name: 'Bateria'},
-	{Id: 2, Name: 'Óleo'},
-	{Id: 3, Name: 'Pilha'},
-]
-
-const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
-
+ 
 
 export default function DiscardingPage(props) {
+  const list = props.data.map( d => {
+    return {Id: d.id, Name: d.description}
+  });
   return (
     <ContentsContainer>
-      <KeyboardAvoidingView>
         <Header Text1={'Selecione material'} Text2={'e a quantidade'} logo={headerLogo}></Header>
         <PickerModal
           onSelected={(selected) => props.setSelected(selected)}
@@ -51,7 +46,6 @@ export default function DiscardingPage(props) {
         <ButtonStyled
           onPress={props.handleDiscardPress}
         ><TextStyled>Finalizar descarte</TextStyled></ButtonStyled>
-        </KeyboardAvoidingView>
       </ContentsContainer>
   );
 }

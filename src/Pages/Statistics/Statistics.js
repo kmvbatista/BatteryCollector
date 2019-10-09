@@ -10,9 +10,7 @@ import {StyleSheet, Dimensions, BackHandler} from 'react-native'
 const {width : WIDTH, height: HEIGHT} = Dimensions.get('window');
 import AnimatedLoader from 'react-native-animated-loader'
 import getChartStatistics from '../../Services/GetChartsStatistics'
-
-
-
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Statistics({navigation}) {
     const [isLoading, setisLoading] = useState(true);
@@ -49,7 +47,14 @@ export default function Statistics({navigation}) {
       })  
 
     function handlebackPress(){
-        return navigation.navigate('Main', navigation.state.params);
+        if(navigation.state.params) {
+            return navigation.navigate('Main', navigation.state.params);
+        }
+        else {
+            AsyncStorage.getItem('@BatteryCollector:user').then( user => {
+                navigation.navigate('Main', JSON.parse(user));
+            })
+        }
       }
     return (
         

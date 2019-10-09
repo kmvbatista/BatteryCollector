@@ -5,7 +5,6 @@ import Directions from '../Components/Destinations/index'
 import markerImage from '../../images/resizedIcon48.png'
 import { LocationBox, LocationText, LocationBox2, LocationText2, ContainerStyle, PickerBox } from './styles'
 import Search from '../Components/Search'
-import { getPlacesArray } from '../Services/LocalizationService'
 import getPixelSize from '../Services/GetPixelsSize'
 import DiscardButton from '../Pages/Map/DiscardButton'
 import AddModal from '../Components/Modal/index'
@@ -25,15 +24,11 @@ export default class Map extends Component {
         firstDestination: true
     };
 
-    getPlaces() {
-        getPlacesArray().then( (result) => {
-            this.setState({places: result});
-        })
-    }
+    
 
 
     handleDiscardPress = () => {
-        this.props.handleDiscardButton(this.state.places).then( (placePermitted) => {
+        this.props.handleDiscardButton(this.props.places).then( (placePermitted) => {
             if(placePermitted) {
                 this.setState({placePermitted: placePermitted})
                 this.refs.addModal.showAddModal();
@@ -53,15 +48,15 @@ export default class Map extends Component {
     }
 
     handleLocationSelected = (itemIndex) => {
-        this.props.handleLocationSelected(itemIndex, this.state.places);
+        this.props.handleLocationSelected(itemIndex, this.props.places);
     }
 
     render() {
         const region = this.props.region;
         return (
             <View style={{ flex:1 }}>
-            { !this.state.places && this.getPlaces()}
-            { this.state.places &&(
+            { !this.props.places && this.getPlaces()}
+            { this.props.places &&(
             <>
                 <MapView
                     style={{ flex:1 }}
@@ -70,7 +65,7 @@ export default class Map extends Component {
                     loadingEnabled
                     ref= {el => this.mapView= el}
                 >
-                    {this.state.places.map((place)  => 
+                    {this.props.places.map((place)  => 
                         <MapView.Marker
                         coordinate={{latitude: place.latitude,
                             longitude: place.longitude
@@ -116,7 +111,7 @@ export default class Map extends Component {
                                             </LocationBox>
                                             <LocationBox2>
                                                 <LocationText2>
-                                                    Até 
+                                                    Até {this.props.destination.name}
                                                 </LocationText2>
                                             </LocationBox2>
                                         </ContainerStyle>
@@ -130,11 +125,11 @@ export default class Map extends Component {
                 </MapView>
             </>
             )}
-            {this.state.places &&(
-                <Search handleLocationSelected={this.handleLocationSelected} places={this.state.places}></Search>
+            {this.props.places &&(
+                <Search handleLocationSelected={this.handleLocationSelected} places={this.props.places}></Search>
             )}
              <DiscardButton onclick={this.handleDiscardPress}></DiscardButton>
-            {this.state.places &&(   
+            {this.props.places &&(   
                 <AddModal 
                     ref={'addModal'} 
                     placePermitted={this.state.placePermitted}

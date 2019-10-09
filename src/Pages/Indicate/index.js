@@ -9,15 +9,6 @@ import Header from '../../Components/Header/index';
 import Api from '../../Services/Api'
 import headerLogo from '../../../images/email.png'
 
-const list = [
-	{Id: 1, Name: 'Bateria', Value: 'Test1 Value'},
-	{Id: 2, Name: 'Óleo', Value: 'Test2 Value'},
-	{Id: 3, Name: 'Pilha', Value: 'Test3 Value'},
-	{Id: 4, Name: 'Test4 Name', Value: 'Test4 Value'}
-]
-
-const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
-
 export default function Indicate({navigation}) {
   useEffect( () => {
     BackHandler.addEventListener(
@@ -54,7 +45,7 @@ export default function Indicate({navigation}) {
         sender: userFound,
         material: materialToSend,
         local: localToSend,
-        address: adress,
+        address,
         description: description
       }
       return Api().then(api => {

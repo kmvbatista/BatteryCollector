@@ -62,8 +62,8 @@ export default function Login( { navigation } ) {
         password:password
       }).then( ( {data}) => {
         return MultisetStorage( data.userToSend, data.token.value.token).then( () => {
-          Alert.alert(`Bem vindo, ${data.userToSend.name}`);
           navigation.navigate('Main', data.userToSend);
+          Alert.alert(`Bem vindo, ${data.userToSend.name}`);
         })
       }).catch( (error) => {
         console.log(error.message);

@@ -1,26 +1,27 @@
 import { Container } from './styles'
-import {  Alert} from 'react-native'
+import {  KeyboardAvoidingView} from 'react-native'
 import AnimatedLoader from 'react-native-animated-loader'
 import React, { useState } from 'react';
 import DiscardingPage from './DiscardingPage'
 import AfterDiscardPage from './AfterDiscardPage'
 import Api from '../../Services/Api';
 import AsyncStorage from '@react-native-community/async-storage'
+import getMaterialsApi from '../../Services/GetMaterials'
 
 
-const list = [
-	{Id: 1, Name: 'Bateria', Value: 'Test1 Value'},
-	{Id: 2, Name: 'Óleo', Value: 'Test2 Value'},
-	{Id: 3, Name: 'Pilha', Value: 'Test3 Value'},
-	{Id: 4, Name: 'Test4 Name', Value: 'Test4 Value'}
-]
 
 export default function DiscardPage({navigation}) {
   const [selectedItem, setSelected] = useState(null);
   const [congrats, setCongrats] = useState(false);
   const [isDiscarding, setisDiscarding] = useState(true);
   let [quantity, setQuantity] = useState(0);
-  let [userLogged, setUserLogged] = useState();
+  const [materials, setMaterials] = useState();
+
+  const getMaterials = () => {
+    return getMaterialsApi().then( materials => {
+      setMaterials(materials);
+    });
+  }
 
   const handleDiscardPress = () => {
     try {
@@ -36,6 +37,12 @@ export default function DiscardPage({navigation}) {
       console.error()
       handleDiscardFailure();
     }
+  }
+
+  const callApi = () => {
+    getMaterials().then( () => {
+      setIsLoading(false);
+    })
   }
 
   const getDiscardData = () => {
@@ -93,21 +100,35 @@ export default function DiscardPage({navigation}) {
 
   return (
     
+
+    <>
+    {materials ==undefined && (
+            <AnimatedLoader  visible={true} animationType={'slide'} overlayColor='rgba(21, 219, 10, 1)' 
+            speed={1}  source={require("../../Components/Animations/bigLixeira.json")}></AnimatedLoader>
+          )}
+    {materials ==undefined && callApi()}
     <Container>
         {congrats &&(
          <AnimatedLoader  visible={true}  overlayColor='rgba(21, 219, 10, 1)'
           speed={1} animationType={'fade'} source={require("../../Components/Animations/trophy.json")}></AnimatedLoader>)}
-        {isDiscarding &&(
-          <DiscardingPage 
-            handleDiscardPress={handleDiscardPress} 
-            setQuantity = {setQuantity}
-            setSelected ={setSelected}
-          ></DiscardingPage>
-        )}
-        {!isDiscarding &&(
-          <AfterDiscardPage></AfterDiscardPage>
-        )}   
+        <KeyboardAvoidingView>
+          {isDiscarding &&(
+            materials && (
+            <DiscardingPage 
+              handleDiscardPress={handleDiscardPress} 
+              setQuantity = {setQuantity}
+              setSelected ={setSelected}
+              data={materials}
+            ></DiscardingPage>)
+          )}
+          {!isDiscarding &&(
+            <AfterDiscardPage></AfterDiscardPage>
+          )}
+        </KeyboardAvoidingView>
     </Container>
+    </>
+    
+
   )}
 
 

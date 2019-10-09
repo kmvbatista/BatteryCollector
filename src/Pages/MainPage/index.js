@@ -8,6 +8,7 @@ import headerLogo from '../../../images/recicl-o-simbolo-de-tres-folhas.png'
 import Accordion from  '../../Components/Accordion/index'
 import GetAsks from '../../Services/GetAsks';
 import AnimatedLoader from 'react-native-animated-loader'
+import AsyncStorage from '@react-native-community/async-storage'
 
 export default function Main( { navigation } ) {
 
@@ -21,8 +22,14 @@ export default function Main( { navigation } ) {
     })
     .catch( () => {
       alert('Tente Novamente');
-      navigation.navigate('Login');
+      handleSair().then()
+      
     });
+  }
+  const handleSair = () => {
+    AsyncStorage.removeItem('@BatteryCollector:token').then( () => {
+      return navigation.navigate('Login')
+    })
   }
 
   const callApi = () => {
