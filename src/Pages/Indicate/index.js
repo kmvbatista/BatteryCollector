@@ -45,7 +45,7 @@ export default function Indicate({navigation}) {
         sender: userFound,
         material: materialToSend,
         local: localToSend,
-        address,
+        adress: adress,
         description: description
       }
       return Api().then(api => {

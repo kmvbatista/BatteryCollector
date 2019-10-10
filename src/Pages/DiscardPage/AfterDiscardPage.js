@@ -5,14 +5,23 @@ import { TextStyled, Container, UserDataContainer, AnimationContainer,
 import UserData from '../../Components/UserData/index'
 import LottieView from 'lottie-react-native';
 import {withNavigation} from 'react-navigation'
-
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 class Tabs extends React.Component {
   render() {
 
+  const getUser = () => {
+    return AsyncStorage.getItem('@BatteryCollector:user').then(user => {
+      debugger;
+      return JSON.parse(user);
+    })
+  }
+
   const handleNavigate = () => {
-    this.props.navigation.navigate('Statistics');
+    getUser().then(user => {
+      this.props.navigation.navigate('Statistics', user);
+    })
   }
   
     return (

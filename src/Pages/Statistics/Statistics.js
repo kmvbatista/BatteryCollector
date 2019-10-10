@@ -20,6 +20,7 @@ export default function Statistics({navigation}) {
     let [materialsDiscarded, setMaterialsDiscarded]= useState();
 
     const getData = () => {
+        debugger;
         return getChartStatistics(navigation.state.params.id).then( (dataDragged) => {
             if(dataDragged) {
                 setChartsData(dataDragged.alldiscards);

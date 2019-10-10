@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 const api = () => {
     return AsyncStorage.getItem('@BatteryCollector:token').then( token => {
-        const instance = axios.create({baseURL:'http://192.168.0.8:5000',
+        const instance = axios.create({baseURL:'https://turnitgreenerapiback.azurewebsites.net',
         headers: {
             'Content-Type': 'application/json',
         }});

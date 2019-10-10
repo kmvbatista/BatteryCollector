@@ -19,30 +19,25 @@ export default function Login( { navigation } ) {
   let [userLogged, setuserLogged] = useState('');
   let [tokenActive, setToken] = useState('');
 
-  const getUserLoggedStorage = async () => {
-    let userFound= await AsyncStorage.getItem('@BatteryCollector:user');
-     if(userFound) {
-      userFound = JSON.parse(userFound);
-      setuserLogged(userFound);
+  const getUserLoggedStorage = () => {
+    return AsyncStorage.getItem('@BatteryCollector:user').then(user => {
+      const userFound = JSON.parse(user);
+      setuserLogged(user);
       return userFound;
-     }
+    })
   }
 
-  const getTokenStorage = async () => {
-    const tokenFound = await AsyncStorage.getItem('@BatteryCollector:token');
-    if(tokenFound) {
-      setToken(tokenFound);
-      return tokenFound;
-    }
+  const getTokenStorage = () => {
+    return AsyncStorage.getItem('@BatteryCollector:token').then( token => {
+      return token;
+    })
   }
   
   const MultisetStorage = (logIn, token) => {
     return AsyncStorage.multiSet([
       ['@BatteryCollector:token', token],
       ['@BatteryCollector:user', JSON.stringify(logIn)]
-    ]).then( () => {
-      
-    })
+    ]);
   }
 
   const verifyUserLogged = () => {
